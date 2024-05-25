@@ -4,7 +4,7 @@ import pygame_gui
 
 pygame.init()
 
-pygame.display.set_caption('Idiot Start')
+pygame.display.set_caption('Quick2 Start')
 window_surface = pygame.display.set_mode((800, 600))
 
 background = pygame.Surface((800, 600))
