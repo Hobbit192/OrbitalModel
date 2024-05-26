@@ -15,6 +15,11 @@ manager = pygame_gui.UIManager((800, 600))
 hello_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((350, 275), (100, 50)),
                                             text='Say Hello',
                                             manager=manager)
+details_window = pygame_gui.elements.UIWindow(
+                        rect=pygame.Rect((50,50),(100,100)),
+                        manager= manager,
+                        window_display_title="Test window"
+                    )
 
 window_test = pygame_gui.windows.ui_colour_picker_dialog.UIColourPickerDialog(rect=((100, 100), (400, 400)), manager=manager)
 clock = pygame.time.Clock()

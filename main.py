@@ -103,7 +103,10 @@ trail_surface.fill((255, 255, 255, 0))
 body_surface = pygame.Surface(window_size)
 screen.blit(body_surface, (0, 0))
 body_surface.blit(trail_surface, (0, 0))
+
 ui_surface = pygame.Surface(window_size)
+ui_surface.fill(WHITE)
+ui_surface.set_colorkey(WHITE)
 manager = pygame_gui.UIManager((1536, 802))
 hello_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((350, 275), (100, 50)), text='Say Hello', manager=manager)
 
@@ -128,10 +131,12 @@ pygame.display.flip()
 running = True
 dragging = False
 selected = False
+clock = pygame.time.Clock()
 
 tick = 0
 
 while running:
+    time_delta = clock.tick(60)/1000
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -174,6 +179,14 @@ while running:
                     dragging = True
                     selected_body = body
                     selected = True
+
+                    # Create GUI window elements
+                    details_window = pygame_gui.elements.UIWindow(
+                        rect=pygame.Rect((50,50),(100,100)),
+                        manager= manager,
+                        window_display_title="Test window"
+                    )
+
                     break
 
                 selected = False
@@ -212,7 +225,7 @@ while running:
         body.move(acceleration_total)
         tick += 1
 
-        if tick % 127 == 0:
+        if True: #tick % 127 == 0:
             # Draw tracers
             #pygame.draw.circle(trail_surface, body.colour, (body.last_displayed.convert().x,
             #                                                body.last_displayed.convert().y), 1)
@@ -245,5 +258,6 @@ while running:
                                  5)
 
             screen.blit(body_surface, (0, 0))
+            manager.update(time_delta)
             manager.draw_ui(ui_surface)
             pygame.display.flip()
