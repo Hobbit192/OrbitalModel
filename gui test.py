@@ -4,7 +4,7 @@ import pygame_gui
 
 pygame.init()
 
-pygame.display.set_caption('Quick3 Start')
+pygame.display.set_caption('Quick Start')
 window_surface = pygame.display.set_mode((800, 600))
 
 background = pygame.Surface((800, 600))
@@ -36,8 +36,10 @@ while is_running:
                 print('Hello World!')
 
         manager.process_events(event)
-    manager.update(time_delta)
 
     window_surface.blit(background, (0, 0))
+
+    manager.update(time_delta)
     manager.draw_ui(window_surface)
+
     pygame.display.update()

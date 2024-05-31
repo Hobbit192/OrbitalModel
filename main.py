@@ -132,11 +132,16 @@ running = True
 dragging = False
 selected = False
 clock = pygame.time.Clock()
-
-tick = 0
+clock.tick()
+simulation_elapsed = 0
+drawing_elapsed = 0
 
 while running:
-    time_delta = clock.tick(60)/1000
+    delta = clock.tick(10000)
+    simulation_elapsed += delta
+    drawing_elapsed += delta
+    print(drawing_elapsed)
+    #time_delta = clock.tick(6000)/1000
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -171,7 +176,7 @@ while running:
             if event.key == pygame.K_RIGHT:
                 centrex -= 20
 
-        manager.process_events(event)
+        #manager.process_events(event)
 
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             for body in bodies:
@@ -181,11 +186,11 @@ while running:
                     selected = True
 
                     # Create GUI window elements
-                    details_window = pygame_gui.elements.UIWindow(
-                        rect=pygame.Rect((50,50),(100,100)),
-                        manager= manager,
-                        window_display_title="Test window"
-                    )
+                    #details_window = pygame_gui.elements.UIWindow(
+                        #rect=pygame.Rect((50,50),(100,100)),
+                       # manager= manager,
+                       # window_display_title="Test window"
+                    #)
 
                     break
 
@@ -223,9 +228,9 @@ while running:
                     #other.velocity = C[1]
 
         body.move(acceleration_total)
-        tick += 1
 
-        if True: #tick % 127 == 0:
+    if drawing_elapsed >= 16:
+        for body in bodies:
             # Draw tracers
             #pygame.draw.circle(trail_surface, body.colour, (body.last_displayed.convert().x,
             #                                                body.last_displayed.convert().y), 1)
@@ -235,29 +240,31 @@ while running:
             body.last_displayed = body.position
             body_surface.fill(BACKGROUND)
             all_sprites_list.draw(body_surface)
-            body_surface.blit(trail_surface, (0, 0))
 
-            # Information to display if the body is selected
-            if selected:
-                font = pygame.font.Font('GillSans.ttf', 32)
-                name_text = font.render(selected_body.name, True, WHITE, selected_body.colour)
-                name_rect = name_text.get_rect()
-                name_rect.center = (75, 75)
-                body_surface.blit(name_text, name_rect)
+            #body_surface.blit(trail_surface, (0, 0))
 
-                velocity_text = font.render("Speed: " + str(selected_body.velocity.magnitude() // 1) + " m/s", True,
-                                            WHITE, selected_body.colour)
-                velocity_rect = velocity_text.get_rect()
-                velocity_rect.center = (145, 110)
-                body_surface.blit(velocity_text, velocity_rect)
+        # Information to display if the body is selected
+        if selected:
+            font = pygame.font.Font('GillSans.ttf', 32)
+            name_text = font.render(selected_body.name, True, WHITE, selected_body.colour)
+            name_rect = name_text.get_rect()
+            name_rect.center = (75, 75)
+            body_surface.blit(name_text, name_rect)
 
-                pygame.draw.line(body_surface, ORANGE,
-                                 (selected_body.position.convert().x, selected_body.position.convert().y),
-                                 (selected_body.position.convert().x + selected_body.velocity.x / velocity_scale_factor,
-                                  selected_body.position.convert().y + selected_body.velocity.y / velocity_scale_factor),
-                                 5)
+            velocity_text = font.render("Speed: " + str(selected_body.velocity.magnitude() // 1) + " m/s", True,
+                                        WHITE, selected_body.colour)
+            velocity_rect = velocity_text.get_rect()
+            velocity_rect.center = (145, 110)
+            body_surface.blit(velocity_text, velocity_rect)
 
-            screen.blit(body_surface, (0, 0))
-            manager.update(time_delta)
-            manager.draw_ui(ui_surface)
-            pygame.display.flip()
+            pygame.draw.line(body_surface, ORANGE,
+                             (selected_body.position.convert().x, selected_body.position.convert().y),
+                             (selected_body.position.convert().x + selected_body.velocity.x / velocity_scale_factor,
+                              selected_body.position.convert().y + selected_body.velocity.y / velocity_scale_factor),
+                             5)
+
+        drawing_elapsed = 0
+        screen.blit(body_surface, (0, 0))
+        #manager.update(time_delta)
+        #manager.draw_ui(ui_surface)
+        pygame.display.flip()
