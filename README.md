@@ -1,7 +1,7 @@
 ---------- ORBITAL MODEL (WIP) ----------
 
 Roadmap:
-- Fix time function
+- Fix time function      COMPLETED
 - Add UI
 - Add ability to thrust and change orientaton of rocket
 - Add start and pause menu and functionality
