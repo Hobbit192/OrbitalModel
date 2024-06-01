@@ -1,45 +1,85 @@
 import pygame
 import pygame_gui
 
-
+# Initialize Pygame
 pygame.init()
 
-pygame.display.set_caption('Quick Start')
-window_surface = pygame.display.set_mode((800, 600))
+# Set up the window
+screen_width = 800
+screen_height = 600
+screen = pygame.display.set_mode((screen_width, screen_height))
+pygame.display.set_caption("Centered Window Example")
 
-background = pygame.Surface((800, 600))
-background.fill(pygame.Color('#000000'))
+# Create a UI manager
+ui_manager = pygame_gui.UIManager((screen_width, screen_height))
 
-manager = pygame_gui.UIManager((800, 600))
+# Create a custom window
+window_width = 300
+window_height = 200
+window_x = (screen_width - window_width) // 2  # Center horizontally
+window_y = screen_height - window_height  # Position at the bottom border
+custom_window = pygame_gui.elements.UIPanel(relative_rect=pygame.Rect(window_x, window_y, window_width, window_height),
+                                            manager=ui_manager,
+                                            starting_height=1)
 
-hello_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((350, 275), (100, 50)),
-                                            text='Say Hello',
-                                            manager=manager)
-details_window = pygame_gui.elements.UIWindow(
-                        rect=pygame.Rect((50,50),(100,100)),
-                        manager= manager,
-                        window_display_title="Test window"
-                    )
+# Add some UI elements to the custom window
+label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect(10, 10, 280, 30),
+                                    text="This is a centered window",
+                                    manager=ui_manager,
+                                    container=custom_window)
 
-window_test = pygame_gui.windows.ui_colour_picker_dialog.UIColourPickerDialog(rect=((100, 100), (400, 400)), manager=manager)
+# Create a toggle button
+toggle_button_width = 100
+toggle_button_height = 50
+toggle_button_x = (screen_width - toggle_button_width) // 2  # Center horizontally
+toggle_button_y = window_y - toggle_button_height  # Position above the window
+toggle_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect(toggle_button_x, toggle_button_y, toggle_button_width, toggle_button_height),
+                                             text="Toggle",
+                                             manager=ui_manager)
+
+# Window visibility flag
+window_visible = True
+
+# Main event loop
 clock = pygame.time.Clock()
-is_running = True
-
-while is_running:
-
-    time_delta = clock.tick(60)/1000.0
+running = True
+while running:
+    time_delta = clock.tick(60) / 1000.0
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            is_running = False
+            running = False
+
+        # Handle UI events
+        ui_manager.process_events(event)
+
+        # Toggle the window visibility on button click
         if event.type == pygame_gui.UI_BUTTON_PRESSED:
-            if event.ui_element == hello_button:
-                print('Hello World!')
+            if event.ui_element == toggle_button:
+                window_visible = not window_visible
 
-        manager.process_events(event)
+    # Update the toggle button position
+    if window_visible:
+        toggle_button_y = window_y - toggle_button_height  # Position above the window
+    else:
+        toggle_button_y = screen_height - toggle_button_height  # Position at the bottom of the screen
+    toggle_button.set_relative_position((toggle_button_x, toggle_button_y))
 
-    window_surface.blit(background, (0, 0))
+    # Update the UI
+    ui_manager.update(time_delta)
 
-    manager.update(time_delta)
-    manager.draw_ui(window_surface)
+    # Clear the window
+    screen.fill((255, 255, 255))
 
+    # Draw the custom window if it's visible
+    if window_visible:
+        custom_window.show()
+    else:
+        custom_window.hide()
+
+    ui_manager.draw_ui(screen)
+
+    # Update the display
     pygame.display.update()
+
+# Quit Pygame
+pygame.quit()
