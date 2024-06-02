@@ -1,5 +1,4 @@
 import pygame
-import numpy as np
 import pygame_gui
 
 # Colours
@@ -83,6 +82,9 @@ class Vector:
     def convert_back(self):
         return Vector((self.x - centrex) * distance_scale_factor, (self.y - centrey) * distance_scale_factor)
 
+    def dot(self, other):
+        return self.x * other.x + self.y * other.y
+
 # Constants and initialise
 G = 6.67430e-11
 restitution_coefficient = 0.5
@@ -135,12 +137,12 @@ clock = pygame.time.Clock()
 clock.tick()
 simulation_elapsed = 0
 drawing_elapsed = 0
+print(Vector(7,8))
 
 while running:
-    delta = clock.tick(10000)
+    delta = clock.tick(1000)
     simulation_elapsed += delta
     drawing_elapsed += delta
-    print(drawing_elapsed)
     #time_delta = clock.tick(6000)/1000
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -186,11 +188,11 @@ while running:
                     selected = True
 
                     # Create GUI window elements
-                    #details_window = pygame_gui.elements.UIWindow(
-                        #rect=pygame.Rect((50,50),(100,100)),
-                       # manager= manager,
-                       # window_display_title="Test window"
-                    #)
+                    details_window = pygame_gui.elements.UIWindow(
+                        rect=pygame.Rect((50,50),(100,100)),
+                        manager= manager,
+                        window_display_title="Test window"
+                    )
 
                     break
 
@@ -218,14 +220,18 @@ while running:
 
                 acceleration_total += acceleration
 
-                #if body_to_other.magnitude() <= body.radius + other.radius:
-                    #A = np.array([[body.mass, other.mass], [-1, 1]])
-                    #B = np.array([body.mass * body.velocity + other.mass * other.velocity, restitution_coefficient *
-                                  #body.velocity - restitution_coefficient * other.velocity])
+                if body_to_other.magnitude() <= body.radius + other.radius:
+                    print("COLLISTION!")
+                    c = (2 * (body.mass * other.mass) / (body.mass + other.mass) * body_to_other.dot(body.velocity - other.velocity)
+                         / body_to_other.dot(body_to_other))
 
-                    #C = np.linalg.solve(A, B)
-                    #body.velocity = C[0]
-                    #other.velocity = C[1]
+                    print("Body velocity before = ",body.velocity)
+
+                    body.velocity = body.velocity - (body_to_other * (c / body.mass))
+                    other.velocity = other.velocity + (body_to_other * (c / other.mass))
+
+                    print("Body velocity after = ",body.velocity)
+
 
         body.move(acceleration_total)
 
