@@ -11,7 +11,7 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Centered Window Example")
 
 # Create a UI manager
-ui_manager = pygame_gui.UIManager((screen_width, screen_height))
+ui_manager = pygame_gui.UIManager((screen_width, screen_height), "THEME.JSON")
 
 # Create a custom window
 window_width = 300
@@ -56,6 +56,13 @@ while running:
         if event.type == pygame_gui.UI_BUTTON_PRESSED:
             if event.ui_element == toggle_button:
                 window_visible = not window_visible
+
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                toggle_button.disable()
+
+            if event.key == pygame.K_1:
+                toggle_button.enable()
 
     # Update the toggle button position
     if window_visible:

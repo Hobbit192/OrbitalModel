@@ -1,11 +1,30 @@
 {
-    "defaults":
-    {
-        "colours":
-        {
-            "button": "blue":
-
-        }
+    "colours": {
+        "normal_bg": "#DBD7D2",
+        "hovered_bg": "#FFFFFF",
+        "disabled_bg": "#4D5151",
+        "active_bg": "#398B83",
+        "normal_text": "#173762",
+        "normal_border": "#4D5151",
+        "hovered_border": "#848C8E",
+        "disabled_border": "#0E0F11",
+        "active_border": "#848C8E"
     },
-  "version": 3
+    "button": {
+        "colours": {
+            "normal_bg": "#DBD7D2",
+            "hovered_bg": "#FFFFFF",
+            "disabled_bg": "#4D5151",
+            "active_bg": "#398B83",
+            "normal_text": "#173762",
+            "normal_border": "#4D5151",
+            "hovered_border": "#848C8E",
+            "disabled_border": "#0E0F11",
+            "active_border": "#848C8E"
+        },
+        "font": {
+            "name": "Arial",
+            "size": 20
+        }
+    }
 }
