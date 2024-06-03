@@ -188,7 +188,8 @@ while running:
 
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             for body in bodies:
-                if body.sprite.rect.collidepoint(event.pos):
+                clickpos = Vector(event.pos[0], event.pos[1]).convert_back()
+                if (clickpos - body.position).magnitude() <= body.radius:
                     dragging = True
                     selected_body = body
                     selected = True
@@ -201,6 +202,7 @@ while running:
                     )
 
                     break
+
 
                 selected = False
 
