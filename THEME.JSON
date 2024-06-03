@@ -1,50 +1,54 @@
 {
-    "button":
+    "#info_panel":
     {
         "colours":
         {
-            "normal_bg": "#848C8E",
-            "hovered_bg": "#DBD7D2",
-            "disabled_bg": "#4D5151",
-            "active_bg": "#398B83",
-            "normal_text": "#173762",
-            "hovered_text": "#3685DD",
-            "active_text": "#DBD7D2"
-        },
-        "font":
-        {
-            "name": "Alata",
-            "size": 20,
-            "regular_path": "Alata-Regular.ttf"
+            "dark_bg": "#848C8E"
         },
         "misc":
         {
-            "border_width": "0",
-            "shadow_width": "0"
+            "shape": "rectangle",
+            "border_width": "0"
         }
     },
-    "#button_test":
+    "@info_labels":
     {
         "colours":
         {
-            "normal_bg": "#FFFFFF",
-            "hovered_bg": "#FFFFFF",
-            "disabled_bg": "#FFFFFF",
-            "active_bg": "#FFFFFF",
-            "normal_text": "#000000",
-            "hovered_text": "#000000",
-            "active_text": "#000000"
+            "dark_bg": "#848C8E",
+            "normal_text": "#000000"
+        },
+        "font": {
+            "name": "OverpassMono-SemiBold",
+            "size": "13",
+            "regular_path": "OverpassMono-SemiBold.ttf"
+        }
+    },
+    "#name_label":
+    {
+        "colours":
+        {
+            "dark_bg": "#848C8E",
+            "normal_text": "#000000"
+        },
+        "font": {
+            "name": "OverpassMono-SemiBold",
+            "size": "62",
+            "regular_path": "OverpassMono-SemiBold.ttf"
+        }
+    },
+    "#info_title_label":
+    {
+        "colours":
+        {
+            "dark_bg": "#848C8E",
+            "normal_text": "#4D5151"
         },
         "font":
         {
-            "name": "Alata",
-            "size": 20,
-            "regular_path": "Alata-Regular.ttf"
-        },
-        "misc":
-        {
-            "border_width": "0",
-            "shadow_width": "0"
+            "name": "IBMPlexMono-SemiBoldItalic",
+            "size": "12",
+            "regular_path": "IBMPlexMono-SemiBoldItalic.ttf"
         }
     }
 }
