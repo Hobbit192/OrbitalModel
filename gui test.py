@@ -1,12 +1,15 @@
 import pygame
 import pygame_gui
+import os
 
 # Initialize Pygame
 pygame.init()
 
 # Set up the window
-screen_width = 800
-screen_height = 600
+os.environ['SDL_VIDEO_WINDOW_POS'] = '0,30'
+info = pygame.display.Info()
+screen_width = info.current_w
+screen_height = info.current_h - 80
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Centered Window Example")
 

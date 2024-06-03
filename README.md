@@ -2,6 +2,7 @@
 
 Roadmap:
 - Fix time function      COMPLETED
+- Collisions             COMPLETED
 - Add UI
 - Add ability to thrust and change orientation of rocket
 - Add start and pause menu and functionality
