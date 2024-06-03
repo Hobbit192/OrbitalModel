@@ -16,11 +16,11 @@ pygame.display.set_caption("Centered Window Example")
 # Create a UI manager
 ui_manager = pygame_gui.UIManager((screen_width, screen_height), "THEME.JSON")
 
-# Create a custom window
+# Info panel
 window_width = 300
-window_height = 200
-window_x = (screen_width - window_width) // 2  # Center horizontally
-window_y = screen_height - window_height  # Position at the bottom border
+window_height = 700
+window_x = screen_width - window_width
+window_y = (screen_height - window_height) // 2
 custom_window = pygame_gui.elements.UIPanel(relative_rect=pygame.Rect(window_x, window_y, window_width, window_height),
                                             manager=ui_manager,
                                             starting_height=1)
@@ -39,6 +39,10 @@ toggle_button_y = window_y - toggle_button_height  # Position above the window
 toggle_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect(toggle_button_x, toggle_button_y, toggle_button_width, toggle_button_height),
                                              text="Toggle",
                                              manager=ui_manager)
+
+test_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect(0, 0, 100, 50),
+                                             text="Toggle",
+                                             manager=ui_manager, object_id="#button_test")
 
 # Window visibility flag
 window_visible = True

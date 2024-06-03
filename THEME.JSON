@@ -25,6 +25,26 @@
     },
     "#button_test":
     {
-
+        "colours":
+        {
+            "normal_bg": "#FFFFFF",
+            "hovered_bg": "#FFFFFF",
+            "disabled_bg": "#FFFFFF",
+            "active_bg": "#FFFFFF",
+            "normal_text": "#000000",
+            "hovered_text": "#000000",
+            "active_text": "#000000"
+        },
+        "font":
+        {
+            "name": "Alata",
+            "size": 20,
+            "regular_path": "Alata-Regular.ttf"
+        },
+        "misc":
+        {
+            "border_width": "0",
+            "shadow_width": "0"
+        }
     }
 }

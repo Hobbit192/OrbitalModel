@@ -1,5 +1,6 @@
 import pygame
 import pygame_gui
+import os
 
 # Colours
 WHITE = (255, 255, 255)
@@ -95,9 +96,14 @@ pygame.init()
 all_sprites_list = pygame.sprite.Group()
 
 # Setup window and surfaces
-window_size = (1536, 802)
-centrex = 768
-centrey = 401
+os.environ['SDL_VIDEO_WINDOW_POS'] = '0,30'
+info = pygame.display.Info()
+screen_width = info.current_w
+screen_height = info.current_h - 80
+
+window_size = (screen_width, screen_height)
+centrex = screen_width / 2
+centrey = screen_height / 2
 screen = pygame.display.set_mode(window_size)
 
 trail_surface = pygame.Surface(window_size, pygame.SRCALPHA)
