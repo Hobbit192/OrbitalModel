@@ -7,6 +7,7 @@ from pygame_gui.core import ObjectID
 BACKGROUND = (10, 5, 38)
 
 # Initialize Pygame
+# testing
 pygame.init()
 
 # Set up the window
