@@ -316,8 +316,8 @@ toggle_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect(toggle_bu
                                              manager=ui_manager)
 
 test_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect(0, 0, 100, 50),
-                                             text="Toggle",
-                                             manager=ui_manager, object_id="#button_test")
+                                           text="Toggle",
+                                           manager=ui_manager, object_id="#button_test")
 
 # Window visibility flag
 window_visible = True
@@ -368,7 +368,7 @@ while running:
         mass_slider.set_current_value(float(mass_text))
 
     radius_slider_value = radius_slider.get_current_value()
-    radius_text= radius_entry_text.get_text()
+    radius_text = radius_entry_text.get_text()
     if radius_text and float(radius_text) != radius_slider_value:
         radius_slider.set_current_value(float(radius_text))
 
