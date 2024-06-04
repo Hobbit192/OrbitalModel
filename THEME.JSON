@@ -50,5 +50,54 @@
             "size": "12",
             "regular_path": "IBMPlexMono-SemiBoldItalic.ttf"
         }
+    },
+    "@info_text_entry":
+    {
+        "colours":
+        {
+            "dark_bg": "#73797A",
+            "selected_bg": "#173762",
+            "normal_text": "#000000",
+            "selected_text": "#DBD7D2",
+            "text_cursor": "#000000"
+        },
+        "font":
+        {
+            "name": "OverpassMono-SemiBold",
+            "size": "14",
+            "regular_path": "OverpassMono-SemiBold.ttf"
+        },
+        "misc":
+        {
+            "shape": "rectangle",
+            "border_width": "0",
+            "shadow_width": "0"
+        }
+    },
+    "@info_sliders":
+    {
+        "colours":
+        {
+            "dark_bg": "#4D5151",
+            "normal_border": "#000000"
+        },
+        "misc":
+        {
+            "shape": "rectangle",
+            "shadow_width": "0",
+            "enable_arrow_buttons": "0",
+            "sliding_button_width": "10"
+        }
+    },
+    "horizontal_slider.#sliding_button":
+    {
+        "colours":
+        {
+            "normal_bg": "#848C8E"
+        },
+        "misc":
+        {
+            "border_width": "0"
+        }
     }
 }
