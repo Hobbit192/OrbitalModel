@@ -56,7 +56,7 @@ pygame.display.set_caption("Centered Window Example")
 ui_manager = pygame_gui.UIManager((screen_width, screen_height), "THEME.JSON")
 
 # Info panel
-info_panel_width = 350
+info_panel_width = 365
 info_panel_height = 700
 info_panel_x = screen_width - info_panel_width
 info_panel_y = (screen_height - info_panel_height) // 2
@@ -74,7 +74,7 @@ info_title_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((12, 10
                                                object_id=ObjectID(object_id="#info_title_label")
                                                )
 
-name_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((44, 47), (266, 79)),
+name_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((47, 47), (266, 79)),
                                          text="JUPITER",
                                          manager=ui_manager,
                                          container=info_panel,
@@ -95,7 +95,7 @@ mass_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((185, 149), (
                                          object_id=ObjectID(class_id="@info_labels")
                                          )
 
-mass_entry_text = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect((264, 149), (42, 18)),
+mass_entry_text = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect((252, 149), (42, 18)),
                                                       manager=ui_manager,
                                                       container=info_panel,
                                                       object_id=ObjectID(class_id="@info_text_entry"),
@@ -105,20 +105,28 @@ mass_entry_text = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect(
 mass_entry_text.set_text_length_limit(4)
 mass_entry_text.set_allowed_characters(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."])
 
-e_label_1 = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((310, 149), (9, 18)),
+e_label_1 = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((298, 149), (9, 18)),
                                         text="E",
                                         manager=ui_manager,
                                         container=info_panel,
                                         object_id=ObjectID(class_id="@info_labels")
                                         )
 
-power_entry_text_1 = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect((325, 149), (20, 18)),
+power_entry_text_1 = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect((313, 149), (24, 18)),
                                                          manager=ui_manager,
                                                          container=info_panel,
-                                                         object_id=ObjectID(class_id="@info_text_entry")
+                                                         object_id=ObjectID(class_id="@info_text_entry"),
+                                                         initial_text="1"
                                                          )
-power_entry_text_1.set_text_length_limit(1)
+power_entry_text_1.set_text_length_limit(2)
 power_entry_text_1.set_allowed_characters("numbers")
+
+mass_unit_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((335, 149), (24, 18)),
+                                              text="kg",
+                                              manager=ui_manager,
+                                              container=info_panel,
+                                              object_id=ObjectID(class_id="@info_labels")
+                                              )
 
 mass_slider = pygame_gui.elements.UIHorizontalSlider(relative_rect=pygame.Rect((195, 171), (140, 20)),
                                                      start_value=0.01,
@@ -126,7 +134,8 @@ mass_slider = pygame_gui.elements.UIHorizontalSlider(relative_rect=pygame.Rect((
                                                      manager=ui_manager,
                                                      container=info_panel,
                                                      object_id=ObjectID(class_id="@info_sliders"),
-                                                     click_increment=0.01)
+                                                     click_increment=0.01
+                                                     )
 
 radius_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((185, 222), (63, 18)),
                                            text="Radius:",
@@ -135,7 +144,7 @@ radius_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((185, 222),
                                            object_id=ObjectID(class_id="@info_labels")
                                            )
 
-radius_entry_text = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect((264, 222), (42, 18)),
+radius_entry_text = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect((252, 222), (42, 18)),
                                                         manager=ui_manager,
                                                         container=info_panel,
                                                         object_id=ObjectID(class_id="@info_text_entry"),
@@ -145,20 +154,28 @@ radius_entry_text = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rec
 radius_entry_text.set_text_length_limit(4)
 radius_entry_text.set_allowed_characters(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."])
 
-e_label_2 = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((310, 222), (9, 18)),
+e_label_2 = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((298, 222), (9, 18)),
                                         text="E",
                                         manager=ui_manager,
                                         container=info_panel,
                                         object_id=ObjectID(class_id="@info_labels")
                                         )
 
-power_entry_text_2 = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect((325, 222), (20, 18)),
+power_entry_text_2 = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect((311, 222), (24, 18)),
                                                          manager=ui_manager,
                                                          container=info_panel,
-                                                         object_id=ObjectID(class_id="@info_text_entry")
+                                                         object_id=ObjectID(class_id="@info_text_entry"),
+                                                         initial_text="1"
                                                          )
-power_entry_text_2.set_text_length_limit(1)
+power_entry_text_2.set_text_length_limit(2)
 power_entry_text_2.set_allowed_characters("numbers")
+
+radius_unit_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((335, 222), (15, 18)),
+                                                text="m",
+                                                manager=ui_manager,
+                                                container=info_panel,
+                                                object_id=ObjectID(class_id="@info_labels")
+                                                )
 
 radius_slider = pygame_gui.elements.UIHorizontalSlider(relative_rect=pygame.Rect((195, 244), (140, 20)),
                                                        start_value=0.01,
@@ -166,7 +183,8 @@ radius_slider = pygame_gui.elements.UIHorizontalSlider(relative_rect=pygame.Rect
                                                        manager=ui_manager,
                                                        container=info_panel,
                                                        object_id=ObjectID(class_id="@info_sliders"),
-                                                       click_increment=0.01)
+                                                       click_increment=0.01
+                                                       )
 
 red_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((12, 319), (36, 18)),
                                         text="Red:",
@@ -175,6 +193,17 @@ red_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((12, 319), (36
                                         object_id=ObjectID(class_id="@info_labels")
                                         )
 
+red_slider = pygame_gui.elements.UIHorizontalSlider(relative_rect=pygame.Rect((78, 316), (140, 20)),
+                                                    start_value=0,
+                                                    value_range=(0, 255),
+                                                    manager=ui_manager,
+                                                    container=info_panel,
+                                                    object_id=ObjectID(class_id="@info_sliders"),
+                                                    click_increment=1
+                                                    )
+
+#red_entry_text =
+
 green_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((12, 347), (54, 18)),
                                           text="Green:",
                                           manager=ui_manager,
@@ -182,12 +211,30 @@ green_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((12, 347), (
                                           object_id=ObjectID(class_id="@info_labels")
                                           )
 
+green_slider = pygame_gui.elements.UIHorizontalSlider(relative_rect=pygame.Rect((78, 344), (140, 20)),
+                                                      start_value=0,
+                                                      value_range=(0, 255),
+                                                      manager=ui_manager,
+                                                      container=info_panel,
+                                                      object_id=ObjectID(class_id="@info_sliders"),
+                                                      click_increment=1
+                                                      )
+
 blue_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((12, 375), (45, 18)),
                                          text="Blue:",
                                          manager=ui_manager,
                                          container=info_panel,
                                          object_id=ObjectID(class_id="@info_labels")
                                          )
+
+blue_slider = pygame_gui.elements.UIHorizontalSlider(relative_rect=pygame.Rect((78, 373), (140, 20)),
+                                                     start_value=0,
+                                                     value_range=(0, 255),
+                                                     manager=ui_manager,
+                                                     container=info_panel,
+                                                     object_id=ObjectID(class_id="@info_sliders"),
+                                                     click_increment=1
+                                                     )
 
 velocity_x_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((37, 414), (216, 18)),
                                                text="Horizontal velocity (x):",
