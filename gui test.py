@@ -2,16 +2,51 @@ import pygame
 import pygame_gui
 import os
 
-from pygame_gui.core import ObjectID
+from pygame_gui.core import ObjectID, UIElement
+from pygame_gui.core.interfaces import IUIManagerInterface
 
 BACKGROUND = (10, 5, 38)
+
+class UIShape(UIElement):
+    def __init__(self, relative_rect: pygame.Rect, shape: str, colour: tuple, manager: IUIManagerInterface,
+                 container=None, starting_height=1, layer_thickness=1):
+        super().__init__(relative_rect, manager, container, starting_height=starting_height, layer_thickness=layer_thickness)
+        self.shape = shape
+        self.colour = colour
+        self.image = pygame.Surface(relative_rect.size, pygame.SRCALPHA)
+        self.draw()
+
+    def draw(self):
+        if self.shape == "circle":
+            pygame.draw.circle(self.image, self.colour, (self.rect.width // 2, self.rect.height // 2),
+                               (min(self.rect.width, self.rect.height) // 2))
+
+        elif self.shape == "rectangle":
+            pygame.draw.rect(self.image, self.colour, self.image.get_rect())
+
+        elif self.shape == "triangle":
+            points = [
+                (self.rect.width // 2, 0),
+                (self.rect.width, self.rect.height),
+                (0, self.rect.height)
+            ]
+            pygame.draw.polygon(self.image, self.colour, points)
+
+    def update(self, time_delta):
+        pass
+
+    def process_event(self, event: pygame.event.Event) -> bool:
+        pass
+    def redraw(self):
+        self.image.fill((0, 0, 0, 0))  # Clear the surface
+        self.draw()
 
 # Initialize Pygame
 # testing
 pygame.init()
 
 # Set up the window
-os.environ['SDL_VIDEO_WINDOW_POS'] = '0,30'
+os.environ["SDL_VIDEO_WINDOW_POS"] = "0,30"
 info = pygame.display.Info()
 screen_width = info.current_w
 screen_height = info.current_h - 80
@@ -33,7 +68,7 @@ info_panel = pygame_gui.elements.UIPanel(relative_rect=pygame.Rect(info_panel_x,
                                          )
 
 # Elements on the Info Panel
-info_title_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((11, 10), (140, 16)),
+info_title_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((12, 10), (140, 16)),
                                                text="// INFORMATION PANEL",
                                                manager=ui_manager,
                                                container=info_panel,
@@ -47,42 +82,75 @@ name_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((44, 47), (26
                                          object_id=ObjectID(object_id="#name_label")
                                          )
 
-mass_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((184, 150), (41, 17)),
+planet_label = UIShape(relative_rect=pygame.Rect((11, 119), (173, 173)),
+                       shape="circle",
+                       colour=(81, 136, 130),
+                       manager=ui_manager,
+                       container=info_panel
+                       )
+
+mass_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((185, 149), (45, 18)),
                                          text="Mass:",
                                          manager=ui_manager,
                                          container=info_panel,
                                          object_id=ObjectID(class_id="@info_labels")
                                          )
 
-radius_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((184, 223), (57, 17)),
+radius_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((185, 222), (63, 18)),
                                            text="Radius:",
                                            manager=ui_manager,
                                            container=info_panel,
                                            object_id=ObjectID(class_id="@info_labels")
                                            )
 
-red_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((11, 320), (32, 17)),
+red_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((12, 319), (36, 18)),
                                         text="Red:",
                                         manager=ui_manager,
                                         container=info_panel,
                                         object_id=ObjectID(class_id="@info_labels")
                                         )
 
-green_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((11, 348), (48, 17)),
+green_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((12, 347), (54, 18)),
                                           text="Green:",
                                           manager=ui_manager,
                                           container=info_panel,
                                           object_id=ObjectID(class_id="@info_labels")
                                           )
 
-
-blue_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((11, 376), (41, 17)),
+blue_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((12, 375), (45, 18)),
                                          text="Blue:",
                                          manager=ui_manager,
                                          container=info_panel,
                                          object_id=ObjectID(class_id="@info_labels")
                                          )
 
+velocity_x_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((37, 414), (216, 18)),
+                                               text="Horizontal velocity (x):",
+                                               manager=ui_manager,
+                                               container=info_panel,
+                                               object_id=ObjectID(class_id="@info_labels")
+                                               )
+
+velocity_y_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((55, 440), (198, 18)),
+                                               text="Vertical velocity (y):",
+                                               manager=ui_manager,
+                                               container=info_panel,
+                                               object_id=ObjectID(class_id="@info_labels")
+                                               )
+
+speed_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((199, 470), (54, 18)),
+                                          text="Speed:",
+                                          manager=ui_manager,
+                                          container=info_panel,
+                                          object_id=ObjectID(class_id="@info_labels")
+                                          )
+
+trajectories_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((12, 514), (162, 18)),
+                                                 text="Show trajectories:",
+                                                 manager=ui_manager,
+                                                 container=info_panel,
+                                                 object_id=ObjectID(class_id="@info_labels")
+                                                 )
 
 # Create a toggle button
 toggle_button_width = 100
@@ -109,7 +177,6 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-        # Handle UI events
         ui_manager.process_events(event)
 
         # Toggle the window visibility on button click
