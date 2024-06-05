@@ -1,39 +1,11 @@
 import pygame
-import pygame_gui
-import os
+from setup import centrex, centrey, body_surface, screen
 from constants import WHITE, BACKGROUND, ORANGE, G, distance_scale_factor, velocity_scale_factor, radius_scale_factor
 from vectors import Vector
 from bodies import all_sprites_list, bodies
 
 # Initialise
 pygame.init()
-
-# Setup window and surfaces
-os.environ['SDL_VIDEO_WINDOW_POS'] = '0,30'
-info = pygame.display.Info()
-screen_width = info.current_w
-screen_height = info.current_h - 80
-
-window_size = (screen_width, screen_height)
-centrex = screen_width / 2
-centrey = screen_height / 2
-screen = pygame.display.set_mode(window_size)
-
-trail_surface = pygame.Surface(window_size, pygame.SRCALPHA)
-trail_surface.fill((255, 255, 255, 0))
-body_surface = pygame.Surface(window_size)
-screen.blit(body_surface, (0, 0))
-body_surface.blit(trail_surface, (0, 0))
-
-ui_surface = pygame.Surface(window_size)
-ui_surface.fill(WHITE)
-ui_surface.set_colorkey(WHITE)
-manager = pygame_gui.UIManager((1536, 802))
-hello_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((350, 275), (100, 50)), text='Say Hello', manager=manager)
-
-icon = pygame.image.load("black-hole-256x256.png")
-pygame.display.set_icon(icon)
-pygame.display.set_caption("Orbital Simulator", "OrbitSim")
 
 all_sprites_list.update()
 body_surface.fill(BACKGROUND)
@@ -51,7 +23,7 @@ drawing_elapsed = 0
 print(Vector(7,8))
 
 while running:
-    delta = clock.tick(1000)
+    delta = clock.tick(2000)
     simulation_elapsed += delta
     drawing_elapsed += delta
     #time_delta = clock.tick(6000)/1000
@@ -100,11 +72,11 @@ while running:
                     selected = True
 
                     # Create GUI window elements
-                    details_window = pygame_gui.elements.UIWindow(
-                        rect=pygame.Rect((50,50),(100,100)),
-                        manager= manager,
-                        window_display_title="Test window"
-                    )
+                    #details_window = pygame_gui.elements.UIWindow(
+                        #rect=pygame.Rect((50,50),(100,100)),
+                        #manager= manager,
+                        #window_display_title="Test window"
+                    #)
 
                     break
 

@@ -1,4 +1,4 @@
-from main import centrex, centrey
+from setup import centrex, centrey
 from constants import distance_scale_factor
 
 
