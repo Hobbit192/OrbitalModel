@@ -1,99 +1,12 @@
 import pygame
 import pygame_gui
 import os
+from constants import WHITE, BACKGROUND, ORANGE, G, distance_scale_factor, velocity_scale_factor, radius_scale_factor
+from vectors import Vector
+from bodies import all_sprites_list, bodies
 
-# Colours
-WHITE = (255, 255, 255)
-BACKGROUND = (10, 5, 38)
-ORANGE = (255, 85, 0)
-YELLOW = (255, 255, 0)
-
-# Classes
-class Sprite(pygame.sprite.Sprite):
-    def __init__(self, colour, pixel_radius):
-        super().__init__()
-
-        self.colour = colour
-        self.pixel_radius = pixel_radius
-        self.image = pygame.Surface([pixel_radius * 2, pixel_radius * 2])
-        self.image.fill(WHITE)
-        self.image.set_colorkey(WHITE)
-
-        pygame.draw.circle(self.image, colour, (pixel_radius, pixel_radius), pixel_radius)
-        self.rect = self.image.get_rect()
-
-    def set_pos(self, position):
-        self.rect.x = position.x - self.pixel_radius
-        self.rect.y = position.y - self.pixel_radius
-
-    def set_radius(self, pixel_radius, position):
-        self.pixel_radius = pixel_radius
-        self.image = pygame.Surface([pixel_radius * 2, pixel_radius * 2])
-        self.image.fill(WHITE)
-        self.image.set_colorkey(WHITE)
-
-        pygame.draw.circle(self.image, self.colour, (pixel_radius, pixel_radius), pixel_radius)
-        self.rect = self.image.get_rect()
-
-        self.rect.x = position.x - self.pixel_radius
-        self.rect.y = position.y - self.pixel_radius
-
-class Body():
-    def __init__(self, mass, radius, velocity, position, colour, name):
-        self.mass = mass
-        self.radius = radius
-        self.velocity = velocity
-        self.position = position
-        self.colour = colour
-        self.name = name
-        self.last_displayed = position
-
-        self.sprite = Sprite(colour, radius / radius_scale_factor)
-        all_sprites_list.add(self.sprite)
-
-    def move(self, acceleration):
-        new_velocity = self.velocity + acceleration * 0.1
-        new_position = self.position + (self.velocity + new_velocity) * 0.5 * 0.1
-        self.velocity = new_velocity
-        self.position = new_position
-
-class Vector:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-
-    def __add__(self, other):
-        return Vector(self.x + other.x, self.y + other.y)
-
-    def __mul__(self, multiplier):
-        return Vector(self.x * multiplier, self.y * multiplier)
-
-    def __sub__(self, other):
-        return Vector(self.x - other.x, self.y - other.y)
-
-    def magnitude(self):
-        return (self.x ** 2 + self.y ** 2) ** 0.5
-
-    def __str__(self):
-        return str(self.x) + ", " + str(self.y)
-
-    def convert(self):
-        return Vector(self.x / distance_scale_factor + centrex, self.y / distance_scale_factor + centrey)
-
-    def convert_back(self):
-        return Vector((self.x - centrex) * distance_scale_factor, (self.y - centrey) * distance_scale_factor)
-
-    def dot(self, other):
-        return self.x * other.x + self.y * other.y
-
-# Constants and initialise
-G = 6.67430e-11
-restitution_coefficient = 0.5
-distance_scale_factor = 2e4
-velocity_scale_factor = 100
-radius_scale_factor = 2e4
+# Initialise
 pygame.init()
-all_sprites_list = pygame.sprite.Group()
 
 # Setup window and surfaces
 os.environ['SDL_VIDEO_WINDOW_POS'] = '0,30'
@@ -122,14 +35,6 @@ icon = pygame.image.load("black-hole-256x256.png")
 pygame.display.set_icon(icon)
 pygame.display.set_caption("Orbital Simulator", "OrbitSim")
 
-# Define Bodies
-
-Earth = Body(5.972168e24, 8371.0e3, Vector(0, 0), Vector(0, 0), (18, 53, 36), "Earth")
-Space_Station = Body(450000, 100e3, Vector(0, (G * Earth.mass / (Earth.radius + 1000e3)) ** 0.5), Vector(8371.0e3 + 1000e3, 0), (255, 254, 255), "ISS")
-Moon = Body(7.342e22, 1737.4e3, Vector(0, (G * Earth.mass / (Earth.radius + 384400e3)) ** 0.5), Vector(8371.0e3 + 384400e3, 0), (128, 128, 128), "Moon")
-Rocket = Body(10000, 100e3, Vector(2000, 9000), Vector(Earth.radius, 0), (176, 36, 204), "Rocket")
-
-bodies = [Earth, Space_Station, Moon, Rocket]
 all_sprites_list.update()
 body_surface.fill(BACKGROUND)
 all_sprites_list.draw(body_surface)
@@ -188,8 +93,8 @@ while running:
 
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             for body in bodies:
-                clickpos = Vector(event.pos[0], event.pos[1]).convert_back()
-                if (clickpos - body.position).magnitude() <= body.radius:
+                click_pos = Vector(event.pos[0], event.pos[1]).convert_back()
+                if (click_pos - body.position).magnitude() <= body.radius:
                     dragging = True
                     selected_body = body
                     selected = True
@@ -202,7 +107,6 @@ while running:
                     )
 
                     break
-
 
                 selected = False
 
