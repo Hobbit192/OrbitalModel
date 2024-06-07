@@ -4,8 +4,8 @@ import os
 
 from pygame_gui.core import ObjectID, UIElement
 from pygame_gui.core.interfaces import IUIManagerInterface
+from constants import BACKGROUND
 
-BACKGROUND = (10, 5, 38)
 
 class UIShape(UIElement):
     def __init__(self, relative_rect: pygame.Rect, shape: str, colour: tuple, manager: IUIManagerInterface,

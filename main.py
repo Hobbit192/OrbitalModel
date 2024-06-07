@@ -116,7 +116,6 @@ while running:
 
                     print("Body velocity after = ",body.velocity)
 
-
         body.move(acceleration_total)
 
     if drawing_elapsed >= 16:
