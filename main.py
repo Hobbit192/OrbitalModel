@@ -1,6 +1,6 @@
 import pygame
-from setup import centrex, centrey, body_surface, screen
-from constants import WHITE, BACKGROUND, ORANGE, G, distance_scale_factor, velocity_scale_factor, radius_scale_factor
+from setup import body_surface, screen, screen_info
+from constants import WHITE, BACKGROUND, ORANGE, G, scale_factors
 from vectors import Vector
 from bodies import all_sprites_list, bodies
 
@@ -35,30 +35,30 @@ while running:
                 running = False
 
             if event.key == pygame.K_EQUALS:
-                distance_scale_factor /= 1.1
-                radius_scale_factor /= 1.1
+                scale_factors.distance_scale_factor /= 1.1
+                scale_factors.radius_scale_factor /= 1.1
 
                 for body in bodies:
-                    body.sprite.set_radius(body.radius / radius_scale_factor, body.position)
+                    body.sprite.set_radius(body.radius / scale_factors.radius_scale_factor, body.position)
 
             if event.key == pygame.K_MINUS:
-                distance_scale_factor *= 1.1
-                radius_scale_factor *= 1.1
+                scale_factors.distance_scale_factor *= 1.1
+                scale_factors.radius_scale_factor *= 1.1
 
                 for body in bodies:
-                    body.sprite.set_radius(body.radius / radius_scale_factor, body.position)
+                    body.sprite.set_radius(body.radius / scale_factors.radius_scale_factor, body.position)
 
             if event.key == pygame.K_UP:
-                centrey += 20
+                screen_info.centre_y += 20
 
             if event.key == pygame.K_DOWN:
-                centrey -= 20
+                screen_info.centre_y -= 20
 
             if event.key == pygame.K_LEFT:
-                centrex += 20
+                screen_info.centre_x += 20
 
             if event.key == pygame.K_RIGHT:
-                centrex -= 20
+                screen_info.centre_x -= 20
 
         #manager.process_events(event)
 
@@ -122,9 +122,8 @@ while running:
 
         deltav_list.append(acceleration_total)
 
-    for z in zip(bodies,deltav_list):
+    for z in zip(bodies, deltav_list):
         z[0].move(z[1])
-
 
     if drawing_elapsed >= 16:
         for body in bodies:
@@ -156,8 +155,8 @@ while running:
 
             pygame.draw.line(body_surface, ORANGE,
                              (selected_body.position.convert().x, selected_body.position.convert().y),
-                             (selected_body.position.convert().x + selected_body.velocity.x / velocity_scale_factor,
-                              selected_body.position.convert().y + selected_body.velocity.y / velocity_scale_factor),
+                             (selected_body.position.convert().x + selected_body.velocity.x / scale_factors.velocity_scale_factor,
+                              selected_body.position.convert().y + selected_body.velocity.y / scale_factors.velocity_scale_factor),
                              5)
 
         drawing_elapsed = 0

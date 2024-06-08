@@ -1,5 +1,5 @@
-from setup import centrex, centrey
-from constants import distance_scale_factor
+from setup import screen_info
+from constants import scale_factors
 
 
 class Vector:
@@ -23,10 +23,12 @@ class Vector:
         return str(self.x) + ", " + str(self.y)
 
     def convert(self):
-        return Vector(self.x / distance_scale_factor + centrex, self.y / distance_scale_factor + centrey)
+        return Vector(self.x / scale_factors.distance_scale_factor + screen_info.centre_x,
+                      self.y / scale_factors.distance_scale_factor + screen_info.centre_y)
 
     def convert_back(self):
-        return Vector((self.x - centrex) * distance_scale_factor, (self.y - centrey) * distance_scale_factor)
+        return Vector((self.x - screen_info.centre_x) * scale_factors.distance_scale_factor,
+                      (self.y - screen_info.centre_y) * scale_factors.distance_scale_factor)
 
     def dot(self, other):
         return self.x * other.x + self.y * other.y

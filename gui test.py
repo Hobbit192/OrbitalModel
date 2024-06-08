@@ -1,7 +1,6 @@
 import pygame
 import pygame_gui
 import os
-
 from pygame_gui.core import ObjectID, UIElement
 from pygame_gui.core.interfaces import IUIManagerInterface
 from constants import BACKGROUND
@@ -63,7 +62,7 @@ info_panel_y = (screen_height - info_panel_height) // 2
 info_panel = pygame_gui.elements.UIPanel(relative_rect=pygame.Rect(info_panel_x, info_panel_y, info_panel_width, info_panel_height),
                                          manager=ui_manager,
                                          starting_height=1,
-                                         object_id=ObjectID(object_id="#info_panel")
+                                         object_id=ObjectID(object_id="#info_panel"),
                                          )
 
 # Elements on the Info Panel

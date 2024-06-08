@@ -1,5 +1,5 @@
 import pygame
-from constants import WHITE, radius_scale_factor, G
+from constants import WHITE, scale_factors, G
 from vectors import Vector
 
 
@@ -44,7 +44,7 @@ class Body:
         self.last_displayed = position
         self.colliding = False
 
-        self.sprite = Sprite(colour, radius / radius_scale_factor)
+        self.sprite = Sprite(colour, radius / scale_factors.radius_scale_factor)
         all_sprites_list.add(self.sprite)
 
     def move(self, acceleration):
@@ -56,14 +56,36 @@ class Body:
 
 all_sprites_list = pygame.sprite.Group()
 
-Earth = Body(5.972168e24,
-             8371.0e3,
-             velocity=Vector(0,0),
-             position=Vector(0,0),
-             colour = (18, 53, 36),
-             name = "Earth")
-Space_Station = Body(450000, 100e3, Vector(0, (G * Earth.mass / (Earth.radius + 1000e3)) ** 0.5), Vector(Earth.radius + 1000e3, 0), (255, 254, 255), "ISS")
-Moon = Body(7.342e22, 1737.4e3, Vector(0, (G * Earth.mass / (Earth.radius + 384400e3)) ** 0.5), Vector(8371.0e3 + 384400e3, 0), (128, 128, 128), "Moon")
-Rocket = Body(10000, 100e3, Vector(4000, 00), Vector(Earth.radius+10000e3, 0), (176, 36, 204), "Rocket")
+Earth = Body(mass=5.972168e24,
+             radius=8371.0e3,
+             velocity=Vector(0, 0),
+             position=Vector(0, 0),
+             colour=(18, 53, 36),
+             name="Earth"
+             )
 
-bodies = [Earth, Space_Station, Moon]
+Space_Station = Body(mass=450000,
+                     radius=100e3,
+                     velocity=Vector(0, (G * Earth.mass / (Earth.radius + 1000e3)) ** 0.5),
+                     position=Vector(Earth.radius + 1000e3, 0),
+                     colour=(255, 254, 255),
+                     name="ISS"
+                     )
+
+Moon = Body(mass=7.342e22,
+            radius=1737.4e3,
+            velocity=Vector(0, (G * Earth.mass / (Earth.radius + 384400e3)) ** 0.5),
+            position=Vector(8371.0e3 + 384400e3, 0),
+            colour=(128, 128, 128),
+            name="Moon"
+            )
+
+Rocket = Body(mass=10000,
+              radius=100e3,
+              velocity=Vector(4000, 00),
+              position=Vector(Earth.radius+10000e3, 0),
+              colour=(176, 36, 204),
+              name="Rocket"
+              )
+
+bodies = [Earth, Space_Station, Moon, Rocket]
