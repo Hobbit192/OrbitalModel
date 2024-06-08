@@ -20,10 +20,9 @@ clock = pygame.time.Clock()
 clock.tick()
 simulation_elapsed = 0
 drawing_elapsed = 0
-print(Vector(7,8))
 
 while running:
-    delta = clock.tick(2000)
+    delta = clock.tick(500)
     simulation_elapsed += delta
     drawing_elapsed += delta
     #time_delta = clock.tick(6000)/1000
@@ -91,6 +90,7 @@ while running:
             dragging = False
 
     # Accelerate bodies
+    deltav_list = []
     for body in bodies:
         acceleration_total = Vector(0, 0)
 
@@ -98,25 +98,33 @@ while running:
             # Find forces from other bodies and acceleration of this body
             if body != other:
                 body_to_other = other.position - body.position
+                separation = body_to_other.magnitude()
 
-                acceleration_magnitude = G * other.mass / body_to_other.magnitude() ** 2
-                acceleration = body_to_other * (acceleration_magnitude / body_to_other.magnitude())
+                acceleration = body_to_other * (G * other.mass / separation ** 3)
 
                 acceleration_total += acceleration
 
-                if body_to_other.magnitude() <= body.radius + other.radius:
-                    print("COLLISTION!")
-                    c = (2 * (body.mass * other.mass) / (body.mass + other.mass) * body_to_other.dot(body.velocity - other.velocity)
-                         / body_to_other.dot(body_to_other))
+                if body.colliding:
+                    body.colliding = (separation <= body.radius + other.radius)
+                else:
+                    if separation <= body.radius + other.radius:
 
-                    print("Body velocity before = ",body.velocity)
+                        body.colliding = True
+                        print("COLLISION!",body.name, " with ", other.name)
+                        c = (2 * (body.mass * other.mass) / (body.mass + other.mass) * body_to_other.dot(body.velocity - other.velocity)
+                             / body_to_other.dot(body_to_other))
 
-                    body.velocity = body.velocity - (body_to_other * (c / body.mass))
-                    other.velocity = other.velocity + (body_to_other * (c / other.mass))
+                        acceleration_total = acceleration_total + body_to_other * (c / body.mass)
+                        body.colliding = True
 
-                    print("Body velocity after = ",body.velocity)
+                        #body.velocity = body.velocity - (body_to_other * (c / body.mass))
+                        #other.velocity = other.velocity + (body_to_other * (c / other.mass))
 
-        body.move(acceleration_total)
+        deltav_list.append(acceleration_total)
+
+    for z in zip(bodies,deltav_list):
+        z[0].move(z[1])
+
 
     if drawing_elapsed >= 16:
         for body in bodies:

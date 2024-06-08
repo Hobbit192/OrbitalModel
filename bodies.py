@@ -42,22 +42,28 @@ class Body:
         self.colour = colour
         self.name = name
         self.last_displayed = position
+        self.colliding = False
 
         self.sprite = Sprite(colour, radius / radius_scale_factor)
         all_sprites_list.add(self.sprite)
 
     def move(self, acceleration):
-        new_velocity = self.velocity + acceleration * 0.1
-        new_position = self.position + (self.velocity + new_velocity) * 0.5 * 0.1
+        new_velocity = self.velocity + acceleration
+        new_position = self.position + (self.velocity + new_velocity) * 0.5
         self.velocity = new_velocity
         self.position = new_position
 
 
 all_sprites_list = pygame.sprite.Group()
 
-Earth = Body(5.972168e24, 8371.0e3, Vector(0, 0), Vector(0, 0), (18, 53, 36), "Earth")
-Space_Station = Body(450000, 100e3, Vector(0, (G * Earth.mass / (Earth.radius + 1000e3)) ** 0.5), Vector(8371.0e3 + 1000e3, 0), (255, 254, 255), "ISS")
+Earth = Body(5.972168e24,
+             8371.0e3,
+             velocity=Vector(0,0),
+             position=Vector(0,0),
+             colour = (18, 53, 36),
+             name = "Earth")
+Space_Station = Body(450000, 100e3, Vector(0, (G * Earth.mass / (Earth.radius + 1000e3)) ** 0.5), Vector(Earth.radius + 1000e3, 0), (255, 254, 255), "ISS")
 Moon = Body(7.342e22, 1737.4e3, Vector(0, (G * Earth.mass / (Earth.radius + 384400e3)) ** 0.5), Vector(8371.0e3 + 384400e3, 0), (128, 128, 128), "Moon")
-Rocket = Body(10000, 100e3, Vector(2000, 9000), Vector(Earth.radius, 0), (176, 36, 204), "Rocket")
+Rocket = Body(10000, 100e3, Vector(4000, 00), Vector(Earth.radius+10000e3, 0), (176, 36, 204), "Rocket")
 
-bodies = [Earth, Space_Station, Moon, Rocket]
+bodies = [Earth, Space_Station, Moon]
