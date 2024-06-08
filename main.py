@@ -22,10 +22,9 @@ simulation_elapsed = 0
 drawing_elapsed = 0
 
 while running:
-    delta = clock.tick(500)
-    simulation_elapsed += delta
-    drawing_elapsed += delta
-    #time_delta = clock.tick(6000)/1000
+    time_delta = clock.tick(1000)
+    simulation_elapsed += time_delta
+    drawing_elapsed += time_delta
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False

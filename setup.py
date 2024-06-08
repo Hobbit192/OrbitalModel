@@ -23,6 +23,8 @@ screen = pygame.display.set_mode(window_size)
 trail_surface = pygame.Surface(window_size, pygame.SRCALPHA)
 trail_surface.fill((255, 255, 255, 0))
 body_surface = pygame.Surface(window_size)
+ui_surface = pygame.Surface(window_size)
+
 screen.blit(body_surface, (0, 0))
 body_surface.blit(trail_surface, (0, 0))
 

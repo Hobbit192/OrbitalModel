@@ -1,9 +1,9 @@
 import pygame
 import pygame_gui
-import os
 from pygame_gui.core import ObjectID, UIElement
 from pygame_gui.core.interfaces import IUIManagerInterface
 from constants import BACKGROUND
+from setup import ui_surface, screen_info
 
 
 class UIShape(UIElement):
@@ -39,31 +39,33 @@ class UIShape(UIElement):
         self.image.fill((0, 0, 0, 0))  # Clear the surface
         self.draw()
 
+
 # Initialize Pygame
-# testing
 pygame.init()
 
-# Set up the window
-os.environ["SDL_VIDEO_WINDOW_POS"] = "0,30"
-info = pygame.display.Info()
-screen_width = info.current_w
-screen_height = info.current_h - 80
-screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("Centered Window Example")
-
 # Create a UI manager
-ui_manager = pygame_gui.UIManager((screen_width, screen_height), "THEME.JSON")
+ui_manager = pygame_gui.UIManager((screen_info.screen_width, screen_info.screen_height), "THEME.JSON")
+
+
+def create_ui_panels(manager):
+    panels = {}
+
+    panels["info_panel"] = pygame_gui.elements.UIPanel(relative_rect=pygame.Rect(info_panel_x, info_panel_y, info_panel_width, info_panel_height),
+                                                       manager=ui_manager,
+                                                       starting_height=1,
+                                                       object_id=ObjectID(object_id="#info_panel"),
+                                                       )
+
+
+def create_ui_elements(manager):
+    pass
 
 # Info panel
 info_panel_width = 365
 info_panel_height = 700
-info_panel_x = screen_width - info_panel_width
-info_panel_y = (screen_height - info_panel_height) // 2
-info_panel = pygame_gui.elements.UIPanel(relative_rect=pygame.Rect(info_panel_x, info_panel_y, info_panel_width, info_panel_height),
-                                         manager=ui_manager,
-                                         starting_height=1,
-                                         object_id=ObjectID(object_id="#info_panel"),
-                                         )
+info_panel_x = screen_info.screen_width - info_panel_width
+info_panel_y = (screen_info.screen_height - info_panel_height) // 2
+
 
 # Elements on the Info Panel
 info_title_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((12, 10), (140, 16)),
@@ -336,15 +338,11 @@ trajectories_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((12, 
 # Create a toggle button
 toggle_button_width = 100
 toggle_button_height = 50
-toggle_button_x = (screen_width - toggle_button_width) // 2  # Center horizontally
+toggle_button_x = (screen_info.screen_width - toggle_button_width) // 2  # Center horizontally
 toggle_button_y = info_panel_y - toggle_button_height  # Position above the window
 toggle_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect(toggle_button_x, toggle_button_y, toggle_button_width, toggle_button_height),
                                              text="Toggle",
                                              manager=ui_manager)
-
-test_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect(0, 0, 100, 50),
-                                           text="Toggle",
-                                           manager=ui_manager, object_id="#button_test")
 
 # Window visibility flag
 window_visible = True
@@ -372,33 +370,32 @@ while running:
             if event.key == pygame.K_1:
                 toggle_button.enable()
 
-        if event.type == pygame.USEREVENT:
-            if event.user_type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:
-                if event.ui_element == mass_slider:
-                    rounded_mass_slider = round(mass_slider.get_current_value(), 2)
-                    mass_entry_text.set_text(str(rounded_mass_slider))
+        if event.type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:
+            if event.ui_element == mass_slider:
+                rounded_mass_slider = round(mass_slider.get_current_value(), 2)
+                mass_entry_text.set_text(str(rounded_mass_slider))
 
-                elif event.ui_element == radius_slider:
-                    rounded_radius_slider = round(radius_slider.get_current_value(), 2)
-                    radius_entry_text.set_text(str(rounded_radius_slider))
+            elif event.ui_element == radius_slider:
+                rounded_radius_slider = round(radius_slider.get_current_value(), 2)
+                radius_entry_text.set_text(str(rounded_radius_slider))
 
-                elif event.ui_element == red_slider:
-                    rounded_red_slider = round(red_slider.get_current_value())
-                    red_entry_text.set_text(str(rounded_red_slider))
+            elif event.ui_element == red_slider:
+                rounded_red_slider = round(red_slider.get_current_value())
+                red_entry_text.set_text(str(rounded_red_slider))
 
-                elif event.ui_element == green_slider:
-                    rounded_green_slider = round(green_slider.get_current_value())
-                    green_entry_text.set_text(str(rounded_green_slider))
+            elif event.ui_element == green_slider:
+                rounded_green_slider = round(green_slider.get_current_value())
+                green_entry_text.set_text(str(rounded_green_slider))
 
-                elif event.ui_element == blue_slider:
-                    rounded_blue_slider = round(blue_slider.get_current_value())
-                    blue_entry_text.set_text(str(rounded_blue_slider))
+            elif event.ui_element == blue_slider:
+                rounded_blue_slider = round(blue_slider.get_current_value())
+                blue_entry_text.set_text(str(rounded_blue_slider))
 
     # Update the toggle button position
     if window_visible:
         toggle_button_y = info_panel_y - toggle_button_height  # Position above the window
     else:
-        toggle_button_y = screen_height - toggle_button_height  # Position at the bottom of the screen
+        toggle_button_y = screen_info.screen_height - toggle_button_height  # Position at the bottom of the screen
     toggle_button.set_relative_position((toggle_button_x, toggle_button_y))
 
     mass_slider_value = mass_slider.get_current_value()
@@ -430,7 +427,7 @@ while running:
     ui_manager.update(time_delta)
 
     # Clear the window
-    screen.fill(BACKGROUND)
+    ui_surface.fill(BACKGROUND)
 
     # Draw the custom window if it's visible
     if window_visible:
@@ -438,7 +435,7 @@ while running:
     else:
         info_panel.hide()
 
-    ui_manager.draw_ui(screen)
+    ui_manager.draw_ui(ui_surface)
 
     # Update the display
     pygame.display.update()
