@@ -46,26 +46,16 @@ pygame.init()
 # Create a UI manager
 ui_manager = pygame_gui.UIManager((screen_info.screen_width, screen_info.screen_height), "THEME.JSON")
 
-
-def create_ui_panels(manager):
-    panels = {}
-
-    panels["info_panel"] = pygame_gui.elements.UIPanel(relative_rect=pygame.Rect(info_panel_x, info_panel_y, info_panel_width, info_panel_height),
-                                                       manager=ui_manager,
-                                                       starting_height=1,
-                                                       object_id=ObjectID(object_id="#info_panel"),
-                                                       )
-
-
-def create_ui_elements(manager):
-    pass
-
 # Info panel
 info_panel_width = 365
 info_panel_height = 700
 info_panel_x = screen_info.screen_width - info_panel_width
 info_panel_y = (screen_info.screen_height - info_panel_height) // 2
-
+info_panel = pygame_gui.elements.UIPanel(relative_rect=pygame.Rect(info_panel_x, info_panel_y, info_panel_width, info_panel_height),
+                                         manager=ui_manager,
+                                         starting_height=1,
+                                         object_id=ObjectID(object_id="#info_panel"),
+                                         )
 
 # Elements on the Info Panel
 info_title_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((12, 10), (140, 16)),
