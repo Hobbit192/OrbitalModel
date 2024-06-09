@@ -41,11 +41,13 @@ class Body:
         self.position = position
         self.colour = colour
         self.name = name
-        self.last_displayed = position
-        self.colliding = False
+        #self.last_displayed = position
 
         self.sprite = Sprite(colour, radius / scale_factors.radius_scale_factor)
         all_sprites_list.add(self.sprite)
+
+    def separation(self, other):
+        return (self.position-other.position).magnitude()
 
     def move(self, acceleration):
         new_velocity = self.velocity + acceleration
@@ -66,7 +68,7 @@ Earth = Body(mass=5.972168e24,
 
 Space_Station = Body(mass=450000,
                      radius=100e3,
-                     velocity=Vector(0, (G * Earth.mass / (Earth.radius + 1000e3)) ** 0.5),
+                     velocity=Vector(0,0), #Vector(0, (G * Earth.mass / (Earth.radius + 1000e3)) ** 0.5),
                      position=Vector(Earth.radius + 1000e3, 0),
                      colour=(255, 254, 255),
                      name="ISS"

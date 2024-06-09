@@ -23,7 +23,6 @@ drawing_elapsed = 0
 
 while running:
     time_delta = clock.tick(1000)
-    simulation_elapsed += time_delta
     drawing_elapsed += time_delta
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -88,43 +87,48 @@ while running:
         if event.type == pygame.MOUSEBUTTONUP:
             dragging = False
 
-    # Accelerate bodies
+    # Move bodies
     deltav_list = []
+
     for body in bodies:
-        acceleration_total = Vector(0, 0)
+
+        net_acceleration = Vector(0, 0)
 
         for other in bodies:
-            # Find forces from other bodies and acceleration of this body
-            if body != other:
+
+            if other != body:
+                separation = body.separation(other)
                 body_to_other = other.position - body.position
-                separation = body_to_other.magnitude()
+                #check for collisions
 
-                acceleration = body_to_other * (G * other.mass / separation ** 3)
+                if separation <= body.radius + other.radius:
+                    c = (2 * (body.mass * other.mass) / (body.mass + other.mass) * body_to_other.dot(
+                    body.velocity - other.velocity)
+                     / body_to_other.dot(body_to_other))
 
-                acceleration_total += acceleration
+                    impulse = body_to_other * (-c / body.mass)
 
-                if body.colliding:
-                    body.colliding = (separation <= body.radius + other.radius)
-                else:
-                    if separation <= body.radius + other.radius:
+                    #body.velocity = body.velocity - (body_to_other * (c / body.mass))
 
-                        body.colliding = True
-                        print("COLLISION!",body.name, " with ", other.name)
-                        c = (2 * (body.mass * other.mass) / (body.mass + other.mass) * body_to_other.dot(body.velocity - other.velocity)
-                             / body_to_other.dot(body_to_other))
+                    #other.velocity = other.velocity + (body_to_other * (c / other.mass))
+                    #move until separated
+                    body.move(body_to_other * (-c / body.mass))
+                    other.move(body_to_other * (c / other.mass))
+                    while body.separation(other) <= body.radius + other.radius:
+                        body.move(Vector(0, 0))
+                        other.move(Vector(0, 0))
 
-                        acceleration_total = acceleration_total + body_to_other * (c / body.mass)
-                        body.colliding = True
+            # Find forces from other bodies and acceleration of this body
 
-                        #body.velocity = body.velocity - (body_to_other * (c / body.mass))
-                        #other.velocity = other.velocity + (body_to_other * (c / other.mass))
+                net_acceleration += body_to_other * (G * other.mass / separation ** 3)
 
-        deltav_list.append(acceleration_total)
+        deltav_list.append(net_acceleration)
 
+    #move
     for z in zip(bodies, deltav_list):
         z[0].move(z[1])
 
-    if drawing_elapsed >= 16:
+    if drawing_elapsed >= 8:
         for body in bodies:
             # Draw tracers
             #pygame.draw.circle(trail_surface, body.colour, (body.last_displayed.convert().x,
@@ -132,9 +136,9 @@ while running:
 
             # Draw body sprites
             body.sprite.set_pos(body.position.convert())
-            body.last_displayed = body.position
-            body_surface.fill(BACKGROUND)
-            all_sprites_list.draw(body_surface)
+            #body.last_displayed = body.position
+        body_surface.fill(BACKGROUND)
+        all_sprites_list.draw(body_surface)
 
             #body_surface.blit(trail_surface, (0, 0))
 
