@@ -103,8 +103,8 @@ while running:
 
                 if separation <= body.radius + other.radius:
                     c = (2 * (body.mass * other.mass) / (body.mass + other.mass) * body_to_other.dot(
-                    body.velocity - other.velocity)
-                     / body_to_other.dot(body_to_other))
+                         body.velocity - other.velocity)
+                         / body_to_other.dot(body_to_other))
 
                     impulse = body_to_other * (-c / body.mass)
 
