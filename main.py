@@ -1,8 +1,14 @@
 import pygame
-from setup import body_surface, screen, screen_info
+from setup import body_surface, ui_surface, screen_info, screen
 from constants import WHITE, BACKGROUND, ORANGE, G, scale_factors
 from vectors import Vector
 from bodies import all_sprites_list, bodies
+from gui import (ui_manager, info_title_label, name_label, planet_label, mass_label, mass_entry_text, e_label_1,
+                 power_entry_text_1, mass_unit_label, mass_slider, radius_label, radius_entry_text, e_label_2,
+                 power_entry_text_2, radius_unit_label, radius_slider, red_label, red_slider, red_entry_text,
+                 green_label, green_slider, green_entry_text, blue_label, blue_slider, blue_entry_text,
+                 velocity_x_label, velocity_y_label, speed_label, emphasis_rect_1, emphasis_rect_2, emphasis_rect_3,
+                 emphasis_rect_4, emphasis_rect_5, emphasis_rect_6, trajectories_label, window_visible)
 
 # Initialise
 pygame.init()
@@ -58,7 +64,7 @@ while running:
             if event.key == pygame.K_RIGHT:
                 screen_info.centre_x -= 20
 
-        #manager.process_events(event)
+        ui_manager.process_events(event)
 
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             for body in bodies:
@@ -67,14 +73,6 @@ while running:
                     dragging = True
                     selected_body = body
                     selected = True
-
-                    # Create GUI window elements
-                    #details_window = pygame_gui.elements.UIWindow(
-                        #rect=pygame.Rect((50,50),(100,100)),
-                        #manager= manager,
-                        #window_display_title="Test window"
-                    #)
-
                     break
 
                 selected = False
@@ -163,8 +161,10 @@ while running:
                              5)
 
         drawing_elapsed = 0
-        screen.blit(body_surface, (0, 0))
-        #manager.update(time_delta)
-        #manager.draw_ui(ui_surface)
-        pygame.display.flip()
+        ui_manager.update(time_delta)
+        ui_manager.draw_ui(ui_surface)
 
+        screen.blit(body_surface, (0, 0))
+        body_surface.blit(ui_surface, (0, 0))
+
+        pygame.display.flip()

@@ -44,13 +44,13 @@ class UIShape(UIElement):
 pygame.init()
 
 # Create a UI manager
-ui_manager = pygame_gui.UIManager((screen_info.screen_width, screen_info.screen_height), "THEME.JSON")
+ui_manager = pygame_gui.UIManager((screen_info.width, screen_info.height), "THEME.JSON")
 
 # Info panel
 info_panel_width = 365
 info_panel_height = 700
-info_panel_x = screen_info.screen_width - info_panel_width
-info_panel_y = (screen_info.screen_height - info_panel_height) // 2
+info_panel_x = screen_info.width - info_panel_width
+info_panel_y = (screen_info.height - info_panel_height) // 2
 info_panel = pygame_gui.elements.UIPanel(relative_rect=pygame.Rect(info_panel_x, info_panel_y, info_panel_width, info_panel_height),
                                          manager=ui_manager,
                                          starting_height=1,
@@ -328,7 +328,7 @@ trajectories_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((12, 
 # Create a toggle button
 toggle_button_width = 100
 toggle_button_height = 50
-toggle_button_x = (screen_info.screen_width - toggle_button_width) // 2  # Center horizontally
+toggle_button_x = (screen_info.width - toggle_button_width) // 2  # Center horizontally
 toggle_button_y = info_panel_y - toggle_button_height  # Position above the window
 toggle_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect(toggle_button_x, toggle_button_y, toggle_button_width, toggle_button_height),
                                              text="Toggle",
@@ -385,7 +385,7 @@ while running:
     if window_visible:
         toggle_button_y = info_panel_y - toggle_button_height  # Position above the window
     else:
-        toggle_button_y = screen_info.screen_height - toggle_button_height  # Position at the bottom of the screen
+        toggle_button_y = screen_info.height - toggle_button_height  # Position at the bottom of the screen
     toggle_button.set_relative_position((toggle_button_x, toggle_button_y))
 
     mass_slider_value = mass_slider.get_current_value()
