@@ -1,0 +1,34 @@
+{
+  "Bodies": [
+    {
+      "name": "Earth",
+      "colour": [
+        18,
+        53,
+        36
+      ],
+      "mass": 5.927e24,
+      "radius": 8.371e6,
+      "initial_position": [
+        0,
+        0
+      ],
+      "initial_velocity": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "ISS",
+      "colour"
+      Body(mass=450000,
+                     radius=100e3,
+                     velocity=Vector(0,0), #Vector(0, (G * Earth.mass / (Earth.radius + 1000e3)) ** 0.5),
+                     position=Vector(Earth.radius + 1000e3, 0),
+                     colour=(255, 254, 255),
+                     name="ISS"
+                     )
+
+    }
+
+}

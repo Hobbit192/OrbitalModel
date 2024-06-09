@@ -128,7 +128,7 @@ while running:
     for z in zip(bodies, deltav_list):
         z[0].move(z[1])
 
-    if drawing_elapsed >= 8:
+    if drawing_elapsed >= 16:
         for body in bodies:
             # Draw tracers
             #pygame.draw.circle(trail_surface, body.colour, (body.last_displayed.convert().x,
