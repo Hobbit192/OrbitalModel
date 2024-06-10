@@ -3,20 +3,24 @@ from setup import body_surface, ui_surface, screen_info, screen
 from constants import WHITE, BACKGROUND, ORANGE, G, scale_factors
 from vectors import Vector
 from bodies import all_sprites_list, bodies
-from gui import (ui_manager, info_title_label, name_label, planet_label, mass_label, mass_entry_text, e_label_1,
-                 power_entry_text_1, mass_unit_label, mass_slider, radius_label, radius_entry_text, e_label_2,
-                 power_entry_text_2, radius_unit_label, radius_slider, red_label, red_slider, red_entry_text,
-                 green_label, green_slider, green_entry_text, blue_label, blue_slider, blue_entry_text,
-                 velocity_x_label, velocity_y_label, speed_label, emphasis_rect_1, emphasis_rect_2, emphasis_rect_3,
-                 emphasis_rect_4, emphasis_rect_5, emphasis_rect_6, trajectories_label, window_visible)
+#from gui import (ui_manager, info_title_label, name_label, planet_label, mass_label, mass_entry_text, e_label_1,
+#                 power_entry_text_1, mass_unit_label, mass_slider, radius_label, radius_entry_text, e_label_2,
+#                 power_entry_text_2, radius_unit_label, radius_slider, red_label, red_slider, red_entry_text,
+#                 green_label, green_slider, green_entry_text, blue_label, blue_slider, blue_entry_text,
+#                 velocity_x_label, velocity_y_label, speed_label, emphasis_rect_1, emphasis_rect_2, emphasis_rect_3,
+#                 emphasis_rect_4, emphasis_rect_5, emphasis_rect_6, trajectories_label, window_visible)
 
 # Initialise
+
+print("here")
 pygame.init()
 
 all_sprites_list.update()
 body_surface.fill(BACKGROUND)
 all_sprites_list.draw(body_surface)
+print("about to flip")
 pygame.display.flip()
+print("flipped")
 
 # ---------------------------------------- Main Program Loop -----------------------------------------------------------
 running = True
@@ -64,7 +68,7 @@ while running:
             if event.key == pygame.K_RIGHT:
                 screen_info.centre_x -= 20
 
-        ui_manager.process_events(event)
+        #ui_manager.process_events(event)
 
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             for body in bodies:
@@ -133,7 +137,8 @@ while running:
             #                                                body.last_displayed.convert().y), 1)
 
             # Draw body sprites
-            body.sprite.set_pos(body.position.convert())
+            aa = body.position * (1/scale_factors.distance_scale_factor) + Vector(screen_info.centre_x,screen_info.centre_y)
+            body.sprite.set_pos(aa)
             #body.last_displayed = body.position
         body_surface.fill(BACKGROUND)
         all_sprites_list.draw(body_surface)
@@ -161,8 +166,8 @@ while running:
                              5)
 
         drawing_elapsed = 0
-        ui_manager.update(time_delta)
-        ui_manager.draw_ui(ui_surface)
+        #ui_manager.update(time_delta)
+        #ui_manager.draw_ui(ui_surface)
 
         screen.blit(body_surface, (0, 0))
         body_surface.blit(ui_surface, (0, 0))

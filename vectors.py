@@ -22,6 +22,9 @@ class Vector:
     def __str__(self):
         return str(self.x) + ", " + str(self.y)
 
+    def transform(self, translation, scale):
+        return (self+translation)*scale
+
     def convert(self):
         return Vector(self.x / scale_factors.distance_scale_factor + screen_info.centre_x,
                       self.y / scale_factors.distance_scale_factor + screen_info.centre_y)

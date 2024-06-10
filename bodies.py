@@ -20,6 +20,8 @@ class Sprite(pygame.sprite.Sprite):
         self.rect.x = position.x - self.pixel_radius
         self.rect.y = position.y - self.pixel_radius
 
+
+
     def set_radius(self, pixel_radius, position):
         self.pixel_radius = pixel_radius
         self.image = pygame.Surface([pixel_radius * 2, pixel_radius * 2])
@@ -82,10 +84,10 @@ Moon = Body(mass=7.342e22,
             name="Moon"
             )
 
-Rocket = Body(mass=10000,
+Rocket = Body(mass=10000e15,
               radius=100e3,
               velocity=Vector(4000, 00),
-              position=Vector(Earth.radius+10000e3, 0),
+              position=Vector(Earth.radius+100e3, 100e3),
               colour=(176, 36, 204),
               name="Rocket"
               )

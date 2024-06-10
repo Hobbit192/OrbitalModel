@@ -12,6 +12,7 @@ class Screen:
         self.centre_y = self.height / 2
 
 
+
 os.environ["SDL_VIDEO_WINDOW_POS"] = "0,30"
 info = pygame.display.Info()
 
@@ -31,3 +32,4 @@ body_surface.blit(trail_surface, (0, 0))
 icon = pygame.image.load("black-hole-256x256.png")
 pygame.display.set_icon(icon)
 pygame.display.set_caption("Orbital Simulator", "OrbitSim")
+
