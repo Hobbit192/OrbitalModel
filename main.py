@@ -12,15 +12,18 @@ from bodies import all_sprites_list, bodies
 
 # Initialise
 
-print("here")
+def convert_to_screen(vector):
+    return Vector(vector.x / scale_factors.distance_scale_factor + screen_info.centre_x,
+                  vector.y / scale_factors.distance_scale_factor + screen_info.centre_y)
+
+
 pygame.init()
 
 all_sprites_list.update()
 body_surface.fill(BACKGROUND)
 all_sprites_list.draw(body_surface)
-print("about to flip")
 pygame.display.flip()
-print("flipped")
+
 
 # ---------------------------------------- Main Program Loop -----------------------------------------------------------
 running = True
@@ -137,8 +140,8 @@ while running:
             #                                                body.last_displayed.convert().y), 1)
 
             # Draw body sprites
-            aa = body.position * (1/scale_factors.distance_scale_factor) + Vector(screen_info.centre_x,screen_info.centre_y)
-            body.sprite.set_pos(aa)
+            body.sprite.set_pos(convert_to_screen(body.position))
+
             #body.last_displayed = body.position
         body_surface.fill(BACKGROUND)
         all_sprites_list.draw(body_surface)
