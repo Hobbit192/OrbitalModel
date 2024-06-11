@@ -3,27 +3,31 @@ from setup import body_surface, ui_surface, screen_info, screen
 from constants import WHITE, BACKGROUND, ORANGE, G, scale_factors
 from vectors import Vector
 from bodies import all_sprites_list, bodies
-#from gui import (ui_manager, info_title_label, name_label, planet_label, mass_label, mass_entry_text, e_label_1,
-#                 power_entry_text_1, mass_unit_label, mass_slider, radius_label, radius_entry_text, e_label_2,
-#                 power_entry_text_2, radius_unit_label, radius_slider, red_label, red_slider, red_entry_text,
-#                 green_label, green_slider, green_entry_text, blue_label, blue_slider, blue_entry_text,
-#                 velocity_x_label, velocity_y_label, speed_label, emphasis_rect_1, emphasis_rect_2, emphasis_rect_3,
-#                 emphasis_rect_4, emphasis_rect_5, emphasis_rect_6, trajectories_label, window_visible)
+from gui import (ui_manager, info_title_label, name_label, planet_label, mass_label, mass_entry_text, e_label_1,
+                 power_entry_text_1, mass_unit_label, mass_slider, radius_label, radius_entry_text, e_label_2,
+                 power_entry_text_2, radius_unit_label, radius_slider, red_label, red_slider, red_entry_text,
+                 green_label, green_slider, green_entry_text, blue_label, blue_slider, blue_entry_text,
+                 velocity_x_label, velocity_y_label, speed_label, emphasis_rect_1, emphasis_rect_2, emphasis_rect_3,
+                 emphasis_rect_4, emphasis_rect_5, emphasis_rect_6, trajectories_label, window_visible)
 
 # Initialise
+pygame.init()
+
 
 def convert_to_screen(vector):
     return Vector(vector.x / scale_factors.distance_scale_factor + screen_info.centre_x,
                   vector.y / scale_factors.distance_scale_factor + screen_info.centre_y)
 
 
-pygame.init()
+def convert_from_screen(vector):
+    return Vector((vector.x - screen_info.centre_x) * scale_factors.distance_scale_factor,
+                  (vector.y - screen_info.centre_y) * scale_factors.distance_scale_factor)
+
 
 all_sprites_list.update()
 body_surface.fill(BACKGROUND)
 all_sprites_list.draw(body_surface)
 pygame.display.flip()
-
 
 # ---------------------------------------- Main Program Loop -----------------------------------------------------------
 running = True
@@ -71,11 +75,9 @@ while running:
             if event.key == pygame.K_RIGHT:
                 screen_info.centre_x -= 20
 
-        #ui_manager.process_events(event)
-
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             for body in bodies:
-                click_pos = Vector(event.pos[0], event.pos[1]).convert_back()
+                click_pos = convert_from_screen(Vector(event.pos[0], event.pos[1]))
                 if (click_pos - body.position).magnitude() <= body.radius:
                     dragging = True
                     selected_body = body
@@ -86,7 +88,7 @@ while running:
 
         if event.type == pygame.MOUSEMOTION:
             if dragging:
-                selected_body.position = Vector(event.pos[0], event.pos[1]).convert_back()
+                selected_body.position = convert_from_screen(Vector(event.pos[0], event.pos[1]))
                 selected_body.velocity = Vector(0, 0)
 
         if event.type == pygame.MOUSEBUTTONUP:
@@ -96,29 +98,24 @@ while running:
     deltav_list = []
 
     for body in bodies:
-
         net_acceleration = Vector(0, 0)
 
         for other in bodies:
-
             if other != body:
                 separation = body.separation(other)
                 body_to_other = other.position - body.position
-                #check for collisions
+
+                # Check for collisions
 
                 if separation <= body.radius + other.radius:
                     c = (2 * (body.mass * other.mass) / (body.mass + other.mass) * body_to_other.dot(
-                         body.velocity - other.velocity)
-                         / body_to_other.dot(body_to_other))
+                         body.velocity - other.velocity) / body_to_other.dot(body_to_other))
 
-                    impulse = body_to_other * (-c / body.mass)
+                    # Move until separated
 
-                    #body.velocity = body.velocity - (body_to_other * (c / body.mass))
-
-                    #other.velocity = other.velocity + (body_to_other * (c / other.mass))
-                    #move until separated
                     body.move(body_to_other * (-c / body.mass))
                     other.move(body_to_other * (c / other.mass))
+
                     while body.separation(other) <= body.radius + other.radius:
                         body.move(Vector(0, 0))
                         other.move(Vector(0, 0))
@@ -129,24 +126,18 @@ while running:
 
         deltav_list.append(net_acceleration)
 
-    #move
+    # Move
     for z in zip(bodies, deltav_list):
         z[0].move(z[1])
 
     if drawing_elapsed >= 16:
         for body in bodies:
-            # Draw tracers
-            #pygame.draw.circle(trail_surface, body.colour, (body.last_displayed.convert().x,
-            #                                                body.last_displayed.convert().y), 1)
 
             # Draw body sprites
             body.sprite.set_pos(convert_to_screen(body.position))
 
-            #body.last_displayed = body.position
         body_surface.fill(BACKGROUND)
         all_sprites_list.draw(body_surface)
-
-            #body_surface.blit(trail_surface, (0, 0))
 
         # Information to display if the body is selected
         if selected:
@@ -163,9 +154,9 @@ while running:
             body_surface.blit(velocity_text, velocity_rect)
 
             pygame.draw.line(body_surface, ORANGE,
-                             (selected_body.position.convert().x, selected_body.position.convert().y),
-                             (selected_body.position.convert().x + selected_body.velocity.x / scale_factors.velocity_scale_factor,
-                              selected_body.position.convert().y + selected_body.velocity.y / scale_factors.velocity_scale_factor),
+                             (convert_to_screen(selected_body.position).x, convert_to_screen(selected_body.position).y),
+                             (convert_to_screen(selected_body.position).x + selected_body.velocity.x / scale_factors.velocity_scale_factor,
+                              convert_to_screen(selected_body.position).y + selected_body.velocity.y / scale_factors.velocity_scale_factor),
                              5)
 
         drawing_elapsed = 0

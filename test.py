@@ -249,7 +249,7 @@ while running:
             #                                                body.last_displayed.convert().y), 1)
 
             # Draw body sprites
-            body.sprite.set_pos(body.position.convert())
+            body.sprite.set_pos(convert_to_screen(body.position))
             body.last_displayed = body.position
             body_surface.fill(BACKGROUND)
             all_sprites_list.draw(body_surface)
