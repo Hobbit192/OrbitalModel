@@ -1,14 +1,12 @@
 import pygame
-from setup import body_surface, ui_surface, screen_info, screen
-from constants import WHITE, BACKGROUND, ORANGE, G, scale_factors
-from vectors import Vector
+import pygame_gui
+
 from bodies import all_sprites_list, bodies
-from gui import (ui_manager, info_title_label, name_label, planet_label, mass_label, mass_entry_text, e_label_1,
-                 power_entry_text_1, mass_unit_label, mass_slider, radius_label, radius_entry_text, e_label_2,
-                 power_entry_text_2, radius_unit_label, radius_slider, red_label, red_slider, red_entry_text,
-                 green_label, green_slider, green_entry_text, blue_label, blue_slider, blue_entry_text,
-                 velocity_x_label, velocity_y_label, speed_label, emphasis_rect_1, emphasis_rect_2, emphasis_rect_3,
-                 emphasis_rect_4, emphasis_rect_5, emphasis_rect_6, trajectories_label, window_visible)
+from constants import BACKGROUND, ORANGE, G, scale_factors
+from gui import (ui_manager, mass_entry_text, mass_slider, radius_entry_text, radius_slider, red_slider, red_entry_text,
+                 green_slider, green_entry_text, blue_slider, blue_entry_text, info_panel)
+from setup import body_surface, ui_surface, screen_info, screen
+from vectors import Vector
 
 # Initialise
 pygame.init()
@@ -44,6 +42,8 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
+        ui_manager.process_events(event)
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
@@ -94,6 +94,52 @@ while running:
         if event.type == pygame.MOUSEBUTTONUP:
             dragging = False
 
+        if event.type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:
+            if event.ui_element == mass_slider:
+                rounded_mass_slider = round(mass_slider.get_current_value(), 2)
+                mass_entry_text.set_text(str(rounded_mass_slider))
+
+            elif event.ui_element == radius_slider:
+                rounded_radius_slider = round(radius_slider.get_current_value(), 2)
+                radius_entry_text.set_text(str(rounded_radius_slider))
+
+            elif event.ui_element == red_slider:
+                rounded_red_slider = round(red_slider.get_current_value())
+                red_entry_text.set_text(str(rounded_red_slider))
+
+            elif event.ui_element == green_slider:
+                rounded_green_slider = round(green_slider.get_current_value())
+                green_entry_text.set_text(str(rounded_green_slider))
+
+            elif event.ui_element == blue_slider:
+                rounded_blue_slider = round(blue_slider.get_current_value())
+                blue_entry_text.set_text(str(rounded_blue_slider))
+
+    mass_slider_value = mass_slider.get_current_value()
+    mass_text = mass_entry_text.get_text()
+    if mass_text and float(mass_text) != mass_slider_value:
+        mass_slider.set_current_value(float(mass_text))
+
+    radius_slider_value = radius_slider.get_current_value()
+    radius_text = radius_entry_text.get_text()
+    if radius_text and float(radius_text) != radius_slider_value:
+        radius_slider.set_current_value(float(radius_text))
+
+    red_slider_value = red_slider.get_current_value()
+    red_text = red_entry_text.get_text()
+    if red_text and int(red_text) != red_slider_value:
+        red_slider.set_current_value(int(red_text))
+
+    blue_slider_value = blue_slider.get_current_value()
+    blue_text = blue_entry_text.get_text()
+    if blue_text and int(blue_text) != blue_slider_value:
+        blue_slider.set_current_value(int(blue_text))
+
+    green_slider_value = green_slider.get_current_value()
+    green_text = green_entry_text.get_text()
+    if green_text and int(green_text) != green_slider_value:
+        green_slider.set_current_value(int(green_text))
+
     # Move bodies
     deltav_list = []
 
@@ -141,17 +187,7 @@ while running:
 
         # Information to display if the body is selected
         if selected:
-            font = pygame.font.Font('GillSans.ttf', 32)
-            name_text = font.render(selected_body.name, True, WHITE, selected_body.colour)
-            name_rect = name_text.get_rect()
-            name_rect.center = (75, 75)
-            body_surface.blit(name_text, name_rect)
-
-            velocity_text = font.render("Speed: " + str(selected_body.velocity.magnitude() // 1) + " m/s", True,
-                                        WHITE, selected_body.colour)
-            velocity_rect = velocity_text.get_rect()
-            velocity_rect.center = (145, 110)
-            body_surface.blit(velocity_text, velocity_rect)
+            info_panel.show()
 
             pygame.draw.line(body_surface, ORANGE,
                              (convert_to_screen(selected_body.position).x, convert_to_screen(selected_body.position).y),
@@ -159,9 +195,13 @@ while running:
                               convert_to_screen(selected_body.position).y + selected_body.velocity.y / scale_factors.velocity_scale_factor),
                              5)
 
+        else:
+            info_panel.hide()
+
         drawing_elapsed = 0
-        #ui_manager.update(time_delta)
-        #ui_manager.draw_ui(ui_surface)
+        ui_manager.update(time_delta)
+        ui_surface.fill(BACKGROUND)
+        ui_manager.draw_ui(ui_surface)
 
         screen.blit(body_surface, (0, 0))
         body_surface.blit(ui_surface, (0, 0))

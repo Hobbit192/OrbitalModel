@@ -338,6 +338,7 @@ toggle_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect(toggle_bu
 window_visible = True
 
 # Main event loop
+"""
 clock = pygame.time.Clock()
 running = True
 while running:
@@ -346,7 +347,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-        ui_manager.process_events(event)
+        
 
         # Toggle the window visibility on button click
         if event.type == pygame_gui.UI_BUTTON_PRESSED:
@@ -360,58 +361,12 @@ while running:
             if event.key == pygame.K_1:
                 toggle_button.enable()
 
-        if event.type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:
-            if event.ui_element == mass_slider:
-                rounded_mass_slider = round(mass_slider.get_current_value(), 2)
-                mass_entry_text.set_text(str(rounded_mass_slider))
-
-            elif event.ui_element == radius_slider:
-                rounded_radius_slider = round(radius_slider.get_current_value(), 2)
-                radius_entry_text.set_text(str(rounded_radius_slider))
-
-            elif event.ui_element == red_slider:
-                rounded_red_slider = round(red_slider.get_current_value())
-                red_entry_text.set_text(str(rounded_red_slider))
-
-            elif event.ui_element == green_slider:
-                rounded_green_slider = round(green_slider.get_current_value())
-                green_entry_text.set_text(str(rounded_green_slider))
-
-            elif event.ui_element == blue_slider:
-                rounded_blue_slider = round(blue_slider.get_current_value())
-                blue_entry_text.set_text(str(rounded_blue_slider))
-
     # Update the toggle button position
     if window_visible:
         toggle_button_y = info_panel_y - toggle_button_height  # Position above the window
     else:
         toggle_button_y = screen_info.height - toggle_button_height  # Position at the bottom of the screen
     toggle_button.set_relative_position((toggle_button_x, toggle_button_y))
-
-    mass_slider_value = mass_slider.get_current_value()
-    mass_text = mass_entry_text.get_text()
-    if mass_text and float(mass_text) != mass_slider_value:
-        mass_slider.set_current_value(float(mass_text))
-
-    radius_slider_value = radius_slider.get_current_value()
-    radius_text = radius_entry_text.get_text()
-    if radius_text and float(radius_text) != radius_slider_value:
-        radius_slider.set_current_value(float(radius_text))
-
-    red_slider_value = red_slider.get_current_value()
-    red_text = red_entry_text.get_text()
-    if red_text and int(red_text) != red_slider_value:
-        red_slider.set_current_value(int(red_text))
-
-    blue_slider_value = blue_slider.get_current_value()
-    blue_text = blue_entry_text.get_text()
-    if blue_text and int(blue_text) != blue_slider_value:
-        blue_slider.set_current_value(int(blue_text))
-
-    green_slider_value = green_slider.get_current_value()
-    green_text = green_entry_text.get_text()
-    if green_text and int(green_text) != green_slider_value:
-        green_slider.set_current_value(int(green_text))
 
     # Update the UI
     ui_manager.update(time_delta)
@@ -432,3 +387,4 @@ while running:
 
 # Quit Pygame
 pygame.quit()
+"""
