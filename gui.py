@@ -54,6 +54,7 @@ info_panel = pygame_gui.elements.UIPanel(relative_rect=pygame.Rect(info_panel_x,
                                          manager=ui_manager,
                                          starting_height=1,
                                          object_id=ObjectID(object_id="#info_panel"),
+                                         visible=0
                                          )
 
 # Elements on the Info Panel
@@ -325,13 +326,13 @@ trajectories_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((12, 
                                                  )
 
 # Create a toggle button
-toggle_button_width = 100
-toggle_button_height = 50
-toggle_button_x = (screen_info.width - toggle_button_width) // 2  # Center horizontally
-toggle_button_y = info_panel_y - toggle_button_height  # Position above the window
-toggle_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect(toggle_button_x, toggle_button_y, toggle_button_width, toggle_button_height),
-                                             text="Toggle",
-                                             manager=ui_manager)
+#toggle_button_width = 100
+#toggle_button_height = 50
+#toggle_button_x = (screen_info.width - toggle_button_width) // 2  # Center horizontally
+#toggle_button_y = info_panel_y - toggle_button_height  # Position above the window
+#toggle_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect(toggle_button_x, toggle_button_y, toggle_button_width, toggle_button_height),
+                                             #text="Toggle",
+                                             #manager=ui_manager)
 
 # Window visibility flag
 window_visible = True

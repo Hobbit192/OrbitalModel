@@ -1,6 +1,8 @@
 import os
 import pygame
 
+from constants import BACKGROUND
+
 pygame.init()
 
 
@@ -24,6 +26,7 @@ trail_surface = pygame.Surface(window_size, pygame.SRCALPHA)
 trail_surface.fill((255, 255, 255, 0))
 body_surface = pygame.Surface(window_size)
 ui_surface = pygame.Surface(window_size)
+ui_surface.set_colorkey(BACKGROUND)
 
 screen.blit(body_surface, (0, 0))
 #body_surface.blit(ui_surface, (0, 0))
