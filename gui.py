@@ -2,8 +2,7 @@ import pygame
 import pygame_gui
 from pygame_gui.core import ObjectID, UIElement
 from pygame_gui.core.interfaces import IUIManagerInterface
-from constants import BACKGROUND
-from setup import ui_surface, screen_info
+from setup import screen_info
 
 
 class UIShape(UIElement):

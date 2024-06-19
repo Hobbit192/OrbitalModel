@@ -39,6 +39,7 @@ drawing_elapsed = 0
 while running:
     time_delta = clock.tick(1000)
     drawing_elapsed += time_delta
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -141,7 +142,7 @@ while running:
         green_slider.set_current_value(int(green_text))
 
     # Move bodies
-    deltav_list = []
+    delta_v_list = []
 
     for body in bodies:
         net_acceleration = Vector(0, 0)
@@ -170,10 +171,10 @@ while running:
 
                 net_acceleration += body_to_other * (G * other.mass / separation ** 3)
 
-        deltav_list.append(net_acceleration)
+        delta_v_list.append(net_acceleration)
 
     # Move
-    for z in zip(bodies, deltav_list):
+    for z in zip(bodies, delta_v_list):
         z[0].move(z[1])
 
     if drawing_elapsed >= 16:
@@ -187,7 +188,7 @@ while running:
 
         # Information to display if the body is selected
         if selected:
-            info_panel.show()
+            #info_panel.show()
 
             pygame.draw.line(body_surface, ORANGE,
                              (convert_to_screen(selected_body.position).x, convert_to_screen(selected_body.position).y),
@@ -196,14 +197,15 @@ while running:
                              5)
 
         else:
-            info_panel.hide()
+            #info_panel.hide()
+            pass
 
         drawing_elapsed = 0
         ui_manager.update(time_delta)
         ui_surface.fill(BACKGROUND)
-        ui_manager.draw_ui(ui_surface)
 
         screen.blit(body_surface, (0, 0))
         body_surface.blit(ui_surface, (0, 0))
 
+        ui_manager.draw_ui(ui_surface)
         pygame.display.flip()
