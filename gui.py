@@ -34,6 +34,10 @@ class UIShape(UIElement):
     def update(self, time_delta):
         pass
 
+    def update_colour(self, colour: tuple):
+        self.colour = colour
+        self.redraw()
+
     def redraw(self):
         self.image.fill((0, 0, 0, 0))  # Clear the surface
         self.draw()

@@ -5,7 +5,7 @@ from bodies import all_sprites_list, bodies
 from constants import BACKGROUND, ORANGE, G, scale_factors
 from gui import (ui_manager, mass_entry_text, mass_slider, radius_entry_text, radius_slider, red_slider, red_entry_text,
                  green_slider, green_entry_text, blue_slider, blue_entry_text, info_panel, name_label,
-                 power_entry_text_1)
+                 power_entry_text_1, planet_label, power_entry_text_2)
 from setup import body_surface, ui_surface, screen_info, screen
 from vectors import Vector
 from standard_form import standard_form
@@ -42,8 +42,6 @@ while running:
     time_delta = clock.tick(1000)
     drawing_elapsed += time_delta
 
-
-
     # Move bodies
     delta_v_list = []
 
@@ -56,13 +54,11 @@ while running:
                 body_to_other = other.position - body.position
 
                 # Check for collisions
-
                 if separation <= body.radius + other.radius:
                     c = (2 * (body.mass * other.mass) / (body.mass + other.mass) * body_to_other.dot(
                          body.velocity - other.velocity) / body_to_other.dot(body_to_other))
 
                     # Move until separated
-
                     body.move(body_to_other * (-c / body.mass))
                     other.move(body_to_other * (c / other.mass))
 
@@ -70,8 +66,7 @@ while running:
                         body.move(Vector(0, 0))
                         other.move(Vector(0, 0))
 
-            # Find forces from other bodies and acceleration of this body
-
+                # Find forces from other bodies and acceleration of this body
                 net_acceleration += body_to_other * (G * other.mass / separation ** 3)
 
         delta_v_list.append(net_acceleration)
@@ -127,13 +122,25 @@ while running:
                             selected_body = body
                             selected = True
 
+                            # First time selected info to be displayed
                             info_panel.show()
                             name_label.set_text(selected_body.name.upper())
+
                             mass_string = str(round(standard_form(selected_body.mass)[0], 2))
                             mass_entry_text.set_text(mass_string)
+                            power_string_1 = str(standard_form(selected_body.mass)[1])
+                            power_entry_text_1.set_text(power_string_1)
 
-                            power_string = str(standard_form(selected_body.mass)[1])
-                            power_entry_text_1.set_text(power_string)
+                            radius_string = str(round(standard_form(selected_body.radius)[0], 2))
+                            radius_entry_text.set_text(radius_string)
+                            power_string_2 = str(standard_form(selected_body.radius)[1])
+                            power_entry_text_2.set_text(power_string_2)
+
+                            planet_label.update_colour(selected_body.colour)
+
+                            red_entry_text.set_text(str(selected_body.colour[0]))
+                            green_entry_text.set_text(str(selected_body.colour[1]))
+                            blue_entry_text.set_text(str(selected_body.colour[2]))
                             break
 
                         selected = False
@@ -153,21 +160,26 @@ while running:
                     selected_body.mass = float(mass_entry_text.get_text()) * 10 ** int(power_entry_text_1.get_text())
 
                 elif event.ui_element == radius_slider:
-                    rounded_radius_slider = round(radius_slider.get_current_value(), 2)
-                    radius_entry_text.set_text(str(rounded_radius_slider))
+                    radius_entry_text.set_text("{:.2f}".format(radius_slider.get_current_value()))
+                    selected_body.radius = float(radius_entry_text.get_text()) * 10 ** int(power_entry_text_2.get_text())
+                    selected_body.update_sprite(selected_body.colour, selected_body.radius)
 
                 elif event.ui_element == red_slider:
                     rounded_red_slider = round(red_slider.get_current_value())
                     red_entry_text.set_text(str(rounded_red_slider))
+                    selected_body.update_sprite(selected_body.colour, selected_body.radius)
 
                 elif event.ui_element == green_slider:
                     rounded_green_slider = round(green_slider.get_current_value())
                     green_entry_text.set_text(str(rounded_green_slider))
+                    selected_body.update_sprite(selected_body.colour, selected_body.radius)
 
                 elif event.ui_element == blue_slider:
                     rounded_blue_slider = round(blue_slider.get_current_value())
                     blue_entry_text.set_text(str(rounded_blue_slider))
+                    selected_body.update_sprite(selected_body.colour, selected_body.radius)
 
+        # Sync up slider and text values for all sliders
         mass_slider_value = mass_slider.get_current_value()
         mass_text = mass_entry_text.get_text()
         if mass_text and float(mass_text) != mass_slider_value:
@@ -201,7 +213,7 @@ while running:
         body_surface.fill(BACKGROUND)
         all_sprites_list.draw(body_surface)
 
-        # Information to display if the body is selected
+        # Information  that needs to be constantly updated to display if the body is selected
         if selected:
             pygame.draw.line(body_surface, ORANGE,
                              (convert_to_screen(selected_body.position).x, convert_to_screen(selected_body.position).y),

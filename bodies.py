@@ -20,8 +20,6 @@ class Sprite(pygame.sprite.Sprite):
         self.rect.x = position.x - self.pixel_radius
         self.rect.y = position.y - self.pixel_radius
 
-
-
     def set_radius(self, pixel_radius, position):
         self.pixel_radius = pixel_radius
         self.image = pygame.Surface([pixel_radius * 2, pixel_radius * 2])
@@ -34,6 +32,16 @@ class Sprite(pygame.sprite.Sprite):
         self.rect.x = position.x - self.pixel_radius
         self.rect.y = position.y - self.pixel_radius
 
+    def update_sprite_info(self, colour, pixel_radius):
+        self.colour = colour
+        self.pixel_radius = pixel_radius
+        self.image = pygame.Surface([pixel_radius * 2, pixel_radius * 2])
+        self.image.fill(WHITE)
+        self.image.set_colorkey(WHITE)
+
+        pygame.draw.circle(self.image, colour, (pixel_radius, pixel_radius), pixel_radius)
+        self.rect = self.image.get_rect()
+
 
 class Body:
     def __init__(self, mass, radius, velocity, position, colour, name):
@@ -43,10 +51,12 @@ class Body:
         self.position = position
         self.colour = colour
         self.name = name
-        #self.last_displayed = position
 
         self.sprite = Sprite(colour, radius / scale_factors.radius_scale_factor)
         all_sprites_list.add(self.sprite)
+
+    def update_sprite(self, colour, radius):
+        self.sprite.update_sprite_info(colour, radius / scale_factors.radius_scale_factor)
 
     def separation(self, other):
         return (self.position-other.position).magnitude()
@@ -70,7 +80,7 @@ Earth = Body(mass=5.972168e24,
 
 Space_Station = Body(mass=450000,
                      radius=100e3,
-                     velocity=Vector(0,0), #Vector(0, (G * Earth.mass / (Earth.radius + 1000e3)) ** 0.5),
+                     velocity=Vector(0, (G * Earth.mass / (Earth.radius + 1000e3)) ** 0.5),
                      position=Vector(Earth.radius + 1000e3, 0),
                      colour=(255, 254, 255),
                      name="ISS"
