@@ -5,7 +5,7 @@ from bodies import all_sprites_list, bodies
 from constants import BACKGROUND, ORANGE, G, scale_factors
 from gui import (ui_manager, mass_entry_text, mass_slider, radius_entry_text, radius_slider, red_slider, red_entry_text,
                  green_slider, green_entry_text, blue_slider, blue_entry_text, info_panel, name_label,
-                 power_entry_text_1, planet_label, power_entry_text_2)
+                 power_entry_text_1, planet_label, power_entry_text_2, speed_value_label)
 from setup import body_surface, ui_surface, screen_info, screen
 from vectors import Vector
 from standard_form import standard_form
@@ -154,6 +154,14 @@ while running:
             if event.type == pygame.MOUSEBUTTONUP:
                 dragging = False
 
+            if event.type == pygame_gui.UI_TEXT_ENTRY_FINISHED:
+                if event.ui_element == power_entry_text_1:
+                    selected_body.mass = float(mass_entry_text.get_text()) * 10 ** int(power_entry_text_1.get_text())
+
+                elif event.ui_element == power_entry_text_2:
+                    selected_body.radius = float(radius_entry_text.get_text()) * 10 ** int(power_entry_text_2.get_text())
+                    selected_body.update_sprite(selected_body.colour, selected_body.radius)
+
             if event.type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:
                 if event.ui_element == mass_slider:
                     mass_entry_text.set_text("{:.2f}".format(mass_slider.get_current_value()))
@@ -167,17 +175,26 @@ while running:
                 elif event.ui_element == red_slider:
                     rounded_red_slider = round(red_slider.get_current_value())
                     red_entry_text.set_text(str(rounded_red_slider))
+                    new_red = [int(red_entry_text.get_text()), selected_body.colour[1], selected_body.colour[2]]
+                    selected_body.colour = tuple(new_red)
                     selected_body.update_sprite(selected_body.colour, selected_body.radius)
+                    planet_label.update_colour(selected_body.colour)
 
                 elif event.ui_element == green_slider:
                     rounded_green_slider = round(green_slider.get_current_value())
                     green_entry_text.set_text(str(rounded_green_slider))
+                    new_green = [selected_body.colour[0], int(green_entry_text.get_text()), selected_body.colour[2]]
+                    selected_body.colour = tuple(new_green)
                     selected_body.update_sprite(selected_body.colour, selected_body.radius)
+                    planet_label.update_colour(selected_body.colour)
 
                 elif event.ui_element == blue_slider:
                     rounded_blue_slider = round(blue_slider.get_current_value())
                     blue_entry_text.set_text(str(rounded_blue_slider))
+                    new_blue = [selected_body.colour[0], selected_body.colour[1], int(blue_entry_text.get_text())]
+                    selected_body.colour = tuple(new_blue)
                     selected_body.update_sprite(selected_body.colour, selected_body.radius)
+                    planet_label.update_colour(selected_body.colour)
 
         # Sync up slider and text values for all sliders
         mass_slider_value = mass_slider.get_current_value()
@@ -220,6 +237,8 @@ while running:
                              (convert_to_screen(selected_body.position).x + selected_body.velocity.x / scale_factors.velocity_scale_factor,
                               convert_to_screen(selected_body.position).y + selected_body.velocity.y / scale_factors.velocity_scale_factor),
                              5)
+
+            speed_value_label.set_text(str(round()))
 
         drawing_elapsed = 0
         ui_manager.update(time_delta)

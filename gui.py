@@ -280,6 +280,13 @@ speed_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((199, 466), 
                                           object_id=ObjectID(class_id="@info_labels")
                                           )
 
+speed_value_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((275, 466), (66, 18)),
+                                                text=" m/s",
+                                                manager=ui_manager,
+                                                container=info_panel,
+                                                object_id=ObjectID(class_id="@info_labels")
+                                                )
+
 emphasis_rect_1 = UIShape(relative_rect=pygame.Rect((6, 408), (5, 80)),
                           shape="rectangle",
                           colour=(77, 81, 81),
