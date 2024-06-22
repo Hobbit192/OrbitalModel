@@ -8,7 +8,7 @@ from gui import (ui_manager, mass_entry_text, mass_slider, radius_entry_text, ra
                  power_entry_text_1, planet_label, power_entry_text_2, speed_value_label)
 from setup import body_surface, ui_surface, screen_info, screen
 from vectors import Vector
-from standard_form import standard_form
+from maths import standard_form, round_to_sf
 
 # Initialise
 pygame.init()
@@ -238,7 +238,7 @@ while running:
                               convert_to_screen(selected_body.position).y + selected_body.velocity.y / scale_factors.velocity_scale_factor),
                              5)
 
-            speed_value_label.set_text(str(round()))
+            speed_value_label.set_text(str(round_to_sf(selected_body.velocity.magnitude(), 4)) + " m/s")
 
         drawing_elapsed = 0
         ui_manager.update(time_delta)
