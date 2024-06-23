@@ -66,8 +66,16 @@ info_title_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((12, 10
                                                text="// INFORMATION PANEL",
                                                manager=ui_manager,
                                                container=info_panel,
-                                               object_id=ObjectID(object_id="#info_title_label")
+                                               object_id=ObjectID(class_id="@title_labels")
                                                )
+info_toggle_button_x = screen_info.width - 29
+info_toggle_button_y = (screen_info.height - 100) // 2
+info_toggle_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((info_toggle_button_x, info_toggle_button_y),
+                                                                            (29, 100)),
+                                                  text="",
+                                                  manager=ui_manager,
+                                                  object_id=ObjectID(class_id="@right_toggle_button")
+                                                  )
 
 name_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((47, 47), (266, 79)),
                                          text="JUPITER",
@@ -350,8 +358,21 @@ new_body_panel = pygame_gui.elements.UIPanel(relative_rect=pygame.Rect((new_body
                                              visible=1
                                              )
 
-# Window visibility flag
-window_visible = True
+# Elements on the New Body Panel
+
+new_body_title_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((6, 4), (80, 16)),
+                                                   text="// NEW BODY",
+                                                   manager=ui_manager,
+                                                   container=new_body_panel,
+                                                   object_id=ObjectID(class_id="@title_labels")
+                                                   )
+
+new_body_label = UIShape(relative_rect=pygame.Rect((16, 24), (74, 74)),
+                         shape="circle",
+                         colour=(81, 136, 130),
+                         manager=ui_manager,
+                         container=new_body_panel
+                         )
 
 # Main event loop
 """

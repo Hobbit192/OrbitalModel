@@ -5,7 +5,8 @@ from bodies import all_sprites_list, bodies
 from constants import BACKGROUND, ORANGE, G, scale_factors
 from gui import (ui_manager, mass_entry_text, mass_slider, radius_entry_text, radius_slider, red_slider, red_entry_text,
                  green_slider, green_entry_text, blue_slider, blue_entry_text, info_panel, name_label,
-                 power_entry_text_1, planet_label, power_entry_text_2, speed_value_label)
+                 power_entry_text_1, planet_label, power_entry_text_2, speed_value_label, info_toggle_button_x,
+                 info_panel_x, info_toggle_button, info_toggle_button_y)
 from setup import body_surface, ui_surface, screen_info, screen
 from vectors import Vector
 from maths import standard_form, round_to_sf
@@ -119,15 +120,26 @@ while running:
                 if event.key == pygame.K_RIGHT:
                     offset_x -= 20
 
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                if event.ui_element == info_toggle_button:
+                    info_panel.hide()
+                    info_toggle_button_x = screen_info.width - 29
+                    info_toggle_button.set_relative_position((info_toggle_button_x, info_toggle_button_y))
 
-                if not info_panel.relative_rect.collidepoint(event.pos) or info_panel.visible == 0:
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                if (not (info_panel.relative_rect.collidepoint(event.pos)
+                         or info_toggle_button.relative_rect.collidepoint(event.pos)) or info_panel.visible == 0):
                     for body in bodies:
                         click_pos = convert_from_screen(Vector(event.pos[0], event.pos[1]))
+
                         if (click_pos - body.position).magnitude() <= body.radius:
                             dragging = True
                             selected_body = body
                             selected = True
+
+                            info_toggle_button_x = info_panel_x - 29
+                            info_toggle_button.set_relative_position((info_toggle_button_x, info_toggle_button_y))
+                            info_toggle_button.enable()
 
                             # First time selected info to be displayed
                             info_panel.show()
@@ -152,6 +164,9 @@ while running:
 
                         selected = False
                         info_panel.hide()
+                        info_toggle_button_x = screen_info.width - 29
+                        info_toggle_button.set_relative_position((info_toggle_button_x, info_toggle_button_y))
+                        info_toggle_button.disable()
 
             if event.type == pygame.MOUSEMOTION:
                 if dragging:
