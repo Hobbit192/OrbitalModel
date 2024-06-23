@@ -16,22 +16,19 @@ from maths import standard_form, round_to_sf
 pygame.init()
 info = pygame.display.Info()
 
-#constants
+# Vector constants
 null_vector = Vector(0,0)
-screen_centre = Vector(info.current_w/2, (info.current_h - 80)/2)
+screen_centre = Vector(info.current_w / 2, (info.current_h - 80) / 2)
 offset = null_vector
 zoom = 1
 
+
 def convert_to_screen(vector):
-    return screen_centre + (vector * (1/scale_factors.distance_scale_factor) + offset) * zoom
-   # return Vector(vector.x / scale_factors.distance_scale_factor + screen_info.centre_x + offset_x,
-    #              vector.y / scale_factors.distance_scale_factor + screen_info.centre_y + offset_y)
+    return screen_centre + (vector * (1 / scale_factors.distance_scale_factor) + offset) * zoom
 
 
 def convert_from_screen(vector):
-    return ((vector - screen_centre) * (1/zoom) - offset) * scale_factors.distance_scale_factor
-    #return Vector((vector.x - screen_info.centre_x - offset_x) * scale_factors.distance_scale_factor,
-     #             (vector.y - screen_info.centre_y - offset_y) * scale_factors.distance_scale_factor)
+    return ((vector - screen_centre) * (1 / zoom) - offset) * scale_factors.distance_scale_factor
 
 
 all_sprites_list.update()
@@ -90,20 +87,19 @@ while running:
 
         keys = pygame.key.get_pressed()
 
-        offset += Vector(keys[pygame.K_RIGHT]-keys[pygame.K_LEFT],
-                         keys[pygame.K_DOWN]-keys[pygame.K_UP]) * (1/zoom)
+        offset += Vector(keys[pygame.K_LEFT] - keys[pygame.K_RIGHT], keys[pygame.K_UP] - keys[pygame.K_DOWN]) * (10 / zoom)
 
-        if keys[pygame.K_EQUALS]:
+        if keys[pygame.K_MINUS]:
             zoom /= 1.01
 
             for body in bodies:
-                body.sprite.set_radius(body.radius / (scale_factors.radius_scale_factor/zoom), body.position)
+                body.sprite.set_radius(body.radius / (scale_factors.radius_scale_factor / zoom), body.position)
 
-        if keys[pygame.K_MINUS]:
+        if keys[pygame.K_EQUALS]:
             zoom *= 1.01
 
             for body in bodies:
-                body.sprite.set_radius(body.radius / (scale_factors.radius_scale_factor/zoom), body.position)
+                body.sprite.set_radius(body.radius / (scale_factors.radius_scale_factor / zoom), body.position)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -111,11 +107,9 @@ while running:
 
             ui_manager.process_events(event)
 
-
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     running = False
-
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
