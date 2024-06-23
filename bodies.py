@@ -59,7 +59,7 @@ class Body:
         self.sprite.update_sprite_info(colour, radius / scale_factors.radius_scale_factor)
 
     def separation(self, other):
-        return (self.position-other.position).magnitude()
+        return (self.position - other.position).magnitude()
 
     def move(self, acceleration):
         new_velocity = self.velocity + acceleration

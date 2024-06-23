@@ -49,7 +49,7 @@ pygame.init()
 # Create a UI manager
 ui_manager = pygame_gui.UIManager((screen_info.width, screen_info.height), "THEME.JSON")
 
-# Info panel
+# ---------------------------------------- INFO PANEL ------------------------------------------------------------------
 info_panel_width = 365
 info_panel_height = 700
 info_panel_x = screen_info.width - info_panel_width
@@ -57,7 +57,7 @@ info_panel_y = (screen_info.height - info_panel_height) // 2
 info_panel = pygame_gui.elements.UIPanel(relative_rect=pygame.Rect(info_panel_x, info_panel_y, info_panel_width, info_panel_height),
                                          manager=ui_manager,
                                          starting_height=1,
-                                         object_id=ObjectID(object_id="#info_panel"),
+                                         object_id=ObjectID(class_id="@panels"),
                                          visible=0
                                          )
 
@@ -273,14 +273,14 @@ velocity_y_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((55, 44
                                                object_id=ObjectID(class_id="@info_labels")
                                                )
 
-speed_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((199, 466), (54, 18)),
+speed_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((150, 466), (54, 18)),
                                           text="Speed:",
                                           manager=ui_manager,
                                           container=info_panel,
                                           object_id=ObjectID(class_id="@info_labels")
                                           )
 
-speed_value_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((254, 466), (66, 18)),
+speed_value_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((200, 466), (120, 18)),
                                                 text=" m/s",
                                                 manager=ui_manager,
                                                 container=info_panel,
@@ -336,41 +336,29 @@ trajectories_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((12, 
                                                  object_id=ObjectID(class_id="@info_labels")
                                                  )
 
-# Create a toggle button
-#toggle_button_width = 100
-#toggle_button_height = 50
-#toggle_button_x = (screen_info.width - toggle_button_width) // 2  # Center horizontally
-#toggle_button_y = info_panel_y - toggle_button_height  # Position above the window
-#toggle_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect(toggle_button_x, toggle_button_y, toggle_button_width, toggle_button_height),
-                                             #text="Toggle",
-                                             #manager=ui_manager)
+# ----------------------------------------- NEW BODY PANEL -------------------------------------------------------------
+
+new_body_panel_width = 110
+new_body_panel_height = 110
+new_body_panel_x = 0
+new_body_panel_y = screen_info.height - new_body_panel_height
+new_body_panel = pygame_gui.elements.UIPanel(relative_rect=pygame.Rect((new_body_panel_x, new_body_panel_y),
+                                                                       (new_body_panel_width, new_body_panel_height)),
+                                             manager=ui_manager,
+                                             starting_height=1,
+                                             object_id=ObjectID(class_id="@panels"),
+                                             visible=1
+                                             )
 
 # Window visibility flag
 window_visible = True
 
 # Main event loop
 """
-clock = pygame.time.Clock()
-running = True
-while running:
-    time_delta = clock.tick(60) / 1000.0
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
-        
-
         # Toggle the window visibility on button click
         if event.type == pygame_gui.UI_BUTTON_PRESSED:
             if event.ui_element == toggle_button:
                 window_visible = not window_visible
-
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                toggle_button.disable()
-
-            if event.key == pygame.K_1:
-                toggle_button.enable()
 
     # Update the toggle button position
     if window_visible:
@@ -379,23 +367,10 @@ while running:
         toggle_button_y = screen_info.height - toggle_button_height  # Position at the bottom of the screen
     toggle_button.set_relative_position((toggle_button_x, toggle_button_y))
 
-    # Update the UI
-    ui_manager.update(time_delta)
-
-    # Clear the window
-    ui_surface.fill(BACKGROUND)
 
     # Draw the custom window if it's visible
     if window_visible:
         info_panel.show()
     else:
         info_panel.hide()
-
-    ui_manager.draw_ui(ui_surface)
-
-    # Update the display
-    pygame.display.update()
-
-# Quit Pygame
-pygame.quit()
 """

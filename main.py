@@ -13,15 +13,18 @@ from maths import standard_form, round_to_sf
 # Initialise
 pygame.init()
 
+offset_x = 0
+offset_y = 0
+
 
 def convert_to_screen(vector):
-    return Vector(vector.x / scale_factors.distance_scale_factor + screen_info.centre_x,
-                  vector.y / scale_factors.distance_scale_factor + screen_info.centre_y)
+    return Vector(vector.x / scale_factors.distance_scale_factor + screen_info.centre_x + offset_x,
+                  vector.y / scale_factors.distance_scale_factor + screen_info.centre_y + offset_y)
 
 
 def convert_from_screen(vector):
-    return Vector((vector.x - screen_info.centre_x) * scale_factors.distance_scale_factor,
-                  (vector.y - screen_info.centre_y) * scale_factors.distance_scale_factor)
+    return Vector((vector.x - screen_info.centre_x - offset_x) * scale_factors.distance_scale_factor,
+                  (vector.y - screen_info.centre_y - offset_y) * scale_factors.distance_scale_factor)
 
 
 all_sprites_list.update()
@@ -89,6 +92,8 @@ while running:
                 if event.key == pygame.K_EQUALS:
                     scale_factors.distance_scale_factor /= 1.1
                     scale_factors.radius_scale_factor /= 1.1
+                    offset_x /= 1.1
+                    offset_y /= 1.1
 
                     for body in bodies:
                         body.sprite.set_radius(body.radius / scale_factors.radius_scale_factor, body.position)
@@ -96,21 +101,23 @@ while running:
                 if event.key == pygame.K_MINUS:
                     scale_factors.distance_scale_factor *= 1.1
                     scale_factors.radius_scale_factor *= 1.1
+                    offset_x *= 1.1
+                    offset_y *= 1.1
 
                     for body in bodies:
                         body.sprite.set_radius(body.radius / scale_factors.radius_scale_factor, body.position)
 
                 if event.key == pygame.K_UP:
-                    screen_info.centre_y += 20
+                    offset_y += 20
 
                 if event.key == pygame.K_DOWN:
-                    screen_info.centre_y -= 20
+                    offset_y -= 20
 
                 if event.key == pygame.K_LEFT:
-                    screen_info.centre_x += 20
+                    offset_x += 20
 
                 if event.key == pygame.K_RIGHT:
-                    screen_info.centre_x -= 20
+                    offset_x -= 20
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
