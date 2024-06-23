@@ -1,3 +1,5 @@
+import time
+
 import pygame
 import pygame_gui
 
@@ -5,27 +7,31 @@ from bodies import all_sprites_list, bodies
 from constants import BACKGROUND, ORANGE, G, scale_factors
 from gui import (ui_manager, mass_entry_text, mass_slider, radius_entry_text, radius_slider, red_slider, red_entry_text,
                  green_slider, green_entry_text, blue_slider, blue_entry_text, info_panel, name_label,
-                 power_entry_text_1, planet_label, power_entry_text_2, speed_value_label, info_toggle_button_x,
-                 info_panel_x, info_toggle_button, info_toggle_button_y)
+                 power_entry_text_1, power_entry_text_2, planet_label, speed_value_label)
 from setup import body_surface, ui_surface, screen_info, screen
 from vectors import Vector
 from maths import standard_form, round_to_sf
 
 # Initialise
 pygame.init()
+info = pygame.display.Info()
 
-offset_x = 0
-offset_y = 0
-
+#constants
+null_vector = Vector(0,0)
+screen_centre = Vector(info.current_w/2, (info.current_h - 80)/2)
+offset = null_vector
+zoom = 1
 
 def convert_to_screen(vector):
-    return Vector(vector.x / scale_factors.distance_scale_factor + screen_info.centre_x + offset_x,
-                  vector.y / scale_factors.distance_scale_factor + screen_info.centre_y + offset_y)
+    return screen_centre + (vector * (1/scale_factors.distance_scale_factor) + offset) * zoom
+   # return Vector(vector.x / scale_factors.distance_scale_factor + screen_info.centre_x + offset_x,
+    #              vector.y / scale_factors.distance_scale_factor + screen_info.centre_y + offset_y)
 
 
 def convert_from_screen(vector):
-    return Vector((vector.x - screen_info.centre_x - offset_x) * scale_factors.distance_scale_factor,
-                  (vector.y - screen_info.centre_y - offset_y) * scale_factors.distance_scale_factor)
+    return ((vector - screen_centre) * (1/zoom) - offset) * scale_factors.distance_scale_factor
+    #return Vector((vector.x - screen_info.centre_x - offset_x) * scale_factors.distance_scale_factor,
+     #             (vector.y - screen_info.centre_y - offset_y) * scale_factors.distance_scale_factor)
 
 
 all_sprites_list.update()
@@ -44,6 +50,7 @@ drawing_elapsed = 0
 
 while running:
     time_delta = clock.tick(1000)
+
     drawing_elapsed += time_delta
 
     # Move bodies
@@ -67,8 +74,8 @@ while running:
                     other.move(body_to_other * (c / other.mass))
 
                     while body.separation(other) <= body.radius + other.radius:
-                        body.move(Vector(0, 0))
-                        other.move(Vector(0, 0))
+                        body.move(null_vector)
+                        other.move(null_vector)
 
                 # Find forces from other bodies and acceleration of this body
                 net_acceleration += body_to_other * (G * other.mass / separation ** 3)
@@ -80,66 +87,45 @@ while running:
         z[0].move(z[1])
 
     if drawing_elapsed >= 16:
+
+        keys = pygame.key.get_pressed()
+
+        offset += Vector(keys[pygame.K_RIGHT]-keys[pygame.K_LEFT],
+                         keys[pygame.K_DOWN]-keys[pygame.K_UP]) * (1/zoom)
+
+        if keys[pygame.K_EQUALS]:
+            zoom /= 1.01
+
+            for body in bodies:
+                body.sprite.set_radius(body.radius / (scale_factors.radius_scale_factor/zoom), body.position)
+
+        if keys[pygame.K_MINUS]:
+            zoom *= 1.01
+
+            for body in bodies:
+                body.sprite.set_radius(body.radius / (scale_factors.radius_scale_factor/zoom), body.position)
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
             ui_manager.process_events(event)
 
+
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     running = False
 
-                if event.key == pygame.K_EQUALS:
-                    scale_factors.distance_scale_factor /= 1.1
-                    scale_factors.radius_scale_factor /= 1.1
-                    offset_x /= 1.1
-                    offset_y /= 1.1
-
-                    for body in bodies:
-                        body.sprite.set_radius(body.radius / scale_factors.radius_scale_factor, body.position)
-
-                if event.key == pygame.K_MINUS:
-                    scale_factors.distance_scale_factor *= 1.1
-                    scale_factors.radius_scale_factor *= 1.1
-                    offset_x *= 1.1
-                    offset_y *= 1.1
-
-                    for body in bodies:
-                        body.sprite.set_radius(body.radius / scale_factors.radius_scale_factor, body.position)
-
-                if event.key == pygame.K_UP:
-                    offset_y += 20
-
-                if event.key == pygame.K_DOWN:
-                    offset_y -= 20
-
-                if event.key == pygame.K_LEFT:
-                    offset_x += 20
-
-                if event.key == pygame.K_RIGHT:
-                    offset_x -= 20
-
-            if event.type == pygame_gui.UI_BUTTON_PRESSED:
-                if event.ui_element == info_toggle_button:
-                    info_panel.hide()
-                    info_toggle_button_x = screen_info.width - 29
-                    info_toggle_button.set_relative_position((info_toggle_button_x, info_toggle_button_y))
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                if (not (info_panel.relative_rect.collidepoint(event.pos)
-                         or info_toggle_button.relative_rect.collidepoint(event.pos)) or info_panel.visible == 0):
+
+                if not info_panel.relative_rect.collidepoint(event.pos) or info_panel.visible == 0:
                     for body in bodies:
                         click_pos = convert_from_screen(Vector(event.pos[0], event.pos[1]))
-
                         if (click_pos - body.position).magnitude() <= body.radius:
                             dragging = True
                             selected_body = body
                             selected = True
-
-                            info_toggle_button_x = info_panel_x - 29
-                            info_toggle_button.set_relative_position((info_toggle_button_x, info_toggle_button_y))
-                            info_toggle_button.enable()
 
                             # First time selected info to be displayed
                             info_panel.show()
@@ -164,9 +150,6 @@ while running:
 
                         selected = False
                         info_panel.hide()
-                        info_toggle_button_x = screen_info.width - 29
-                        info_toggle_button.set_relative_position((info_toggle_button_x, info_toggle_button_y))
-                        info_toggle_button.disable()
 
             if event.type == pygame.MOUSEMOTION:
                 if dragging:
