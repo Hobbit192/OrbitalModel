@@ -1,5 +1,3 @@
-from vectors import Vector
-
 class ScaleFactor:
     def __init__(self, distance_scale_factor, radius_scale_factor, velocity_scale_factor):
         self.distance_scale_factor = distance_scale_factor
