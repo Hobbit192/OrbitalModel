@@ -129,5 +129,35 @@
             "border_width": "0",
             "shadow_width": "0"
         }
+    },
+    "@left_toggle_button":
+    {
+        "colours":
+        {
+            "normal_bg": "#DBD7D2",
+            "hovered_bg": "#A8A6A5",
+            "selected_bg": "#DBD7D2",
+            "active_bg": "#DBD7D2"
+        },
+        "images":
+        {
+            "normal_image":
+            {
+                "path": "triangle_left.png"
+            },
+            "hovered_image":
+            {
+                "path": "triangle_left.png"
+            },
+            "selected_image":
+            {
+                "path": "triangle_left.png"
+            }
+        },
+        "misc":
+        {
+            "border_width": "0",
+            "shadow_width": "0"
+        }
     }
 }

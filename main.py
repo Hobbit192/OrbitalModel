@@ -2,12 +2,14 @@ import time
 
 import pygame
 import pygame_gui
+from pygame_gui.core import ObjectID
 
 from bodies import all_sprites_list, bodies
 from constants import BACKGROUND, ORANGE, G, scale_factors
 from gui import (ui_manager, mass_entry_text, mass_slider, radius_entry_text, radius_slider, red_slider, red_entry_text,
                  green_slider, green_entry_text, blue_slider, blue_entry_text, info_panel, name_label,
-                 power_entry_text_1, power_entry_text_2, planet_label, speed_value_label)
+                 power_entry_text_1, power_entry_text_2, planet_label, speed_value_label, info_toggle_button,
+                 info_toggle_button_y)
 from setup import body_surface, ui_surface, screen_info, screen
 from vectors import Vector
 from maths import standard_form, round_to_sf
@@ -40,6 +42,7 @@ pygame.display.flip()
 running = True
 dragging = False
 selected = False
+selected_body = None
 clock = pygame.time.Clock()
 clock.tick()
 simulation_elapsed = 0
@@ -111,39 +114,63 @@ while running:
                 if event.key == pygame.K_ESCAPE:
                     running = False
 
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-
-                if not info_panel.relative_rect.collidepoint(event.pos) or info_panel.visible == 0:
-                    for body in bodies:
-                        click_pos = convert_from_screen(Vector(event.pos[0], event.pos[1]))
-                        if (click_pos - body.position).magnitude() <= body.radius:
-                            dragging = True
-                            selected_body = body
-                            selected = True
-
-                            # First time selected info to be displayed
-                            info_panel.show()
-                            name_label.set_text(selected_body.name.upper())
-
-                            mass_string = str(round(standard_form(selected_body.mass)[0], 2))
-                            mass_entry_text.set_text(mass_string)
-                            power_string_1 = str(standard_form(selected_body.mass)[1])
-                            power_entry_text_1.set_text(power_string_1)
-
-                            radius_string = str(round(standard_form(selected_body.radius)[0], 2))
-                            radius_entry_text.set_text(radius_string)
-                            power_string_2 = str(standard_form(selected_body.radius)[1])
-                            power_entry_text_2.set_text(power_string_2)
-
-                            planet_label.update_colour(selected_body.colour)
-
-                            red_entry_text.set_text(str(selected_body.colour[0]))
-                            green_entry_text.set_text(str(selected_body.colour[1]))
-                            blue_entry_text.set_text(str(selected_body.colour[2]))
-                            break
-
-                        selected = False
+            if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                if event.ui_element == info_toggle_button and selected_body:
+                    if info_panel.visible:
                         info_panel.hide()
+                        info_toggle_button_x = screen_info.width - 29
+                        info_toggle_button.change_object_id(ObjectID(class_id="@left_toggle_button"))
+
+                    else:
+                        info_panel.show()
+                        info_toggle_button_x = screen_info.width - info_panel.relative_rect.width - 29
+                        info_toggle_button.change_object_id(ObjectID(class_id="@right_toggle_button"))
+
+                    info_toggle_button.set_relative_position((info_toggle_button_x, info_toggle_button_y))
+
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                click_pos = convert_from_screen(Vector(event.pos[0], event.pos[1]))
+                selected = False
+
+                for body in bodies:
+                    if (click_pos - body.position).magnitude() <= body.radius:
+                        selected_body = body
+                        selected = True
+
+                        info_panel.show()
+                        info_toggle_button.enable()
+                        info_toggle_button_x = screen_info.width - info_panel.relative_rect.width - 29
+                        info_toggle_button.change_object_id(ObjectID(class_id="@right_toggle_button"))
+                        info_toggle_button.set_relative_position((info_toggle_button_x, info_toggle_button_y))
+
+                        info_panel.show()
+                        name_label.set_text(selected_body.name.upper())
+
+                        mass_string = str(round(standard_form(selected_body.mass)[0], 2))
+                        mass_entry_text.set_text(mass_string)
+                        power_string_1 = str(standard_form(selected_body.mass)[1])
+                        power_entry_text_1.set_text(power_string_1)
+
+                        radius_string = str(round(standard_form(selected_body.radius)[0], 2))
+                        radius_entry_text.set_text(radius_string)
+                        power_string_2 = str(standard_form(selected_body.radius)[1])
+                        power_entry_text_2.set_text(power_string_2)
+
+                        planet_label.update_colour(selected_body.colour)
+
+                        red_entry_text.set_text(str(selected_body.colour[0]))
+                        green_entry_text.set_text(str(selected_body.colour[1]))
+                        blue_entry_text.set_text(str(selected_body.colour[2]))
+                        break
+
+                if not selected:
+                    if not ((info_panel.visible and info_panel.relative_rect.collidepoint(event.pos)) or info_toggle_button.relative_rect.collidepoint(event.pos)):
+                        selected_body = None
+                        info_panel.hide()
+                        info_toggle_button.disable()
+                        info_toggle_button_x = screen_info.width - 29
+                        info_toggle_button.set_relative_position((info_toggle_button_x, info_toggle_button_y))
+                        info_toggle_button.change_object_id(ObjectID(class_id="@left_toggle_button"))
 
             if event.type == pygame.MOUSEMOTION:
                 if dragging:
@@ -230,7 +257,7 @@ while running:
         all_sprites_list.draw(body_surface)
 
         # Information  that needs to be constantly updated to display if the body is selected
-        if selected:
+        if selected_body:
             pygame.draw.line(body_surface, ORANGE,
                              (convert_to_screen(selected_body.position).x, convert_to_screen(selected_body.position).y),
                              (convert_to_screen(selected_body.position).x + selected_body.velocity.x / scale_factors.velocity_scale_factor,

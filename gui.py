@@ -74,8 +74,10 @@ info_toggle_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((inf
                                                                             (29, 100)),
                                                   text="",
                                                   manager=ui_manager,
-                                                  object_id=ObjectID(class_id="@right_toggle_button")
+                                                  object_id=ObjectID(class_id="@left_toggle_button")
                                                   )
+
+info_toggle_button.disable()
 
 name_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((47, 47), (266, 79)),
                                          text="JUPITER",
