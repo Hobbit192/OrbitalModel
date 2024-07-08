@@ -376,24 +376,11 @@ new_body_label = UIShape(relative_rect=pygame.Rect((16, 24), (74, 74)),
                          container=new_body_panel
                          )
 
-# Main event loop
-"""
-        # Toggle the window visibility on button click
-        if event.type == pygame_gui.UI_BUTTON_PRESSED:
-            if event.ui_element == toggle_button:
-                window_visible = not window_visible
-
-    # Update the toggle button position
-    if window_visible:
-        toggle_button_y = info_panel_y - toggle_button_height  # Position above the window
-    else:
-        toggle_button_y = screen_info.height - toggle_button_height  # Position at the bottom of the screen
-    toggle_button.set_relative_position((toggle_button_x, toggle_button_y))
-
-
-    # Draw the custom window if it's visible
-    if window_visible:
-        info_panel.show()
-    else:
-        info_panel.hide()
-"""
+new_body_toggle_button_x = new_body_panel_width
+new_body_toggle_button_y = new_body_panel_y + 24
+new_body_toggle_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((new_body_toggle_button_x, new_body_toggle_button_y),
+                                                                                (20, 70)),
+                                                      text="",
+                                                      manager=ui_manager,
+                                                      object_id=ObjectID(class_id="@left_small_toggle_button")
+                                                      )

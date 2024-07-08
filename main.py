@@ -1,5 +1,3 @@
-import time
-
 import pygame
 import pygame_gui
 from pygame_gui.core import ObjectID
@@ -9,17 +7,18 @@ from constants import BACKGROUND, ORANGE, G, scale_factors
 from gui import (ui_manager, mass_entry_text, mass_slider, radius_entry_text, radius_slider, red_slider, red_entry_text,
                  green_slider, green_entry_text, blue_slider, blue_entry_text, info_panel, name_label,
                  power_entry_text_1, power_entry_text_2, planet_label, speed_value_label, info_toggle_button,
-                 info_toggle_button_y)
-from setup import body_surface, ui_surface, screen_info, screen
-from vectors import Vector
+                 info_toggle_button_y, new_body_toggle_button, new_body_panel, new_body_panel_width,
+                 new_body_toggle_button_y, new_body_label)
 from maths import standard_form, round_to_sf
+from setup import body_surface, ui_surface, screen_info, screen, thrust_surface
+from vectors import Vector
 
 # Initialise
 pygame.init()
 info = pygame.display.Info()
 
 # Vector constants
-null_vector = Vector(0,0)
+null_vector = Vector(0, 0)
 screen_centre = Vector(info.current_w / 2, (info.current_h - 80) / 2)
 offset = null_vector
 zoom = 1
@@ -41,7 +40,9 @@ pygame.display.flip()
 # ---------------------------------------- Main Program Loop -----------------------------------------------------------
 running = True
 dragging = False
+creating = False
 selected = False
+orientation = True
 selected_body = None
 clock = pygame.time.Clock()
 clock.tick()
@@ -49,8 +50,8 @@ simulation_elapsed = 0
 drawing_elapsed = 0
 
 while running:
-    time_delta = clock.tick(1000)
 
+    time_delta = clock.tick(1000)
     drawing_elapsed += time_delta
 
     # Move bodies
@@ -67,7 +68,7 @@ while running:
                 # Check for collisions
                 if separation <= body.radius + other.radius:
                     c = (2 * (body.mass * other.mass) / (body.mass + other.mass) * body_to_other.dot(
-                         body.velocity - other.velocity) / body_to_other.dot(body_to_other))
+                        body.velocity - other.velocity) / body_to_other.dot(body_to_other))
 
                     # Move until separated
                     body.move(body_to_other * (-c / body.mass))
@@ -87,10 +88,10 @@ while running:
         z[0].move(z[1])
 
     if drawing_elapsed >= 16:
-
         keys = pygame.key.get_pressed()
 
-        offset += Vector(keys[pygame.K_LEFT] - keys[pygame.K_RIGHT], keys[pygame.K_UP] - keys[pygame.K_DOWN]) * (10 / zoom)
+        offset += Vector(keys[pygame.K_LEFT] - keys[pygame.K_RIGHT], keys[pygame.K_UP] - keys[pygame.K_DOWN]) * (
+                    10 / zoom)
 
         if keys[pygame.K_MINUS]:
             zoom /= 1.01
@@ -128,6 +129,19 @@ while running:
 
                     info_toggle_button.set_relative_position((info_toggle_button_x, info_toggle_button_y))
 
+                if event.ui_element == new_body_toggle_button:
+                    if new_body_panel.visible:
+                        new_body_panel.hide()
+                        new_body_toggle_button_x = 0
+                        new_body_toggle_button.change_object_id(ObjectID(class_id="@right_small_toggle_button"))
+
+                    else:
+                        new_body_panel.show()
+                        new_body_toggle_button_x = new_body_panel_width
+                        new_body_toggle_button.change_object_id(ObjectID(class_id="@left_small_toggle_button"))
+
+                    new_body_toggle_button.set_relative_position((new_body_toggle_button_x, new_body_toggle_button_y))
+
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 click_pos = convert_from_screen(Vector(event.pos[0], event.pos[1]))
                 selected = False
@@ -164,13 +178,17 @@ while running:
                         break
 
                 if not selected:
-                    if not ((info_panel.visible and info_panel.relative_rect.collidepoint(event.pos)) or info_toggle_button.relative_rect.collidepoint(event.pos)):
+                    if not ((info_panel.visible and info_panel.relative_rect.collidepoint(
+                            event.pos)) or info_toggle_button.relative_rect.collidepoint(event.pos)):
                         selected_body = None
                         info_panel.hide()
                         info_toggle_button.disable()
                         info_toggle_button_x = screen_info.width - 29
                         info_toggle_button.set_relative_position((info_toggle_button_x, info_toggle_button_y))
                         info_toggle_button.change_object_id(ObjectID(class_id="@left_toggle_button"))
+
+                if new_body_label.relative_rect.collidepoint(event.pos):
+                    print("new body")
 
             if event.type == pygame.MOUSEMOTION:
                 if dragging:
@@ -185,7 +203,8 @@ while running:
                     selected_body.mass = float(mass_entry_text.get_text()) * 10 ** int(power_entry_text_1.get_text())
 
                 elif event.ui_element == power_entry_text_2:
-                    selected_body.radius = float(radius_entry_text.get_text()) * 10 ** int(power_entry_text_2.get_text())
+                    selected_body.radius = float(radius_entry_text.get_text()) * 10 ** int(
+                        power_entry_text_2.get_text())
                     selected_body.update_sprite(selected_body.colour, selected_body.radius)
 
             if event.type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:
@@ -195,7 +214,8 @@ while running:
 
                 elif event.ui_element == radius_slider:
                     radius_entry_text.set_text("{:.2f}".format(radius_slider.get_current_value()))
-                    selected_body.radius = float(radius_entry_text.get_text()) * 10 ** int(power_entry_text_2.get_text())
+                    selected_body.radius = float(radius_entry_text.get_text()) * 10 ** int(
+                        power_entry_text_2.get_text())
                     selected_body.update_sprite(selected_body.colour, selected_body.radius)
 
                 elif event.ui_element == red_slider:
@@ -249,7 +269,6 @@ while running:
             green_slider.set_current_value(int(green_text))
 
         for body in bodies:
-
             # Draw body sprites
             body.sprite.set_pos(convert_to_screen(body.position))
 
@@ -258,13 +277,22 @@ while running:
 
         # Information  that needs to be constantly updated to display if the body is selected
         if selected_body:
-            pygame.draw.line(body_surface, ORANGE,
-                             (convert_to_screen(selected_body.position).x, convert_to_screen(selected_body.position).y),
-                             (convert_to_screen(selected_body.position).x + selected_body.velocity.x / scale_factors.velocity_scale_factor,
-                              convert_to_screen(selected_body.position).y + selected_body.velocity.y / scale_factors.velocity_scale_factor),
+            body_centre = (convert_to_screen(selected_body.position).x, convert_to_screen(selected_body.position).y)
+
+            pygame.draw.line(body_surface, ORANGE, body_centre,
+                             (convert_to_screen(
+                                 selected_body.position).x + selected_body.velocity.x / scale_factors.velocity_scale_factor,
+                              convert_to_screen(
+                                  selected_body.position).y + selected_body.velocity.y / scale_factors.velocity_scale_factor),
                              5)
 
             speed_value_label.set_text(str(round_to_sf(selected_body.velocity.magnitude(), 4)) + " m/s")
+
+            if orientation:
+                pygame.draw.line(body_surface, (54, 133, 221), body_centre,
+                                 (convert_to_screen(selected_body.position).x,
+                                  convert_to_screen(selected_body.position).y + 50),
+                                 5)
 
         drawing_elapsed = 0
         ui_manager.update(time_delta)
