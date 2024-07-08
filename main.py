@@ -55,7 +55,6 @@ while running:
 
     # Move bodies
     delta_v_list = []
-
     for body in bodies:
         net_acceleration = Vector(0, 0)
 
@@ -86,7 +85,7 @@ while running:
     for z in zip(bodies, delta_v_list):
         z[0].move(z[1])
 
-    if drawing_elapsed >= 16:
+    if drawing_elapsed >= 20:
 
         keys = pygame.key.get_pressed()
 

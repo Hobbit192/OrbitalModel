@@ -1,6 +1,6 @@
 import pygame
 from constants import WHITE, scale_factors, G
-from vectors import Vector
+from vectors import Vector, null_vector
 
 
 class Sprite(pygame.sprite.Sprite):
@@ -51,6 +51,7 @@ class Body:
         self.position = position
         self.colour = colour
         self.name = name
+        self.thrust = null_vector
 
         self.sprite = Sprite(colour, radius / scale_factors.radius_scale_factor)
         all_sprites_list.add(self.sprite)
@@ -93,6 +94,7 @@ Moon = Body(mass=7.342e22,
             colour=(128, 128, 128),
             name="Moon"
             )
+
 
 Rocket = Body(mass=10000e15,
               radius=100e3,

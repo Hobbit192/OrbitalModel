@@ -20,3 +20,5 @@ class Vector:
 
     def dot(self, other):
         return self.x * other.x + self.y * other.y
+
+null_vector = Vector(0,0)
