@@ -22,8 +22,11 @@ screen_info = Screen(width=info.current_w, height=info.current_h - 80)
 window_size = (screen_info.width, screen_info.height)
 screen = pygame.display.set_mode(window_size)
 
-trail_surface = pygame.Surface(window_size, pygame.SRCALPHA)
-trail_surface.fill((255, 255, 255, 0))
+velocity_surface = pygame.Surface(window_size, pygame.SRCALPHA)
+velocity_surface.fill((255, 255, 255, 0))
+thrust_surface = pygame.Surface(window_size, pygame.SRCALPHA)
+thrust_surface.fill((255, 255, 255, 0))
+
 body_surface = pygame.Surface(window_size)
 ui_surface = pygame.Surface(window_size)
 ui_surface.set_colorkey(BACKGROUND)
