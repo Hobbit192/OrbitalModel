@@ -219,5 +219,27 @@
             "border_width": "0",
             "shadow_width": "0"
         }
+    },
+    "@check_button":
+    {
+        "colours":
+        {
+            "normal_bg": "#DBD7D2",
+            "hovered_bg": "#DBD7D2",
+            "selected_bg": "#DBD7D2",
+            "active_bg": "#DBD7D2"
+        },
+        "images":
+        {
+            "selected_image":
+            {
+                "path": "tick.png"
+            }
+        },
+        "misc":
+        {
+            "border_width": "0",
+            "shadow_width": "0"
+        }
     }
 }

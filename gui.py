@@ -8,7 +8,8 @@ from setup import screen_info
 class UIShape(UIElement):
     def __init__(self, relative_rect: pygame.Rect, shape: str, colour: tuple, manager: IUIManagerInterface,
                  container=None, starting_height=1, layer_thickness=1):
-        super().__init__(relative_rect, manager, container, starting_height=starting_height, layer_thickness=layer_thickness)
+        super().__init__(relative_rect, manager, container, starting_height=starting_height,
+                         layer_thickness=layer_thickness)
         self.shape = shape
         self.colour = colour
         self.image = pygame.Surface(relative_rect.size, pygame.SRCALPHA)
@@ -54,12 +55,13 @@ info_panel_width = 365
 info_panel_height = 700
 info_panel_x = screen_info.width - info_panel_width
 info_panel_y = (screen_info.height - info_panel_height) // 2
-info_panel = pygame_gui.elements.UIPanel(relative_rect=pygame.Rect(info_panel_x, info_panel_y, info_panel_width, info_panel_height),
-                                         manager=ui_manager,
-                                         starting_height=1,
-                                         object_id=ObjectID(class_id="@panels"),
-                                         visible=0
-                                         )
+info_panel = pygame_gui.elements.UIPanel(
+    relative_rect=pygame.Rect(info_panel_x, info_panel_y, info_panel_width, info_panel_height),
+    manager=ui_manager,
+    starting_height=1,
+    object_id=ObjectID(class_id="@panels"),
+    visible=0
+)
 
 # Elements on the Info Panel
 info_title_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((12, 10), (140, 16)),
@@ -70,12 +72,13 @@ info_title_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((12, 10
                                                )
 info_toggle_button_x = screen_info.width - 29
 info_toggle_button_y = (screen_info.height - 100) // 2
-info_toggle_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((info_toggle_button_x, info_toggle_button_y),
-                                                                            (29, 100)),
-                                                  text="",
-                                                  manager=ui_manager,
-                                                  object_id=ObjectID(class_id="@left_toggle_button")
-                                                  )
+info_toggle_button = pygame_gui.elements.UIButton(
+    relative_rect=pygame.Rect((info_toggle_button_x, info_toggle_button_y),
+                              (29, 100)),
+    text="",
+    manager=ui_manager,
+    object_id=ObjectID(class_id="@left_toggle_button")
+)
 
 info_toggle_button.disable()
 
@@ -269,19 +272,37 @@ blue_entry_text = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect(
 blue_entry_text.set_text_length_limit(3)
 blue_entry_text.set_allowed_characters("numbers")
 
-velocity_x_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((37, 414), (216, 18)),
-                                               text="Horizontal velocity (x):",
-                                               manager=ui_manager,
-                                               container=info_panel,
-                                               object_id=ObjectID(class_id="@info_labels")
-                                               )
+show_velocity_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((123, 417), (126, 18)),
+                                                  text="Show velocity:",
+                                                  manager=ui_manager,
+                                                  container=info_panel,
+                                                  object_id=ObjectID(class_id="@info_labels")
+                                                  )
 
-velocity_y_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((55, 440), (198, 18)),
-                                               text="Vertical velocity (y):",
-                                               manager=ui_manager,
-                                               container=info_panel,
-                                               object_id=ObjectID(class_id="@info_labels")
-                                               )
+velocity_check_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((254, 416), (20, 20)),
+                                                     text="",
+                                                     manager=ui_manager,
+                                                     container=info_panel,
+                                                     object_id=ObjectID(class_id="@check_button")
+                                                     )
+
+velocity_check_button.select()
+
+show_orientation_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((96, 441), (153, 18)),
+                                                     text="Show orientation:",
+                                                     manager=ui_manager,
+                                                     container=info_panel,
+                                                     object_id=ObjectID(class_id="@info_labels")
+                                                     )
+
+orientation_check_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((254, 441), (20, 20)),
+                                                        text="",
+                                                        manager=ui_manager,
+                                                        container=info_panel,
+                                                        object_id=ObjectID(class_id="@check_button")
+                                                        )
+
+orientation_check_button.select()
 
 speed_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((150, 466), (54, 18)),
                                           text="Speed:",
@@ -378,9 +399,9 @@ new_body_label = UIShape(relative_rect=pygame.Rect((16, 24), (74, 74)),
 
 new_body_toggle_button_x = new_body_panel_width
 new_body_toggle_button_y = new_body_panel_y + 24
-new_body_toggle_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((new_body_toggle_button_x, new_body_toggle_button_y),
-                                                                                (20, 70)),
-                                                      text="",
-                                                      manager=ui_manager,
-                                                      object_id=ObjectID(class_id="@left_small_toggle_button")
-                                                      )
+new_body_toggle_button = pygame_gui.elements.UIButton(
+    relative_rect=pygame.Rect((new_body_toggle_button_x, new_body_toggle_button_y), (20, 70)),
+    text="",
+    manager=ui_manager,
+    object_id=ObjectID(class_id="@left_small_toggle_button")
+)

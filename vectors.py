@@ -1,3 +1,6 @@
+from math import cos, sin, radians
+
+
 class Vector:
     def __init__(self, x, y):
         self.x = x
@@ -21,4 +24,9 @@ class Vector:
     def dot(self, other):
         return self.x * other.x + self.y * other.y
 
-null_vector = Vector(0,0)
+    def rotate(self, angle):
+        angle = radians(angle)
+        return Vector(self.x * cos(angle) - self.y * sin(angle), self.x * sin(angle) + self.y * cos(angle))
+
+
+null_vector = Vector(0, 0)

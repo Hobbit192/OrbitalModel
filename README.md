@@ -3,8 +3,8 @@
 Roadmap:
 - Fix time function      COMPLETED
 - Collisions             COMPLETED
-- Add UI
-- Add ability to thrust and change orientation of rocket
+- Add UI                 COMPLETED (sort of)
+- Add ability to thrust and change orientation of rocket      WIP
 - Add start and pause menu and functionality
 - Add predictive orbits
 - Add ability to plan orbital changes (maneuver nodes)

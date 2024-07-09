@@ -8,9 +8,9 @@ from gui import (ui_manager, mass_entry_text, mass_slider, radius_entry_text, ra
                  green_slider, green_entry_text, blue_slider, blue_entry_text, info_panel, name_label,
                  power_entry_text_1, power_entry_text_2, planet_label, speed_value_label, info_toggle_button,
                  info_toggle_button_y, new_body_toggle_button, new_body_panel, new_body_panel_width,
-                 new_body_toggle_button_y, new_body_label)
+                 new_body_toggle_button_y, new_body_label, velocity_check_button, orientation_check_button)
 from maths import standard_form, round_to_sf
-from setup import body_surface, ui_surface, screen_info, screen, thrust_surface
+from setup import body_surface, ui_surface, screen_info, screen
 from vectors import Vector
 
 # Initialise
@@ -43,11 +43,13 @@ dragging = False
 creating = False
 selected = False
 orientation = True
+velocity = True
 selected_body = None
 clock = pygame.time.Clock()
 clock.tick()
 simulation_elapsed = 0
 drawing_elapsed = 0
+angle = 0
 
 while running:
 
@@ -58,7 +60,7 @@ while running:
     delta_v_list = []
 
     for body in bodies:
-        net_acceleration = Vector(0, 0)
+        net_acceleration = body.thrust
 
         for other in bodies:
             if other != body:
@@ -141,6 +143,24 @@ while running:
                         new_body_toggle_button.change_object_id(ObjectID(class_id="@left_small_toggle_button"))
 
                     new_body_toggle_button.set_relative_position((new_body_toggle_button_x, new_body_toggle_button_y))
+
+                if event.ui_element == velocity_check_button:
+                    if not velocity_check_button.is_selected:
+                        velocity_check_button.select()
+                        velocity = True
+
+                    else:
+                        velocity_check_button.unselect()
+                        velocity = False
+
+                if event.ui_element == orientation_check_button:
+                    if not orientation_check_button.is_selected:
+                        orientation_check_button.select()
+                        orientation = True
+
+                    else:
+                        orientation_check_button.unselect()
+                        orientation = False
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 click_pos = convert_from_screen(Vector(event.pos[0], event.pos[1]))
@@ -279,19 +299,25 @@ while running:
         if selected_body:
             body_centre = (convert_to_screen(selected_body.position).x, convert_to_screen(selected_body.position).y)
 
-            pygame.draw.line(body_surface, ORANGE, body_centre,
-                             (convert_to_screen(
-                                 selected_body.position).x + selected_body.velocity.x / scale_factors.velocity_scale_factor,
-                              convert_to_screen(
-                                  selected_body.position).y + selected_body.velocity.y / scale_factors.velocity_scale_factor),
-                             5)
+            if velocity:
+                pygame.draw.line(body_surface, ORANGE, body_centre,
+                                 (convert_to_screen(
+                                     selected_body.position).x + selected_body.velocity.x / scale_factors.velocity_scale_factor,
+                                  convert_to_screen(
+                                      selected_body.position).y + selected_body.velocity.y / scale_factors.velocity_scale_factor),
+                                 5)
 
             speed_value_label.set_text(str(round_to_sf(selected_body.velocity.magnitude(), 4)) + " m/s")
 
             if orientation:
+                if keys[pygame.K_a]:
+                    selected_body.thrust.rotate(6)
+
+                if keys[pygame.K_d]:
+                    selected_body.thrust.rotate(-6)
+
                 pygame.draw.line(body_surface, (54, 133, 221), body_centre,
-                                 (convert_to_screen(selected_body.position).x,
-                                  convert_to_screen(selected_body.position).y + 50),
+                                 (body_centre[0] + convert_to_screen(selected_body.thrust).x, body_centre[1] + convert_to_screen(selected_body.thrust).y),
                                  5)
 
         drawing_elapsed = 0

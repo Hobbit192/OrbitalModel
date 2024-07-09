@@ -51,7 +51,7 @@ class Body:
         self.position = position
         self.colour = colour
         self.name = name
-        self.thrust = null_vector
+        self.thrust = Vector(0, 0)
 
         self.sprite = Sprite(colour, radius / scale_factors.radius_scale_factor)
         all_sprites_list.add(self.sprite)
