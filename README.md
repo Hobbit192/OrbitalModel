@@ -5,6 +5,6 @@ Roadmap:
 - Collisions             COMPLETED
 - Add UI                 COMPLETED (sort of)
 - Add ability to thrust and change orientation of rocket      COMPLETED
-- Add start and pause menu functionality
+- Add start and pause menu functionality        WIP
 - Add predictive orbits
 - Add ability to plan orbital changes (maneuver nodes)
