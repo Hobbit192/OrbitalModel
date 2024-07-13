@@ -34,3 +34,7 @@ class Vector:
 
 
 null_vector = Vector(0, 0)
+
+def unit_vector(angle):
+    return Vector(cos(radians(angle)),
+                  sin(radians(angle)))

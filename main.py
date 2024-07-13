@@ -13,7 +13,7 @@ from gui import (ui_manager, mass_entry_text, mass_slider, radius_entry_text, ra
                  new_body_toggle_button_y, new_body_label, velocity_check_button, orientation_check_button)
 from maths import standard_form, round_to_sf
 from setup import body_surface, ui_surface, screen_info, screen
-from vectors import Vector, null_vector
+from vectors import Vector, null_vector, unit_vector
 
 # Initialise
 pygame.init()
@@ -334,8 +334,7 @@ while running:
                 draw_screen_line(colour=(54, 133, 221),
                                  start_pos=convert_to_screen(selected_body.position),
                                  end_pos=convert_to_screen(selected_body.position) +
-                                         Vector(cos(radians(selected_body.thrust_angle)),
-                                                sin(radians(selected_body.thrust_angle))) *
+                                         unit_vector(selected_body.thrust_angle) *
                                          (selected_body.thrust_magnitude/thrust_scale_factor + selected_body.radius/radius_scale_factor) *
                                           zoom
                                  )
