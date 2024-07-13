@@ -30,8 +30,8 @@ thrust_surface.fill((255, 255, 255, 0))
 body_surface = pygame.Surface(window_size)
 ui_surface = pygame.Surface(window_size)
 ui_surface.set_colorkey(BACKGROUND)
-
-screen.blit(body_surface, (0, 0))
+menu_surface = pygame.Surface(window_size)
+menu_surface.fill(BACKGROUND)
 
 icon = pygame.image.load("black-hole-256x256.png")
 pygame.display.set_icon(icon)

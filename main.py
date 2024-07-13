@@ -4,15 +4,16 @@ from pygame_gui.core import ObjectID
 from math import cos, sin, radians
 
 from bodies import all_sprites_list, bodies
-from constants import BACKGROUND, ORANGE, G, distance_scale_factor, radius_scale_factor, velocity_scale_factor, \
-    thrust_scale_factor
+from constants import (BACKGROUND, ORANGE, G, distance_scale_factor, radius_scale_factor, velocity_scale_factor,
+                       thrust_scale_factor)
 from gui import (ui_manager, mass_entry_text, mass_slider, radius_entry_text, radius_slider, red_slider, red_entry_text,
                  green_slider, green_entry_text, blue_slider, blue_entry_text, info_panel, name_label,
                  power_entry_text_1, power_entry_text_2, planet_label, speed_value_label, info_toggle_button,
                  info_toggle_button_y, new_body_toggle_button, new_body_panel, new_body_panel_width,
-                 new_body_toggle_button_y, new_body_label, velocity_check_button, orientation_check_button)
+                 new_body_toggle_button_y, new_body_label, velocity_check_button, orientation_check_button,
+                 start_menu_manager, start_button, quit_button)
 from maths import standard_form, round_to_sf
-from setup import body_surface, ui_surface, screen_info, screen
+from setup import body_surface, ui_surface, screen_info, screen, menu_surface
 from vectors import Vector, null_vector, unit_vector
 
 # Initialise
@@ -48,6 +49,8 @@ pygame.display.flip()
 
 # ---------------------------------------- Main Program Loop -----------------------------------------------------------
 running = True
+menu = True
+controls = False
 dragging = False
 creating = False
 selected = False
@@ -59,8 +62,45 @@ clock.tick()
 simulation_elapsed = 0
 drawing_elapsed = 0
 
-while running:
+logo = pygame.image.load("orbital_logo.png")
+scaled_side = screen_info.height * 0.86
+scaled_logo = pygame.transform.smoothscale(logo, (scaled_side, scaled_side))
+menu_surface.blit(scaled_logo, (0, screen_info.height * 0.0473))
 
+stripes = pygame.image.load("stripes.png")
+stripes_height = screen_info.height * 0.455
+stripes_width = screen_info.width * 0.255
+scaled_stripes = pygame.transform.smoothscale(stripes, (stripes_width, stripes_height))
+
+stripes_x = screen_info.width * 0.696
+stripes_y = screen_info.height * 0.419
+menu_surface.blit(scaled_stripes, (stripes_x, stripes_y))
+
+while menu:
+    time_delta = clock.tick(1000)
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            quit()
+
+        if event.type == pygame_gui.UI_BUTTON_PRESSED:
+            if event.ui_element == start_button:
+                menu = False
+
+            if event.ui_element == quit_button:
+                pygame.quit()
+                quit()
+
+        start_menu_manager.process_events(event)
+
+    start_menu_manager.update(time_delta)
+    screen.blit(menu_surface, (0, 0))
+    start_menu_manager.draw_ui(menu_surface)
+
+    pygame.display.flip()
+
+while running:
     time_delta = clock.tick(1000)
     drawing_elapsed += time_delta
 
@@ -335,8 +375,9 @@ while running:
                                  start_pos=convert_to_screen(selected_body.position),
                                  end_pos=convert_to_screen(selected_body.position) +
                                          unit_vector(selected_body.thrust_angle) *
-                                         (selected_body.thrust_magnitude/thrust_scale_factor + selected_body.radius/radius_scale_factor) *
-                                          zoom
+                                         (
+                                                     selected_body.thrust_magnitude / thrust_scale_factor + selected_body.radius / radius_scale_factor) *
+                                         zoom
                                  )
 
         drawing_elapsed = 0
@@ -347,5 +388,4 @@ while running:
         body_surface.blit(ui_surface, (0, 0))
         screen.blit(body_surface, (0, 0))
 
-        ui_manager.draw_ui(ui_surface)
         pygame.display.flip()

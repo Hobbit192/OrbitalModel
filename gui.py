@@ -1,3 +1,5 @@
+import json
+
 import pygame
 import pygame_gui
 from pygame_gui.core import ObjectID, UIElement
@@ -48,7 +50,67 @@ class UIShape(UIElement):
 pygame.init()
 
 # Create a UI manager
-ui_manager = pygame_gui.UIManager((screen_info.width, screen_info.height), "THEME.JSON")
+ui_manager = pygame_gui.UIManager((screen_info.width, screen_info.height), "game_theme.JSON")
+start_menu_manager = pygame_gui.UIManager((screen_info.width, screen_info.height), "menu_theme.json")
+
+
+# ---------------------------------------- MAIN MENU -------------------------------------------------------------------
+menu_x = screen_info.width * 0.48
+menu_button_height = screen_info.height * 0.0933
+title_label_y = screen_info.height * 0.1
+title_label_width = screen_info.width * 0.47 + 64
+title_label_height = screen_info.height * 0.25 + 33
+
+title_font_size = int(screen_info.height * 0.2168)
+menu_button_font_size = int(screen_info.height * 0.07653)
+menu_theme = "menu_theme.json"
+
+with open(menu_theme, "r") as file:
+    theme_data = json.load(file)
+
+theme_data["#menu_title_label"]["font"]["size"] = title_font_size
+theme_data["@menu_buttons"]["font"]["size"] = menu_button_font_size
+
+with open(menu_theme, "w") as file:
+    json.dump(theme_data, file, indent=4)
+
+title_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((menu_x, title_label_y), (title_label_width, title_label_height)),
+                                          text="ORBITER",
+                                          manager=start_menu_manager,
+                                          object_id=ObjectID(object_id="#menu_title_label")
+                                          )
+
+start_button_y = screen_info.height * 0.406
+start_button_width = screen_info.width * 0.097
+start_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((menu_x, start_button_y), (start_button_width, menu_button_height)),
+                                            text="Start",
+                                            manager=start_menu_manager,
+                                            object_id=ObjectID(class_id="@menu_buttons")
+                                            )
+
+controls_button_y = screen_info.height * 0.538
+controls_button_width = screen_info.width * 0.170
+controls_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((menu_x, controls_button_y), (controls_button_width, menu_button_height)),
+                                               text="Controls",
+                                               manager=start_menu_manager,
+                                               object_id=ObjectID(class_id="@menu_buttons")
+                                               )
+
+credits_button_y = screen_info.height * 0.666
+credits_button_width = screen_info.width * 0.142
+credits_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((menu_x, credits_button_y), (credits_button_width, menu_button_height)),
+                                              text="Credits",
+                                              manager=start_menu_manager,
+                                              object_id=ObjectID(class_id="@menu_buttons")
+                                              )
+
+quit_button_y = screen_info.height * 0.793
+quit_button_width = screen_info.width * 0.0794
+quit_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((menu_x, quit_button_y), (quit_button_width, menu_button_height)),
+                                           text="Quit",
+                                           manager=start_menu_manager,
+                                           object_id=ObjectID(class_id="@menu_buttons")
+                                           )
 
 # ---------------------------------------- INFO PANEL ------------------------------------------------------------------
 info_panel_width = 365

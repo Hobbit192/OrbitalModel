@@ -1,0 +1,35 @@
+{
+    "#menu_title_label": {
+        "colours": {
+            "dark_bg": "#0A0526",
+            "normal_text": "#DBD7D2"
+        },
+        "font": {
+            "name": "OverpassMono-SemiBold",
+            "size": 294,
+            "regular_path": "OverpassMono-SemiBold.ttf"
+        }
+    },
+    "@menu_buttons": {
+        "colours": {
+            "normal_bg": "#0A0526",
+            "hovered_bg": "#0A0526",
+            "selected_bg": "#0A0526",
+            "active_bg": "#0A0526",
+            "normal_text": "#398B83",
+            "hovered_text": "#4EB7AA",
+            "selected_text": "#398B83",
+            "active_text": "#398B83"
+        },
+        "font": {
+            "name": "Quantico-Bold",
+            "size": 104,
+            "regular_path": "Quantico-Bold.ttf"
+        },
+        "misc": {
+            "shape": "rectangle",
+            "border_width": "0",
+            "shadow_width": "0"
+        }
+    }
+}
