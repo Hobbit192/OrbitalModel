@@ -1,6 +1,6 @@
 import pygame
-from constants import WHITE, scale_factors, G
-from vectors import Vector, null_vector
+from constants import WHITE, G, radius_scale_factor
+from vectors import Vector
 
 
 class Sprite(pygame.sprite.Sprite):
@@ -51,13 +51,14 @@ class Body:
         self.position = position
         self.colour = colour
         self.name = name
-        self.thrust = Vector(0, 0)
+        self.thrust_magnitude = 0
+        self.thrust_angle = 0
 
-        self.sprite = Sprite(colour, radius / scale_factors.radius_scale_factor)
+        self.sprite = Sprite(colour, radius / radius_scale_factor)
         all_sprites_list.add(self.sprite)
 
     def update_sprite(self, colour, radius):
-        self.sprite.update_sprite_info(colour, radius / scale_factors.radius_scale_factor)
+        self.sprite.update_sprite_info(colour, radius / radius_scale_factor)
 
     def separation(self, other):
         return (self.position - other.position).magnitude()

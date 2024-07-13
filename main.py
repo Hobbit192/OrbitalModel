@@ -1,9 +1,11 @@
 import pygame
 import pygame_gui
 from pygame_gui.core import ObjectID
+from math import cos, sin, radians
 
 from bodies import all_sprites_list, bodies
-from constants import BACKGROUND, ORANGE, G, scale_factors
+from constants import BACKGROUND, ORANGE, G, distance_scale_factor, radius_scale_factor, velocity_scale_factor, \
+    thrust_scale_factor
 from gui import (ui_manager, mass_entry_text, mass_slider, radius_entry_text, radius_slider, red_slider, red_entry_text,
                  green_slider, green_entry_text, blue_slider, blue_entry_text, info_panel, name_label,
                  power_entry_text_1, power_entry_text_2, planet_label, speed_value_label, info_toggle_button,
@@ -11,25 +13,32 @@ from gui import (ui_manager, mass_entry_text, mass_slider, radius_entry_text, ra
                  new_body_toggle_button_y, new_body_label, velocity_check_button, orientation_check_button)
 from maths import standard_form, round_to_sf
 from setup import body_surface, ui_surface, screen_info, screen
-from vectors import Vector
+from vectors import Vector, null_vector
 
 # Initialise
 pygame.init()
 info = pygame.display.Info()
 
 # Vector constants
-null_vector = Vector(0, 0)
 screen_centre = Vector(info.current_w / 2, (info.current_h - 80) / 2)
 offset = null_vector
 zoom = 1
 
 
 def convert_to_screen(vector):
-    return screen_centre + (vector * (1 / scale_factors.distance_scale_factor) + offset) * zoom
+    return screen_centre + (vector * (1 / distance_scale_factor) + offset) * zoom
 
 
 def convert_from_screen(vector):
-    return ((vector - screen_centre) * (1 / zoom) - offset) * scale_factors.distance_scale_factor
+    return ((vector - screen_centre) * (1 / zoom) - offset) * distance_scale_factor
+
+
+def draw_screen_line(colour, start_pos, end_pos):
+    pygame.draw.line(surface=body_surface,
+                     color=colour,
+                     start_pos=start_pos.coordinates(),
+                     end_pos=end_pos.coordinates(),
+                     width=4)
 
 
 all_sprites_list.update()
@@ -49,7 +58,6 @@ clock = pygame.time.Clock()
 clock.tick()
 simulation_elapsed = 0
 drawing_elapsed = 0
-angle = 0
 
 while running:
 
@@ -60,7 +68,8 @@ while running:
     delta_v_list = []
 
     for body in bodies:
-        net_acceleration = body.thrust
+        net_acceleration = Vector(cos(radians(body.thrust_angle)),
+                                  sin(radians(body.thrust_angle))) * body.thrust_magnitude
 
         for other in bodies:
             if other != body:
@@ -93,19 +102,19 @@ while running:
         keys = pygame.key.get_pressed()
 
         offset += Vector(keys[pygame.K_LEFT] - keys[pygame.K_RIGHT], keys[pygame.K_UP] - keys[pygame.K_DOWN]) * (
-                    10 / zoom)
+                10 / zoom)
 
         if keys[pygame.K_MINUS]:
             zoom /= 1.01
 
             for body in bodies:
-                body.sprite.set_radius(body.radius / (scale_factors.radius_scale_factor / zoom), body.position)
+                body.sprite.set_radius(body.radius / (radius_scale_factor / zoom), body.position)
 
         if keys[pygame.K_EQUALS]:
             zoom *= 1.01
 
             for body in bodies:
-                body.sprite.set_radius(body.radius / (scale_factors.radius_scale_factor / zoom), body.position)
+                body.sprite.set_radius(body.radius / (radius_scale_factor / zoom), body.position)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -297,28 +306,39 @@ while running:
 
         # Information  that needs to be constantly updated to display if the body is selected
         if selected_body:
-            body_centre = (convert_to_screen(selected_body.position).x, convert_to_screen(selected_body.position).y)
-
             if velocity:
-                pygame.draw.line(body_surface, ORANGE, body_centre,
-                                 (convert_to_screen(
-                                     selected_body.position).x + selected_body.velocity.x / scale_factors.velocity_scale_factor,
-                                  convert_to_screen(
-                                      selected_body.position).y + selected_body.velocity.y / scale_factors.velocity_scale_factor),
-                                 5)
+                draw_screen_line(colour=ORANGE,
+                                 start_pos=convert_to_screen(selected_body.position),
+                                 end_pos=(convert_to_screen(selected_body.position)
+                                          + selected_body.velocity * (zoom / velocity_scale_factor)))
 
             speed_value_label.set_text(str(round_to_sf(selected_body.velocity.magnitude(), 4)) + " m/s")
 
             if orientation:
                 if keys[pygame.K_a]:
-                    selected_body.thrust.rotate(6)
+                    selected_body.thrust_angle -= 2
 
                 if keys[pygame.K_d]:
-                    selected_body.thrust.rotate(-6)
+                    selected_body.thrust_angle += 2
 
-                pygame.draw.line(body_surface, (54, 133, 221), body_centre,
-                                 (body_centre[0] + convert_to_screen(selected_body.thrust).x, body_centre[1] + convert_to_screen(selected_body.thrust).y),
-                                 5)
+                if keys[pygame.K_w]:
+                    selected_body.thrust_magnitude += 0.025
+
+                if keys[pygame.K_s]:
+                    selected_body.thrust_magnitude = max(selected_body.thrust_magnitude - 0.025, 0)
+
+                radius_vector = Vector(cos(radians(selected_body.thrust_angle)),
+                                       sin(radians(selected_body.thrust_angle))) * (
+                                        zoom * selected_body.radius / radius_scale_factor)
+
+                draw_screen_line(colour=(54, 133, 221),
+                                 start_pos=convert_to_screen(selected_body.position),
+                                 end_pos=convert_to_screen(selected_body.position) +
+                                         Vector(cos(radians(selected_body.thrust_angle)),
+                                                sin(radians(selected_body.thrust_angle))) *
+                                         (selected_body.thrust_magnitude/thrust_scale_factor + selected_body.radius/radius_scale_factor) *
+                                          zoom
+                                 )
 
         drawing_elapsed = 0
         ui_manager.update(time_delta)
