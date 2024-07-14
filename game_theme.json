@@ -21,7 +21,7 @@
         "font": {
             "name": "OverpassMono-SemiBold",
             "size": "14",
-            "regular_path": "OverpassMono-SemiBold.ttf"
+            "regular_path": "fonts/OverpassMono-SemiBold.ttf"
         }
     },
     "#name_label":
@@ -34,7 +34,7 @@
         "font": {
             "name": "OverpassMono-SemiBold",
             "size": "62",
-            "regular_path": "OverpassMono-SemiBold.ttf"
+            "regular_path": "fonts/OverpassMono-SemiBold.ttf"
         }
     },
     "@title_labels":
@@ -48,7 +48,7 @@
         {
             "name": "IBMPlexMono-SemiBoldItalic",
             "size": "12",
-            "regular_path": "IBMPlexMono-SemiBoldItalic.ttf"
+            "regular_path": "fonts/IBMPlexMono-SemiBoldItalic.ttf"
         }
     },
     "@info_text_entry":
@@ -65,7 +65,7 @@
         {
             "name": "OverpassMono-SemiBold",
             "size": "14",
-            "regular_path": "OverpassMono-SemiBold.ttf"
+            "regular_path": "fonts/OverpassMono-SemiBold.ttf"
         },
         "misc":
         {
@@ -113,15 +113,15 @@
         {
             "normal_image":
             {
-                "path": "triangle_right.png"
+                "path": "images/triangle_right.png"
             },
             "hovered_image":
             {
-                "path": "triangle_right.png"
+                "path": "images/triangle_right.png"
             },
             "selected_image":
             {
-                "path": "triangle_right.png"
+                "path": "images/triangle_right.png"
             }
         },
         "misc":
@@ -143,15 +143,15 @@
         {
             "normal_image":
             {
-                "path": "triangle_left.png"
+                "path": "images/triangle_left.png"
             },
             "hovered_image":
             {
-                "path": "triangle_left.png"
+                "path": "images/triangle_left.png"
             },
             "selected_image":
             {
-                "path": "triangle_left.png"
+                "path": "images/triangle_left.png"
             }
         },
         "misc":
@@ -173,15 +173,15 @@
         {
             "normal_image":
             {
-                "path": "triangle_right_small.png"
+                "path": "images/triangle_right_small.png"
             },
             "hovered_image":
             {
-                "path": "triangle_right_small.png"
+                "path": "images/triangle_right_small.png"
             },
             "selected_image":
             {
-                "path": "triangle_right_small.png"
+                "path": "images/triangle_right_small.png"
             }
         },
         "misc":
@@ -203,15 +203,15 @@
         {
             "normal_image":
             {
-                "path": "triangle_left_small.png"
+                "path": "images/triangle_left_small.png"
             },
             "hovered_image":
             {
-                "path": "triangle_left_small.png"
+                "path": "images/triangle_left_small.png"
             },
             "selected_image":
             {
-                "path": "triangle_left_small.png"
+                "path": "images/triangle_left_small.png"
             }
         },
         "misc":
@@ -233,7 +233,7 @@
         {
             "selected_image":
             {
-                "path": "tick.png"
+                "path": "images/tick.png"
             }
         },
         "misc":

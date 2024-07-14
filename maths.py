@@ -14,4 +14,4 @@ def round_to_sf(value, significant_figures):
     if '.' in formatted_value:
         return float(formatted_value)
     else:
-        return int(formatted_value)
+        return int(float(formatted_value))

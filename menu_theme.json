@@ -7,7 +7,7 @@
         "font": {
             "name": "OverpassMono-SemiBold",
             "size": 294,
-            "regular_path": "OverpassMono-SemiBold.ttf"
+            "regular_path": "fonts/OverpassMono-SemiBold.ttf"
         }
     },
     "@menu_buttons": {
@@ -24,7 +24,7 @@
         "font": {
             "name": "Quantico-Bold",
             "size": 104,
-            "regular_path": "Quantico-Bold.ttf"
+            "regular_path": "fonts/Quantico-Bold.ttf"
         },
         "misc": {
             "shape": "rectangle",
@@ -40,7 +40,7 @@
         "font": {
             "name": "OverpassMono-SemiBold",
             "size": 99,
-            "regular_path": "OverpassMono-SemiBold.ttf"
+            "regular_path": "fonts/OverpassMono-SemiBold.ttf"
         }
     }
 }
