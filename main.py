@@ -15,6 +15,7 @@ from gui import (ui_manager, mass_entry_text, mass_slider, radius_entry_text, ra
 from maths import standard_form, round_to_sf
 from setup import body_surface, ui_surface, screen_info, screen, menu_surface, controls_surface
 from vectors import Vector, null_vector, unit_vector
+from time import perf_counter_ns
 
 # Initialise
 pygame.init()
@@ -24,6 +25,7 @@ info = pygame.display.Info()
 screen_centre = Vector(info.current_w / 2, (info.current_h - 80) / 2)
 offset = null_vector
 zoom = 1
+time_dilation = 1
 
 
 def convert_to_screen(vector):
@@ -75,8 +77,11 @@ stripes_x = screen_info.width * 0.696
 stripes_y = screen_info.height * 0.419
 menu_surface.blit(scaled_stripes, (stripes_x, stripes_y))
 
+drawing_mark = perf_counter_ns()
+simulation_mark = perf_counter_ns()
+
 while running:
-    time_delta = clock.tick(1000)
+    time_delta = 0.001
 
     if game_state == "menu":
         for event in pygame.event.get():
@@ -123,7 +128,7 @@ while running:
         pygame.display.flip()
 
     elif game_state == "game":
-        drawing_elapsed += time_delta
+
 
         # Move bodies
         delta_v_list = []
@@ -159,7 +164,7 @@ while running:
         for z in zip(bodies, delta_v_list):
             z[0].move(z[1])
 
-        if drawing_elapsed >= 16:
+        if perf_counter_ns() - drawing_mark >= 16e6:
             keys = pygame.key.get_pressed()
 
             offset += Vector(keys[pygame.K_LEFT] - keys[pygame.K_RIGHT], keys[pygame.K_UP] - keys[pygame.K_DOWN]) * (
@@ -176,6 +181,11 @@ while running:
 
                 for body in bodies:
                     body.sprite.set_radius(body.radius / (radius_scale_factor / zoom), body.position)
+
+            if keys[pygame.K_1]:
+                time_dilation *= 1.1
+            if keys[pygame.K_2]:
+                time_dilation /= 1.1
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -402,7 +412,7 @@ while running:
                                              zoom
                                      )
 
-            drawing_elapsed = 0
+            drawing_mark = perf_counter_ns()
             ui_manager.update(time_delta)
             ui_surface.fill(BACKGROUND)
             ui_manager.draw_ui(ui_surface)
@@ -411,3 +421,7 @@ while running:
             screen.blit(body_surface, (0, 0))
 
             pygame.display.flip()
+
+        while perf_counter_ns() - simulation_mark < 1e3 * time_dilation:
+            pass
+        simulation_mark = perf_counter_ns()
