@@ -31,5 +31,16 @@
             "border_width": "0",
             "shadow_width": "0"
         }
+    },
+    "@controls_labels": {
+        "colours": {
+            "dark_bg": "#0A0526",
+            "normal_text": "#E51A1F"
+        },
+        "font": {
+            "name": "OverpassMono-SemiBold",
+            "size": 99,
+            "regular_path": "OverpassMono-SemiBold.ttf"
+        }
     }
 }
