@@ -50,9 +50,9 @@ class UIShape(UIElement):
 pygame.init()
 
 # Create a UI manager
-ui_manager = pygame_gui.UIManager((screen_info.width, screen_info.height), "game_theme.json")
-start_menu_manager = pygame_gui.UIManager((screen_info.width, screen_info.height), "menu_theme.json")
-controls_manager = pygame_gui.UIManager((screen_info.width, screen_info.height), "menu_theme.json")
+ui_manager = pygame_gui.UIManager((screen_info.width, screen_info.height), "themes/game_theme.json")
+start_menu_manager = pygame_gui.UIManager((screen_info.width, screen_info.height), "themes/menu_theme.json")
+controls_manager = pygame_gui.UIManager((screen_info.width, screen_info.height), "themes/menu_theme.json")
 
 # ---------------------------------------- MAIN MENU -------------------------------------------------------------------
 menu_x = screen_info.width * 0.48
