@@ -32,6 +32,8 @@ ui_surface = pygame.Surface(window_size)
 ui_surface.set_colorkey(BACKGROUND)
 menu_surface = pygame.Surface(window_size)
 menu_surface.fill(BACKGROUND)
+controls_surface = pygame.Surface(window_size)
+controls_surface.fill(BACKGROUND)
 
 icon = pygame.image.load("black-hole-256x256.png")
 pygame.display.set_icon(icon)

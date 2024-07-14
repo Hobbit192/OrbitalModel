@@ -50,9 +50,9 @@ class UIShape(UIElement):
 pygame.init()
 
 # Create a UI manager
-ui_manager = pygame_gui.UIManager((screen_info.width, screen_info.height), "game_theme.JSON")
+ui_manager = pygame_gui.UIManager((screen_info.width, screen_info.height), "game_theme.json")
 start_menu_manager = pygame_gui.UIManager((screen_info.width, screen_info.height), "menu_theme.json")
-
+controls_manager = pygame_gui.UIManager((screen_info.width, screen_info.height), "menu_theme.json")
 
 # ---------------------------------------- MAIN MENU -------------------------------------------------------------------
 menu_x = screen_info.width * 0.48
@@ -70,6 +70,7 @@ with open(menu_theme, "r") as file:
 
 theme_data["#menu_title_label"]["font"]["size"] = title_font_size
 theme_data["@menu_buttons"]["font"]["size"] = menu_button_font_size
+theme_data["@controls_labels"]["font"]["size"] = menu_button_font_size - 5
 
 with open(menu_theme, "w") as file:
     json.dump(theme_data, file, indent=4)
@@ -81,7 +82,7 @@ title_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((menu_x, tit
                                           )
 
 start_button_y = screen_info.height * 0.406
-start_button_width = screen_info.width * 0.097
+start_button_width = screen_info.width * 0.1
 start_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((menu_x, start_button_y), (start_button_width, menu_button_height)),
                                             text="Start",
                                             manager=start_menu_manager,
@@ -109,6 +110,86 @@ quit_button_width = screen_info.width * 0.0794
 quit_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((menu_x, quit_button_y), (quit_button_width, menu_button_height)),
                                            text="Quit",
                                            manager=start_menu_manager,
+                                           object_id=ObjectID(class_id="@menu_buttons")
+                                           )
+
+# -------------------------------------- CONTROLS MENU -----------------------------------------------------------------
+controls_menu_x = screen_info.width * 0.0579
+
+increase_label_y = screen_info.height * 0.0414
+controls_label_width = screen_info.width * 0.613
+increase_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((controls_menu_x, increase_label_y), (controls_label_width, menu_button_height)),
+                                             text="Increase Thrust:        W",
+                                             manager=controls_manager,
+                                             object_id=ObjectID(class_id="@controls_labels")
+                                             )
+
+decrease_label_y = screen_info.height * 0.131
+decrease_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((controls_menu_x, decrease_label_y), (controls_label_width, menu_button_height)),
+                                             text="Decrease Thrust:        S",
+                                             manager=controls_manager,
+                                             object_id=ObjectID(class_id="@controls_labels")
+                                             )
+
+anticlockwise_label_y = screen_info.height * 0.220
+anticlockwise_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((controls_menu_x, anticlockwise_label_y), (controls_label_width, menu_button_height)),
+                                                  text="Rotate Anticlockwise:   A",
+                                                  manager=controls_manager,
+                                                  object_id=ObjectID(class_id="@controls_labels")
+                                                  )
+
+clockwise_label_y = screen_info.height * 0.309
+clockwise_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((controls_menu_x, clockwise_label_y), (controls_label_width, menu_button_height)),
+                                              text="Rotate Clockwise:       D",
+                                              manager=controls_manager,
+                                              object_id=ObjectID(class_id="@controls_labels")
+                                              )
+
+show_planet_details_label_y = screen_info.height * 0.398
+show_planet_details_label_width = screen_info.width * 0.829
+show_planet_details_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((controls_menu_x, show_planet_details_label_y), (show_planet_details_label_width, menu_button_height)),
+                                                        text="Show Planet Details:    Left Click",
+                                                        manager=controls_manager,
+                                                        object_id=ObjectID(class_id="@controls_labels")
+                                                        )
+
+move_planet_label_y = screen_info.height * 0.489
+move_planet_label_width = screen_info.width * 0.925
+move_planet_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((controls_menu_x, move_planet_label_y), (move_planet_label_width, menu_button_height)),
+                                                text="Move Planet:            Click and Drag",
+                                                manager=controls_manager,
+                                                object_id=ObjectID(class_id="@controls_labels")
+                                                )
+
+pan_label_y = screen_info.height * 0.577
+pan_label_width = screen_info.width * 0.829
+pan_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((controls_menu_x, pan_label_y), (pan_label_width, menu_button_height)),
+                                        text="Pan Map:                Arrow keys",
+                                        manager=controls_manager,
+                                        object_id=ObjectID(class_id="@controls_labels")
+                                        )
+
+zoom_label_y = screen_info.height * 0.665
+zoom_label_width = screen_info.width * 0.757
+zoom_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((controls_menu_x, zoom_label_y), (zoom_label_width, menu_button_height)),
+                                         text="Zoom in and out:        + and -",
+                                         manager=controls_manager,
+                                         object_id=ObjectID(class_id="@controls_labels")
+                                         )
+
+quit_label_y = screen_info.height * 0.753
+quit_label_width = screen_info.width * 0.66
+quit_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((controls_menu_x, quit_label_y), (quit_label_width, menu_button_height)),
+                                         text="Back to Menu:           Esc",
+                                         manager=controls_manager,
+                                         object_id=ObjectID(class_id="@controls_labels")
+                                         )
+
+back_button_y = screen_info.height * 0.873
+back_button_width = screen_info.width * 0.097
+back_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((controls_menu_x, back_button_y), (back_button_width, menu_button_height)),
+                                           text="Back",
+                                           manager=controls_manager,
                                            object_id=ObjectID(class_id="@menu_buttons")
                                            )
 
@@ -422,12 +503,12 @@ emphasis_rect_6 = UIShape(relative_rect=pygame.Rect((328, 412), (4, 72)),
                           container=info_panel
                           )
 
-trajectories_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((12, 514), (162, 18)),
-                                                 text="Show trajectories:",
-                                                 manager=ui_manager,
-                                                 container=info_panel,
-                                                 object_id=ObjectID(class_id="@info_labels")
-                                                 )
+#trajectories_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect((12, 514), (162, 18)),
+#                                                 text="Show trajectories:",
+#                                                 manager=ui_manager,
+#                                                 container=info_panel,
+#                                                 object_id=ObjectID(class_id="@info_labels")
+#                                                 )
 
 # ----------------------------------------- NEW BODY PANEL -------------------------------------------------------------
 
