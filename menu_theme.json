@@ -6,7 +6,7 @@
         },
         "font": {
             "name": "OverpassMono-SemiBold",
-            "size": 294,
+            "size": 195,
             "regular_path": "OverpassMono-SemiBold.ttf"
         }
     },
@@ -23,7 +23,7 @@
         },
         "font": {
             "name": "Quantico-Bold",
-            "size": 104,
+            "size": 69,
             "regular_path": "Quantico-Bold.ttf"
         },
         "misc": {

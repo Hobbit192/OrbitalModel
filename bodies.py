@@ -1,6 +1,6 @@
 import pygame
 from constants import WHITE, G, radius_scale_factor
-from vectors import Vector
+from vectors import Vector, null_vector
 
 
 class Sprite(pygame.sprite.Sprite):
@@ -96,13 +96,44 @@ Moon = Body(mass=7.342e22,
             name="Moon"
             )
 
+Snooker1 = Body(mass=10000e1,
+              radius=100e3,
+              velocity=Vector(0, 0),
+              position=Vector(0,0),
+              colour=(176, 176, 204),
+              name="Snooker1"
+              )
+
+Snooker2 = Body(mass=10000e1,
+              radius=100e3,
+              velocity=null_vector,
+              position=Vector((((200e3)**2)/2)**0.5, -(((200e3)**2)/2)**0.5),
+              colour=(176, 36, 204),
+              name="Snooker2"
+              )
+Snooker3 = Body(mass=10000e1,
+              radius=100e3,
+              velocity=Vector(0, 0),
+              position=Vector((((200e3)**2)/2)**0.5, (((200e3)**2)/2)**0.5),
+              colour=(176, 204, 36),
+              name="Snooker3"
+              )
+
+Snooker4 = Body(mass=10000e1,
+              radius=100e3,
+              velocity=Vector(50, 0),
+              position=Vector(-900e3,0),
+              colour=(176, 36, 204),
+              name="Snooker4"
+              )
+
 
 Rocket = Body(mass=10000e15,
               radius=100e3,
-              velocity=Vector(4000, 00),
+              velocity=Vector(1000, 00),
               position=Vector(Earth.radius+100e3, 100e3),
               colour=(176, 36, 204),
               name="Rocket"
               )
 
-bodies = [Earth, Space_Station, Moon, Rocket]
+bodies = [Snooker4, Snooker1, Snooker2, Snooker3]
