@@ -65,12 +65,12 @@ clock.tick()
 simulation_elapsed = 0
 drawing_elapsed = 0
 
-logo = pygame.image.load("orbital_logo.png")
+logo = pygame.image.load("images/orbital_logo.png")
 scaled_side = screen_info.height * 0.86
 scaled_logo = pygame.transform.smoothscale(logo, (scaled_side, scaled_side))
 menu_surface.blit(scaled_logo, (0, screen_info.height * 0.0473))
 
-stripes = pygame.image.load("stripes.png")
+stripes = pygame.image.load("images/stripes.png")
 stripes_height = screen_info.height * 0.455
 stripes_width = screen_info.width * 0.255
 scaled_stripes = pygame.transform.smoothscale(stripes, (stripes_width, stripes_height))

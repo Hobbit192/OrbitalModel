@@ -35,7 +35,7 @@ menu_surface.fill(BACKGROUND)
 controls_surface = pygame.Surface(window_size)
 controls_surface.fill(BACKGROUND)
 
-icon = pygame.image.load("black-hole-256x256.png")
+icon = pygame.image.load("images/black-hole-256x256.png")
 pygame.display.set_icon(icon)
 pygame.display.set_caption("Orbital Simulator", "OrbitSim")
 
