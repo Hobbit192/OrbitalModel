@@ -1,4 +1,4 @@
------------- INSTRUCTIONS FOR DOWNLOAD --------------------
+------------------------------------------------------------------------------------- INSTRUCTIONS FOR DOWNLOAD --------------------------------------------------------------------------------------------------------------------------------------
 - Download the file "orbiter.zip"
 - Extract the zip file
 - Find the exe file: dist/Orbiter/Orbiter.exe
