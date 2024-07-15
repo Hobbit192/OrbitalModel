@@ -2,6 +2,7 @@
 - Download the file "orbiter.zip"
 - Extract the zip file
 - Find the exe file: dist/Orbiter/Orbiter.exe
+- If you are on mac, the exe won't work, but you might be able to download local copies of everything in this directory and it will maybe work (haven't tested it). I'm working on getting a dmg for mac so the program can just be run from one file.
 - Run and enjoy!
 ![image](https://github.com/user-attachments/assets/b0f916f9-f91b-4231-909d-313a7c98a863)
 
