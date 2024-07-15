@@ -13,7 +13,7 @@ from gui import (ui_manager, mass_entry_text, mass_slider, radius_entry_text, ra
                  new_body_toggle_button_y, new_body_label, velocity_check_button, orientation_check_button,
                  start_menu_manager, start_button, quit_button, controls_button, controls_manager, back_button)
 from maths import standard_form, round_to_sf
-from setup import body_surface, ui_surface, screen_info, screen, menu_surface, controls_surface
+from setup import body_surface, ui_surface, screen_info, screen, menu_surface, controls_surface, resource_path
 from vectors import Vector, null_vector, unit_vector
 from time import perf_counter_ns
 
@@ -63,12 +63,12 @@ clock.tick()
 simulation_elapsed = 0
 drawing_elapsed = 0
 
-logo = pygame.image.load("images/orbital_logo.png")
+logo = pygame.image.load(resource_path("data/images/orbital_logo.png"))
 scaled_side = screen_info.height * 0.86
 scaled_logo = pygame.transform.smoothscale(logo, (scaled_side, scaled_side))
 menu_surface.blit(scaled_logo, (0, screen_info.height * 0.0473))
 
-stripes = pygame.image.load("images/stripes.png")
+stripes = pygame.image.load(resource_path("data/images/stripes.png"))
 stripes_height = screen_info.height * 0.455
 stripes_width = screen_info.width * 0.255
 scaled_stripes = pygame.transform.smoothscale(stripes, (stripes_width, stripes_height))
@@ -128,7 +128,6 @@ while running:
         pygame.display.flip()
 
     elif game_state == "game":
-
 
         # Move bodies
         delta_v_list = []

@@ -1,6 +1,7 @@
 import os
-import pygame
+import sys
 
+import pygame
 from constants import BACKGROUND
 
 pygame.init()
@@ -12,6 +13,17 @@ class Screen:
         self.height = height
         self.centre_x = self.width / 2
         self.centre_y = self.height / 2
+
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except AttributeError:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 
 os.environ["SDL_VIDEO_WINDOW_POS"] = "0,30"
@@ -35,7 +47,7 @@ menu_surface.fill(BACKGROUND)
 controls_surface = pygame.Surface(window_size)
 controls_surface.fill(BACKGROUND)
 
-icon = pygame.image.load("images/black-hole-256x256.png")
+icon = pygame.image.load("data/images/black-hole-256x256.png")
 pygame.display.set_icon(icon)
 pygame.display.set_caption("Orbital Simulator", "OrbitSim")
 

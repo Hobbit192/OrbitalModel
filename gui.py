@@ -4,7 +4,7 @@ import pygame
 import pygame_gui
 from pygame_gui.core import ObjectID, UIElement
 from pygame_gui.core.interfaces import IUIManagerInterface
-from setup import screen_info
+from setup import screen_info, resource_path
 
 
 class UIShape(UIElement):
@@ -50,9 +50,12 @@ class UIShape(UIElement):
 pygame.init()
 
 # Create a UI manager
-ui_manager = pygame_gui.UIManager((screen_info.width, screen_info.height), "themes/game_theme.json")
-start_menu_manager = pygame_gui.UIManager((screen_info.width, screen_info.height), "themes/menu_theme.json")
-controls_manager = pygame_gui.UIManager((screen_info.width, screen_info.height), "themes/menu_theme.json")
+ui_manager = pygame_gui.UIManager((screen_info.width, screen_info.height),
+                                  resource_path("data/themes/game_theme.json"))
+start_menu_manager = pygame_gui.UIManager((screen_info.width, screen_info.height),
+                                          resource_path("data/themes/menu_theme.json"))
+controls_manager = pygame_gui.UIManager((screen_info.width, screen_info.height),
+                                        resource_path("data/themes/menu_theme.json"))
 
 # ---------------------------------------- MAIN MENU -------------------------------------------------------------------
 menu_x = screen_info.width * 0.48
@@ -63,7 +66,7 @@ title_label_height = screen_info.height * 0.25 + 33
 
 title_font_size = int(screen_info.height * 0.2168)
 menu_button_font_size = int(screen_info.height * 0.07653)
-menu_theme = "menu_theme.json"
+menu_theme = "data/themes/menu_theme.json"
 
 with open(menu_theme, "r") as file:
     theme_data = json.load(file)

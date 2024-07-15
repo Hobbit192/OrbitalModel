@@ -72,36 +72,14 @@ class Body:
 
 all_sprites_list = pygame.sprite.Group()
 
-Earth = Body(mass=5.972168e24,
-             radius=8371.0e3,
-             velocity=Vector(0, 0),
-             position=Vector(0, 0),
-             colour=(18, 53, 36),
-             name="Earth"
-             )
+Earth = Body(9.972168e26, 8371.0e3, Vector(0, -10), Vector(0, 0), (18, 53, 36), "Earth")
+Moon = Body(7.342e23, 1737.4e3, Vector(0, -7022), Vector(405400e3, 0), (128, 128, 128), "Moon")
+Other = Body(4.5e22, 1000e3, Vector(-500, 6000), Vector(565400e3, 0), (255, 0, 0), "Other")
+Minmus = Body(3.342e24, 4737.4e3, Vector(0, 11022), Vector(-405400e3, 0), (128, 128, 255), "Minmus")
+Other2 = Body(9.5e25, 5898e3, Vector(0, -6000), Vector(-565400e3, 0), (76, 155, 120), "Other2")
+Other3 = Body(9.5e25, 6438e3, Vector(8000, 0), Vector(0, 500000e3), (30, 20, 10), "Other3")
+Other4 = Body(9.5e25, 6200e3, Vector(-8000, 0), Vector(0, -500000e3), (100, 97, 125), "Other4")
+Other5 = Body(9.5e25, 5706e3, Vector(0, 8000), Vector(-965400e3, 0), (230, 222, 201), "Other5")
+Other6 = Body(3e26, 4123e3, Vector(0, -6000), Vector(640000e3, 0), (176, 36, 204), "Other6")
 
-Space_Station = Body(mass=450000,
-                     radius=100e3,
-                     velocity=Vector(0,0), #Vector(0, (G * Earth.mass / (Earth.radius + 1000e3)) ** 0.5),
-                     position=Vector(Earth.radius + 1000e3, 0),
-                     colour=(255, 254, 255),
-                     name="ISS"
-                     )
-
-Moon = Body(mass=7.342e22,
-            radius=1737.4e3,
-            velocity=Vector(0, (G * Earth.mass / (Earth.radius + 384400e3)) ** 0.5),
-            position=Vector(8371.0e3 + 384400e3, 0),
-            colour=(128, 128, 128),
-            name="Moon"
-            )
-
-Rocket = Body(mass=10000e15,
-              radius=100e3,
-              velocity=Vector(4000, 00),
-              position=Vector(Earth.radius+100e3, 100e3),
-              colour=(176, 36, 204),
-              name="Rocket"
-              )
-
-bodies = [Earth, Space_Station, Moon, Rocket]
+bodies = [Earth, Moon, Other, Minmus, Other2, Other3, Other4, Other5, Other6]

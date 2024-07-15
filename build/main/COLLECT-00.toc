@@ -1,0 +1,504 @@
+([('Orbiter.exe',
+   'C:\\Users\\Oscar '
+   'Quest\\PycharmProjects\\orbitalModel\\build\\main\\Orbiter.exe',
+   'EXECUTABLE'),
+  ('python312.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\python312.dll',
+   'BINARY'),
+  ('libjpeg-62.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\libjpeg-62.dll',
+   'BINARY'),
+  ('SDL2_image.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\SDL2_image.dll',
+   'BINARY'),
+  ('libogg-0.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\libogg-0.dll',
+   'BINARY'),
+  ('libopusfile-0.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\libopusfile-0.dll',
+   'BINARY'),
+  ('libwebpdemux-2.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\libwebpdemux-2.dll',
+   'BINARY'),
+  ('libjpeg-9.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\libjpeg-9.dll',
+   'BINARY'),
+  ('SDL2_mixer.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\SDL2_mixer.dll',
+   'BINARY'),
+  ('SDL2.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\SDL2.dll',
+   'BINARY'),
+  ('zlib1.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\zlib1.dll',
+   'BINARY'),
+  ('portmidi.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\portmidi.dll',
+   'BINARY'),
+  ('libpng16-16.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\libpng16-16.dll',
+   'BINARY'),
+  ('libwebp-7.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\libwebp-7.dll',
+   'BINARY'),
+  ('freetype.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\freetype.dll',
+   'BINARY'),
+  ('SDL2_ttf.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\SDL2_ttf.dll',
+   'BINARY'),
+  ('libtiff-5.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\libtiff-5.dll',
+   'BINARY'),
+  ('libxmp.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\libxmp.dll',
+   'BINARY'),
+  ('libopus-0.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\libopus-0.dll',
+   'BINARY'),
+  ('libwavpack-1.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\libwavpack-1.dll',
+   'BINARY'),
+  ('libmodplug-1.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\libmodplug-1.dll',
+   'BINARY'),
+  ('_decimal.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\_decimal.pyd',
+   'EXTENSION'),
+  ('_hashlib.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\_hashlib.pyd',
+   'EXTENSION'),
+  ('_lzma.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\_lzma.pyd',
+   'EXTENSION'),
+  ('_bz2.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\_bz2.pyd',
+   'EXTENSION'),
+  ('unicodedata.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\unicodedata.pyd',
+   'EXTENSION'),
+  ('select.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\select.pyd',
+   'EXTENSION'),
+  ('_socket.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\_socket.pyd',
+   'EXTENSION'),
+  ('_ctypes.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\_ctypes.pyd',
+   'EXTENSION'),
+  ('_queue.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\_queue.pyd',
+   'EXTENSION'),
+  ('_ssl.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\_ssl.pyd',
+   'EXTENSION'),
+  ('pyexpat.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\pyexpat.pyd',
+   'EXTENSION'),
+  ('_wmi.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\_wmi.pyd',
+   'EXTENSION'),
+  ('pygame\\font.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\font.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\_freetype.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\_freetype.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\surface.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\surface.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\color.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\color.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\image.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\image.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\rect.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\rect.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\transform.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\transform.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\event.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\event.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\mask.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\mask.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\time.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\time.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\math.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\math.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\key.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\key.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\imageext.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\imageext.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\window.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\window.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\system.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\system.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\scrap.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\scrap.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\mixer.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\mixer.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\mixer_music.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\mixer_music.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\pixelarray.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\pixelarray.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\pixelcopy.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\pixelcopy.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\mouse.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\mouse.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\joystick.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\joystick.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\draw.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\draw.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\display.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\display.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\bufferproxy.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\bufferproxy.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\surflock.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\surflock.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\rwobject.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\rwobject.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\constants.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\constants.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\base.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\base.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\_sdl2\\video.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\_sdl2\\video.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\_sdl2\\audio.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\_sdl2\\audio.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\_sdl2\\sdl2.cp312-win_amd64.pyd',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\_sdl2\\sdl2.cp312-win_amd64.pyd',
+   'EXTENSION'),
+  ('VCRUNTIME140.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\VCRUNTIME140.dll',
+   'BINARY'),
+  ('pygame\\SDL2.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\SDL2.dll',
+   'BINARY'),
+  ('pygame\\libopus-0.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\libopus-0.dll',
+   'BINARY'),
+  ('pygame\\libogg-0.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\libogg-0.dll',
+   'BINARY'),
+  ('pygame\\libwebp-7.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\libwebp-7.dll',
+   'BINARY'),
+  ('libcrypto-3.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\libcrypto-3.dll',
+   'BINARY'),
+  ('libffi-8.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\libffi-8.dll',
+   'BINARY'),
+  ('libssl-3.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\DLLs\\libssl-3.dll',
+   'BINARY'),
+  ('VCRUNTIME140_1.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\VCRUNTIME140_1.dll',
+   'BINARY'),
+  ('pygame\\SDL2_ttf.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\SDL2_ttf.dll',
+   'BINARY'),
+  ('pygame\\freetype.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\freetype.dll',
+   'BINARY'),
+  ('pygame\\SDL2_image.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\SDL2_image.dll',
+   'BINARY'),
+  ('pygame\\SDL2_mixer.dll',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\SDL2_mixer.dll',
+   'BINARY'),
+  ('base_library.zip',
+   'C:\\Users\\Oscar '
+   'Quest\\PycharmProjects\\orbitalModel\\build\\main\\base_library.zip',
+   'DATA'),
+  ('pygame_gui\\data\\NotoSans-Regular.ttf',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\NotoSans-Regular.ttf',
+   'DATA'),
+  ('pygame_gui\\data\\translations\\pygame-gui.es.json',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\translations\\pygame-gui.es.json',
+   'DATA'),
+  ('pygame_gui\\data\\NotoSans-BoldItalic.ttf',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\NotoSans-BoldItalic.ttf',
+   'DATA'),
+  ('pygame_gui\\data\\NotoSansGeorgian-Regular.ttf',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\NotoSansGeorgian-Regular.ttf',
+   'DATA'),
+  ('pygame_gui\\data\\translations\\pygame-gui.vi.json',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\translations\\pygame-gui.vi.json',
+   'DATA'),
+  ('pygame_gui\\data\\NotoSansJP-Regular.otf',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\NotoSansJP-Regular.otf',
+   'DATA'),
+  ('pygame_gui\\data\\NotoSansArabic-Bold.ttf',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\NotoSansArabic-Bold.ttf',
+   'DATA'),
+  ('pygame_gui\\data\\translations\\pygame-gui.zh.json',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\translations\\pygame-gui.zh.json',
+   'DATA'),
+  ('pygame_gui\\data\\NotoSans-Bold.ttf',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\NotoSans-Bold.ttf',
+   'DATA'),
+  ('pygame_gui\\data\\NotoSansSC-Regular.otf',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\NotoSansSC-Regular.otf',
+   'DATA'),
+  ('pygame_gui\\data\\NotoSansArabic-Regular.ttf',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\NotoSansArabic-Regular.ttf',
+   'DATA'),
+  ('pygame_gui\\data\\NotoSansHebrew-Bold.ttf',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\NotoSansHebrew-Bold.ttf',
+   'DATA'),
+  ('pygame_gui\\data\\translations\\pygame-gui.pl.json',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\translations\\pygame-gui.pl.json',
+   'DATA'),
+  ('pygame_gui\\data\\translations\\pygame-gui.uk.json',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\translations\\pygame-gui.uk.json',
+   'DATA'),
+  ('pygame_gui\\data\\NotoSansGeorgian-Bold.ttf',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\NotoSansGeorgian-Bold.ttf',
+   'DATA'),
+  ('pygame_gui\\data\\NotoSansKR-Bold.ttf',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\NotoSansKR-Bold.ttf',
+   'DATA'),
+  ('pygame_gui\\data\\translations\\__init__.py',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\translations\\__init__.py',
+   'DATA'),
+  ('pygame_gui\\data\\FiraCode-Regular.ttf',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\FiraCode-Regular.ttf',
+   'DATA'),
+  ('pygame_gui\\data\\translations\\pygame-gui.ko.json',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\translations\\pygame-gui.ko.json',
+   'DATA'),
+  ('pygame_gui\\data\\translations\\pygame-gui.ge.json',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\translations\\pygame-gui.ge.json',
+   'DATA'),
+  ('pygame_gui\\data\\translations\\pygame-gui.ar.json',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\translations\\pygame-gui.ar.json',
+   'DATA'),
+  ('pygame_gui\\data\\translations\\pygame-gui.it.json',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\translations\\pygame-gui.it.json',
+   'DATA'),
+  ('pygame_gui\\data\\translations\\pygame-gui.he.json',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\translations\\pygame-gui.he.json',
+   'DATA'),
+  ('pygame_gui\\data\\NotoSansKR-Regular.ttf',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\NotoSansKR-Regular.ttf',
+   'DATA'),
+  ('pygame_gui\\data\\NotoSans-Italic.ttf',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\NotoSans-Italic.ttf',
+   'DATA'),
+  ('pygame_gui\\data\\translations\\pygame-gui.ru.json',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\translations\\pygame-gui.ru.json',
+   'DATA'),
+  ('pygame_gui\\data\\translations\\pygame-gui.fr.json',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\translations\\pygame-gui.fr.json',
+   'DATA'),
+  ('pygame_gui\\data\\translations\\pygame-gui.pt.json',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\translations\\pygame-gui.pt.json',
+   'DATA'),
+  ('pygame_gui\\data\\NotoSansHebrew-Regular.ttf',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\NotoSansHebrew-Regular.ttf',
+   'DATA'),
+  ('pygame_gui\\data\\translations\\pygame-gui.en.json',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\translations\\pygame-gui.en.json',
+   'DATA'),
+  ('pygame_gui\\data\\NotoSansJP-Bold.otf',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\NotoSansJP-Bold.otf',
+   'DATA'),
+  ('pygame_gui\\data\\translations\\pygame-gui.de.json',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\translations\\pygame-gui.de.json',
+   'DATA'),
+  ('pygame_gui\\data\\default_theme.json',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\default_theme.json',
+   'DATA'),
+  ('pygame_gui\\data\\__init__.py',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\__init__.py',
+   'DATA'),
+  ('pygame_gui\\data\\translations\\pygame-gui.ja.json',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\translations\\pygame-gui.ja.json',
+   'DATA'),
+  ('pygame_gui\\data\\translations\\pygame-gui.id.json',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\translations\\pygame-gui.id.json',
+   'DATA'),
+  ('pygame_gui\\data\\NotoSansSC-Bold.otf',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame_gui\\data\\NotoSansSC-Bold.otf',
+   'DATA'),
+  ('pygame\\pygame_icon.bmp',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\pygame_icon.bmp',
+   'DATA'),
+  ('pygame\\freesansbold.ttf',
+   'C:\\Users\\Oscar '
+   'Quest\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\pygame\\freesansbold.ttf',
+   'DATA'),
+  ('data\\themes\\game_theme.json', 'data\\themes\\game_theme.json', 'DATA'),
+  ('data\\themes\\menu_theme.json', 'data\\themes\\menu_theme.json', 'DATA'),
+  ('data\\images\\black-hole-256x256.ico',
+   'data\\images\\black-hole-256x256.ico',
+   'DATA'),
+  ('data\\images\\black-hole-256x256.png',
+   'data\\images\\black-hole-256x256.png',
+   'DATA'),
+  ('data\\images\\orbital_logo.png', 'data\\images\\orbital_logo.png', 'DATA'),
+  ('data\\images\\stripes.png', 'data\\images\\stripes.png', 'DATA'),
+  ('data\\images\\tick.png', 'data\\images\\tick.png', 'DATA'),
+  ('data\\images\\triangle_left.png',
+   'data\\images\\triangle_left.png',
+   'DATA'),
+  ('data\\images\\triangle_left_small.png',
+   'data\\images\\triangle_left_small.png',
+   'DATA'),
+  ('data\\images\\triangle_right.png',
+   'data\\images\\triangle_right.png',
+   'DATA'),
+  ('data\\images\\triangle_right_small.png',
+   'data\\images\\triangle_right_small.png',
+   'DATA'),
+  ('data\\fonts\\IBMPlexMono-SemiBoldItalic.ttf',
+   'data\\fonts\\IBMPlexMono-SemiBoldItalic.ttf',
+   'DATA'),
+  ('data\\fonts\\OverpassMono-SemiBold.ttf',
+   'data\\fonts\\OverpassMono-SemiBold.ttf',
+   'DATA'),
+  ('data\\fonts\\Quantico-Bold.ttf',
+   'data\\fonts\\Quantico-Bold.ttf',
+   'DATA')],)
