@@ -2,6 +2,8 @@ import os
 import sys
 
 import pygame
+import screeninfo
+
 from constants import BACKGROUND
 
 pygame.init()
@@ -27,9 +29,9 @@ def resource_path(relative_path):
 
 
 os.environ["SDL_VIDEO_WINDOW_POS"] = "0,30"
-info = pygame.display.Info()
+monitor = screeninfo.get_monitors()[0]
 
-screen_info = Screen(width=info.current_w, height=info.current_h - 80)
+screen_info = Screen(width=monitor.width, height=monitor.height - 80)
 
 window_size = (screen_info.width, screen_info.height)
 screen = pygame.display.set_mode(window_size)
@@ -47,7 +49,7 @@ menu_surface.fill(BACKGROUND)
 controls_surface = pygame.Surface(window_size)
 controls_surface.fill(BACKGROUND)
 
-icon = pygame.image.load("data/images/black-hole-256x256.png")
+icon = pygame.image.load(resource_path("data/images/black-hole-256x256.png"))
 pygame.display.set_icon(icon)
 pygame.display.set_caption("Orbital Simulator", "OrbitSim")
 
